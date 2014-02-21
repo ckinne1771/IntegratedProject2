@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class CraftingScript : MonoBehaviour 
 {
 	public CharacterControllerScript characterControllerScript;
 	public TheInventoryScript inventoryScript;
 	public string item;
-	public Dictionary<string, int> recipeList = new Dictionary<string,int >();
+	public List<string> recipeList;
 	public List<string> craftingItems;
 
 	// Use this for initialization
@@ -15,7 +16,7 @@ public class CraftingScript : MonoBehaviour
 	{
 		characterControllerScript = GetComponent<CharacterControllerScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
-		recipeList.Add("dogbowl",0);
+		recipeList.Add("dogbowl");
 	}
 	
 	// Update is called once per frame
@@ -30,11 +31,16 @@ public class CraftingScript : MonoBehaviour
 		//and inventory
 		//"dog" and "bowl" will later be added by the player selecting the items
 		//item = "dog"+"bowl";
-		if(recipeList.ContainsKey(item))
+		foreach(string thing in recipeList)
 		{
-			Debug.Log(item);
-			inventoryScript.playerInventory.Add(item);
+			if(thing.Equals(item))
+			{
+				Debug.Log (item);
+				inventoryScript.playerInventory.Add (item);
+			}
+	
 		}
+
 		characterControllerScript.currentState = CharacterControllerScript.PlayerState.Idle;
 	}
 }

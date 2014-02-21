@@ -9,7 +9,8 @@ public class CharacterControllerScript : MonoBehaviour
 		Idle,
 		Crafting,
 		SelectingComponents,
-		Serving
+		Serving,
+		Recycling
 	};
 
 	public PlayerState currentState;
@@ -61,7 +62,8 @@ public class CharacterControllerScript : MonoBehaviour
 				else if(hit.transform.gameObject.tag=="recyclingbin")
 				{
 					Debug.Log("recycling");
-					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-1,0));
+					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-2,0));
+					currentState = PlayerState.Recycling;
 				}
 				else if(hit.transform.gameObject.tag=="craftingtable")
 				{
@@ -80,10 +82,6 @@ public class CharacterControllerScript : MonoBehaviour
 
 		}
 
-		if(currentState == PlayerState.SelectingComponents)
-		{
-
-		}
 	}
 	 public void OnGUI()
 	{
@@ -96,7 +94,7 @@ public class CharacterControllerScript : MonoBehaviour
 				if(GUILayout.Button(string.Format("{0})",item)))
 				{
 					Debug.Log(string.Format("Got {0}",item));
-					inventoryScript.playerInventory.Add (item);
+					inventoryScript.playerInventory.Add(item);
 				}
 			GUILayout.EndHorizontal();
 		}
@@ -111,7 +109,6 @@ public class CharacterControllerScript : MonoBehaviour
 				{
 					craftingScript.craftingItems.Add(item);
 					itemsTodelete.Add(item);
-					//inventoryScript.playerInventory.Remove(item);
 				}
 				GUILayout.EndHorizontal();
 			}
@@ -119,15 +116,36 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				inventoryScript.playerInventory.Remove(itemToDelete);
 			}
+			itemsTodelete.Clear();
 
 			if(GUILayout.Button("Craft"))
 			{
 				foreach(string item in craftingScript.craftingItems)
 				{
 					craftingScript.item+=item;
-					craftingScript.Craft();
+				}
+				craftingScript.Craft();
+				craftingScript.craftingItems.Clear();
+				craftingScript.item = "";
+			}
+		}
+
+		if(currentState == PlayerState.Recycling && inventoryScript.playerInventory.Count>0)
+		{
+			foreach(string item in inventoryScript.playerInventory)
+			{
+				GUILayout.BeginVertical();
+				if(GUILayout.Button(string.Format("{0}",item)))
+				{
+					itemsTodelete.Add(item);
 				}
 			}
+				GUILayout.EndVertical();
+				foreach(string itemToDelete in itemsTodelete)
+				{
+					inventoryScript.playerInventory.Remove(itemToDelete);
+				}
+			itemsTodelete.Clear();
 		}
 	}
 

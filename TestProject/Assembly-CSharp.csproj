@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\NewInventoryScript.cs" />
      <Compile Include="Assets\scripts\CharacterControllerScript.cs" />
      <Compile Include="Assets\scripts\CraftingScript.cs" />
      <Compile Include="Assets\scripts\TheInventoryScript.cs" />
