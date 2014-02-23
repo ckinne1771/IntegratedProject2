@@ -6,6 +6,7 @@ using System.Linq;
 public class CraftingScript : MonoBehaviour 
 {
 	public CharacterControllerScript characterControllerScript;
+	public CustomerNeedsScript customerNeedsScript;
 	public TheInventoryScript inventoryScript;
 	public string item;
 	public List<string> recipeList;
@@ -14,9 +15,11 @@ public class CraftingScript : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		customerNeedsScript = GetComponent<CustomerNeedsScript>();
 		characterControllerScript = GetComponent<CharacterControllerScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
 		recipeList.Add("dogbowl");
+		customerNeedsScript.AddingToList();
 	}
 	
 	// Update is called once per frame
@@ -37,6 +40,7 @@ public class CraftingScript : MonoBehaviour
 			{
 				Debug.Log (item);
 				inventoryScript.playerInventory.Add (item);
+				customerNeedsScript.itemNeeded = false;
 			}
 	
 		}
