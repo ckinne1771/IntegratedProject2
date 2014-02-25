@@ -13,6 +13,7 @@ public class CharacterControllerScript : MonoBehaviour
 		Recycling
 	};
 
+	//player state comment
 	public PlayerState currentState;
 	//public float maxSpeed = 10.0f;
 	//bool facingRight = true;
