@@ -26,6 +26,8 @@ public class CharacterControllerScript : MonoBehaviour
 	public CustomerNeedsScript customerNeedsScript;
 	public List<string> itemsTodelete;
 	public GameObject Customer;
+	public string item1;
+	public string item2;
 
 	// Use this for initialization
 	void Start () 
@@ -39,6 +41,9 @@ public class CharacterControllerScript : MonoBehaviour
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
 		customerNeedsScript = Customer.GetComponent<CustomerNeedsScript>();
+		item1=null;
+		item2=null;
+
 	}
 	
 	// Update is called once per frame
@@ -110,10 +115,19 @@ public class CharacterControllerScript : MonoBehaviour
 			foreach(string item in inventoryScript.playerInventory)
 			{
 				GUILayout.BeginHorizontal();
-				if(GUILayout.Button(string.Format("{0}",item)))
+				if(GUILayout.Button(string.Format("{0}",item))&&item2==null)
 				{
-					craftingScript.craftingItems.Add(item);
-					itemsTodelete.Add(item);
+					if(item1==null)
+					{
+						item1=item;
+						Debug.Log ("this is item1"+item1);
+						itemsTodelete.Add(item);
+					}
+					else
+					{
+						item2=item;
+						itemsTodelete.Add(item);
+					}
 				}
 				GUILayout.EndHorizontal();
 			}
@@ -125,10 +139,7 @@ public class CharacterControllerScript : MonoBehaviour
 
 			if(GUILayout.Button("Craft"))
 			{
-				foreach(string item in craftingScript.craftingItems)
-				{
-					craftingScript.item+=item;
-				}
+				Debug.Log("This is item1 again"+item1);
 				craftingScript.Craft();
 				craftingScript.craftingItems.Clear();
 				craftingScript.item = "";

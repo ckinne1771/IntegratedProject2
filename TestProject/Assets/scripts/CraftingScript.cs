@@ -12,6 +12,8 @@ public class CraftingScript : MonoBehaviour
 	public List<string> recipeList;
 	public List<string> craftingItems;
 	public GameObject Customer;
+	public string item1;
+	public string item2;
 
 	// Use this for initialization
 	void Start () 
@@ -36,13 +38,15 @@ public class CraftingScript : MonoBehaviour
 		//and inventory
 		//"dog" and "bowl" will later be added by the player selecting the items
 		//item = "dog"+"bowl";
-		foreach(string thing in recipeList)
+		item1=characterControllerScript.item1;
+		item2=characterControllerScript.item2;
+		Debug.Log ("This is item1 and 2"+item1+ item2);
+		foreach(string recipe in recipeList)
 		{
-			if(thing.Equals(item))
+			if(recipe.Equals(item1+item2)||recipe.Equals(item2+item1))
 			{
-				Debug.Log (item);
-				inventoryScript.playerInventory.Add (item);
-				//customerNeedsScript.itemNeeded = false;
+				Debug.Log (recipe);
+				inventoryScript.playerInventory.Add (recipe);
 			}
 	
 		}
