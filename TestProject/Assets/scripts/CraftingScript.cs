@@ -11,11 +11,13 @@ public class CraftingScript : MonoBehaviour
 	public string item;
 	public List<string> recipeList;
 	public List<string> craftingItems;
+	public GameObject Customer;
 
 	// Use this for initialization
 	void Start () 
 	{
-		customerNeedsScript = GetComponent<CustomerNeedsScript>();
+		Customer = GameObject.Find("Customer");
+		customerNeedsScript = Customer.GetComponent<CustomerNeedsScript>();
 		characterControllerScript = GetComponent<CharacterControllerScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
 		recipeList.Add("dogbowl");
@@ -40,7 +42,7 @@ public class CraftingScript : MonoBehaviour
 			{
 				Debug.Log (item);
 				inventoryScript.playerInventory.Add (item);
-				customerNeedsScript.itemNeeded = false;
+				//customerNeedsScript.itemNeeded = false;
 			}
 	
 		}

@@ -15,14 +15,17 @@ public class CustomerNeedsScript : MonoBehaviour {
 	
 	public bool itemNeeded;
 	
-	
+	public string itemRequested;
+
+	public GameObject Player;
 	
 	// Use this for initialization
 	void Start () 
 	{
 		itemNeeded = true;
+		Player = GameObject.Find("Player");
+		theCraftingScript= Player.GetComponent<CraftingScript>();
 
-		
 	}
 	
 	// Update is called once per frame
@@ -31,19 +34,17 @@ public class CustomerNeedsScript : MonoBehaviour {
 	}
 	
 	public void AddingToList(){
-		
-		theCraftingScript = GetComponent<CraftingScript>();
-
 
 		choice = new List<string>(theCraftingScript.recipeList);
 		randomNumber = Random.Range(0,choice.Count);
 		NeededItem = randomNumber;
+		itemRequested = choice[NeededItem];
 	}
 	
 	void OnGUI(){
 		if(itemNeeded==true)
 		{
-			GUI.Box(new Rect(110,5,100,30),choice[NeededItem]);
+			GUI.Box(new Rect(110,5,100,30),itemRequested);
 		}
 		
 	}

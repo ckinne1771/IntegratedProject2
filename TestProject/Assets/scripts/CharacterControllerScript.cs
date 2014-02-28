@@ -23,8 +23,9 @@ public class CharacterControllerScript : MonoBehaviour
 	GameObject Till;
 	public TheInventoryScript inventoryScript;
 	public CraftingScript craftingScript;
-	//public CustomerNeedsScript customerNeedsScript;
+	public CustomerNeedsScript customerNeedsScript;
 	public List<string> itemsTodelete;
+	public GameObject Customer;
 
 	// Use this for initialization
 	void Start () 
@@ -32,11 +33,12 @@ public class CharacterControllerScript : MonoBehaviour
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
+		Customer = GameObject.Find("Customer");
 		Till = GameObject.Find("Till");
 
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
-		//customerNeedsScript.GetComponent<CustomerNeedsScript>();
+		customerNeedsScript = Customer.GetComponent<CustomerNeedsScript>();
 	}
 	
 	// Update is called once per frame
@@ -151,17 +153,18 @@ public class CharacterControllerScript : MonoBehaviour
 			itemsTodelete.Clear();
 		}
 
-		/*if(currentState == PlayerState.Serving)
+		if(currentState == PlayerState.Serving && customerNeedsScript.itemNeeded)
 		{
 			foreach(string item in inventoryScript.playerInventory)
 			{
-				if(inventoryScript.playerInventory.Contains(customerNeedsScript.ItemCustomerWants))
+				if(inventoryScript.playerInventory.Contains(customerNeedsScript.itemRequested))
 				{
 					customerNeedsScript.itemNeeded = false;
+
 				}
 			}
 
-		}*/
+		}
 	}
 
 }
