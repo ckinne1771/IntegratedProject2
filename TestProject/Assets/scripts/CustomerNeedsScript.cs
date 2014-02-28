@@ -18,7 +18,8 @@ public class CustomerNeedsScript : MonoBehaviour {
 	
 	
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		itemNeeded = true;
 
 		
@@ -35,15 +36,13 @@ public class CustomerNeedsScript : MonoBehaviour {
 
 
 		choice = new List<string>(theCraftingScript.recipeList);
-		foreach(var value in choice){
-			Debug.Log(value);
-		}
 		randomNumber = Random.Range(0,choice.Count);
 		NeededItem = randomNumber;
 	}
 	
 	void OnGUI(){
-		if(itemNeeded==true){
+		if(itemNeeded==true)
+		{
 			GUI.Box(new Rect(110,5,100,30),choice[NeededItem]);
 		}
 		

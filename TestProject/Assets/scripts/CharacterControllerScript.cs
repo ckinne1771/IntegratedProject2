@@ -23,6 +23,7 @@ public class CharacterControllerScript : MonoBehaviour
 	GameObject Till;
 	public TheInventoryScript inventoryScript;
 	public CraftingScript craftingScript;
+	//public CustomerNeedsScript customerNeedsScript;
 	public List<string> itemsTodelete;
 
 	// Use this for initialization
@@ -35,6 +36,7 @@ public class CharacterControllerScript : MonoBehaviour
 
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
+		//customerNeedsScript.GetComponent<CustomerNeedsScript>();
 	}
 	
 	// Update is called once per frame
@@ -148,6 +150,18 @@ public class CharacterControllerScript : MonoBehaviour
 				}
 			itemsTodelete.Clear();
 		}
+
+		/*if(currentState == PlayerState.Serving)
+		{
+			foreach(string item in inventoryScript.playerInventory)
+			{
+				if(inventoryScript.playerInventory.Contains(customerNeedsScript.ItemCustomerWants))
+				{
+					customerNeedsScript.itemNeeded = false;
+				}
+			}
+
+		}*/
 	}
 
 }
