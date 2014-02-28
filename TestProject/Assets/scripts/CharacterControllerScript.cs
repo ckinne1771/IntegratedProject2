@@ -15,8 +15,6 @@ public class CharacterControllerScript : MonoBehaviour
 
 	//player state comment
 	public PlayerState currentState;
-	//public float maxSpeed = 10.0f;
-	//bool facingRight = true;
 	GameObject CraftingTable;
 	GameObject RecyclingBin;
 	GameObject ComponentsArea;
@@ -28,6 +26,7 @@ public class CharacterControllerScript : MonoBehaviour
 	public GameObject Customer;
 	public string item1;
 	public string item2;
+	public Texture2D images;
 
 	// Use this for initialization
 	void Start () 
@@ -47,13 +46,7 @@ public class CharacterControllerScript : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
-	{
-		//float moveSide = Input.GetAxis("Horizontal");
-		//float moveUpDown = Input.GetAxis("Vertical");
-		//rigidbody2D.velocity = new Vector2(moveSide*maxSpeed,moveUpDown*maxSpeed);
-	}
-	
+	//moves player
 	void Update()
 	{
 		if(Input.GetMouseButtonDown(0))
@@ -93,8 +86,11 @@ public class CharacterControllerScript : MonoBehaviour
 		}
 
 	}
+
+	//handles player states
 	 public void OnGUI()
 	{
+		//selecting components
 		if(currentState == PlayerState.SelectingComponents)
 		{
 		foreach (string item in inventoryScript.allComponents)
@@ -104,17 +100,23 @@ public class CharacterControllerScript : MonoBehaviour
 				if(GUILayout.Button(string.Format("{0})",item)))
 				{
 					Debug.Log(string.Format("Got {0}",item));
-					inventoryScript.playerInventory.Add(item);
+					inventoryScript.playerInventory.Add(item,1);
+					images = inventoryScript.componentInventory[item];
+					Debug.Log (images);
+					inventoryScript.playerInventoryImages.Add (item, images);
+
 				}
 			GUILayout.EndHorizontal();
 		}
 		}
 
+		//crafting
 		if(currentState == PlayerState.Crafting)
 		{
-			foreach(string item in inventoryScript.playerInventory)
+			foreach(string item in inventoryScript.playerInventory.Keys)
 			{
 				GUILayout.BeginHorizontal();
+				GUILayout.Box(inventoryScript.playerInventoryImages[item],GUILayout.Width(50.0f), GUILayout.Height(50.0f));
 				if(GUILayout.Button(string.Format("{0}",item))&&item2==null)
 				{
 					if(item1==null)
@@ -146,9 +148,10 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 		}
 
+		//recycling
 		if(currentState == PlayerState.Recycling && inventoryScript.playerInventory.Count>0)
 		{
-			foreach(string item in inventoryScript.playerInventory)
+			foreach(string item in inventoryScript.playerInventory.Keys)
 			{
 				GUILayout.BeginVertical();
 				if(GUILayout.Button(string.Format("{0}",item)))
@@ -164,15 +167,21 @@ public class CharacterControllerScript : MonoBehaviour
 			itemsTodelete.Clear();
 		}
 
+		//serving
 		if(currentState == PlayerState.Serving && customerNeedsScript.itemNeeded)
 		{
-			foreach(string item in inventoryScript.playerInventory)
+			foreach(string item in inventoryScript.playerInventory.Keys)
 			{
-				if(inventoryScript.playerInventory.Contains(customerNeedsScript.itemRequested))
+				/*if(inventoryScript.playerInventory.Keys.(customerNeedsScript.itemRequested))
 				{
 					customerNeedsScript.itemNeeded = false;
 
-				}
+				}*/
+
+					if(item==customerNeedsScript.itemRequested)
+					{
+						customerNeedsScript.itemNeeded = false;
+					}
 			}
 
 		}

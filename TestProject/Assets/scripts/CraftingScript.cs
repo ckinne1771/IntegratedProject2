@@ -46,7 +46,7 @@ public class CraftingScript : MonoBehaviour
 			if(recipe.Equals(item1+item2)||recipe.Equals(item2+item1))
 			{
 				Debug.Log (recipe);
-				inventoryScript.playerInventory.Add (recipe);
+				inventoryScript.playerInventory.Add (recipe,1);
 			}
 	
 		}
