@@ -29,11 +29,11 @@ public class CraftingScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
+	
 	}
 
 	public void Craft()
-	{
+		{
 		//temporary test code while the inventory and gui interactions arent done yet for component selecting
 		//and inventory
 		//"dog" and "bowl" will later be added by the player selecting the items
@@ -52,5 +52,11 @@ public class CraftingScript : MonoBehaviour
 		}
 
 		characterControllerScript.currentState = CharacterControllerScript.PlayerState.Idle;
+	}
+	public void OncustomerSpawn()
+	{
+		recipeList.Add("dogbowl");
+		customerNeedsScript.AddingToList();
+		customerNeedsScript.itemNeeded=true;
 	}
 }
