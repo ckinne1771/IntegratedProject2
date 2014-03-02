@@ -20,7 +20,7 @@ public class CustomerSpawningScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(spawnTimeLeft <= 0 && customersSpwaned <8) {
+		if(spawnTimeLeft <= 0 && customersSpwaned <5) {
 			GameObject go = (GameObject)Instantiate(unit, transform.position, transform.rotation);
 			go.GetComponent<CustomerAIScript>().target = target;
 			spawnTimeLeft = spawnTime;

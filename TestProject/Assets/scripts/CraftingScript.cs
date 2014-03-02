@@ -26,7 +26,7 @@ public class CraftingScript : MonoBehaviour
 		customerNeedsScript.AddingToList();
 	}
 	
-	// Update is called once per frame
+	// Update is called once per frame 
 	void Update () 
 	{
 	
@@ -56,7 +56,7 @@ public class CraftingScript : MonoBehaviour
 	public void OncustomerSpawn()
 	{
 		recipeList.Add("dogbowl");
-		customerNeedsScript.AddingToList();
-		customerNeedsScript.itemNeeded=true;
+		//customerNeedsScript.AddingToList();
+		//customerNeedsScript.itemNeeded=true;
 	}
 }

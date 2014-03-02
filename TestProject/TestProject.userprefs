@@ -1,14 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CraftingScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CustomerNeedsScript.cs">
     <Files>
-      <File FileName="Assets\scripts\CharacterControllerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\CraftingScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\CustomerSpawningScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\CharacterControllerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\CustomerNeedsScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\CustomerAIScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\TheInventoryScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\CharactorTriggerScript.cs" Line="40" Column="1" />
+      <File FileName="Assets\scripts\CharacterControllerScript.cs" Line="166" Column="26" />
+      <File FileName="Assets\scripts\CraftingScript.cs" Line="60" Column="5" />
+      <File FileName="Assets\scripts\CustomerSpawningScript.cs" Line="28" Column="27" />
+      <File FileName="Assets\scripts\CustomerNeedsScript.cs" Line="26" Column="3" />
+      <File FileName="Assets\scripts\CustomerAIScript.cs" Line="16" Column="16" />
+      <File FileName="Assets\scripts\TheInventoryScript.cs" Line="47" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

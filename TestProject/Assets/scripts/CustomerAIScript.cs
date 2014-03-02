@@ -12,8 +12,12 @@ public class CustomerAIScript : MonoBehaviour {
 	
 	//The calculated path
 	public Path path;
+
+	public static GameObject thisCustomer;
 	
 	//The AI's speed per second
+
+	[System.NonSerialized]
 	public float speed = 2;
 	
 	//The max distance from the AI to a waypoint for it to continue to the next waypoint
@@ -25,6 +29,7 @@ public class CustomerAIScript : MonoBehaviour {
 	public CustomerNeedsScript theCustomerNeedsScript;
 
 	public void Start () {
+		thisCustomer = this.gameObject;
 	
 		theCustomerNeedsScript = GetComponent<CustomerNeedsScript>();
 		targetPosition = target.transform.position;
@@ -70,16 +75,5 @@ public class CustomerAIScript : MonoBehaviour {
 		}
 	}
 
-	public void OnTriggerEnter(Collider other)
-	{
-		if(other.gameObject.name == "CounterTarget" && theCustomerNeedsScript.itemNeeded ==true)
-		{
-			speed = 0;
-		}
-		/*else if(other.gameObject.tag =="Customer")
-		{
-			speed = 0;
-		}
-		*/
-	}
+
 }

@@ -18,10 +18,13 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string itemRequested;
 
 	public GameObject Player;
+
+	public bool orderCompleted;
 	
 	// Use this for initialization
 	void Start () 
 	{
+		orderCompleted = false;
 		itemNeeded = true;
 		Player = GameObject.Find("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
@@ -34,11 +37,13 @@ public class CustomerNeedsScript : MonoBehaviour {
 	}
 	
 	public void AddingToList(){
-
+		if(orderCompleted = true)
+		{
 		choice = new List<string>(theCraftingScript.recipeList);
 		randomNumber = Random.Range(0,choice.Count);
 		NeededItem = randomNumber;
 		itemRequested = choice[NeededItem];
+		}
 	}
 	
 	void OnGUI(){
