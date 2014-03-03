@@ -173,8 +173,8 @@ public class CharacterControllerScript : MonoBehaviour
 				if(inventoryScript.playerInventory.Contains(customerNeedsScript.itemRequested))
 				{
 					customerNeedsScript.itemNeeded = false;
-					customerNeedsScript.orderCompleted =true;
-					customerNeedsScript.AddingToList ();
+
+
 
 				}
 			}

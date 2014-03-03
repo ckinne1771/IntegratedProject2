@@ -73,6 +73,10 @@ public class CustomerAIScript : MonoBehaviour {
 			currentWaypoint++;
 			return;
 		}
+
+	
+
+	
 	}
 
 

@@ -25,7 +25,8 @@ public class CustomerSpawningScript : MonoBehaviour {
 			go.GetComponent<CustomerAIScript>().target = target;
 			spawnTimeLeft = spawnTime;
 			customersSpwaned++;
-			spawnCraftingScript.OncustomerSpawn ();
+
+			spawnCraftingScript.OncustomerSpawn();
 
 
 		}

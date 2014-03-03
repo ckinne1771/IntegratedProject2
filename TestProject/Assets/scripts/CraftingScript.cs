@@ -24,6 +24,7 @@ public class CraftingScript : MonoBehaviour
 		inventoryScript = GetComponent<TheInventoryScript>();
 		recipeList.Add("dogbowl");
 		customerNeedsScript.AddingToList();
+		customerNeedsScript.RandomList();
 	}
 	
 	// Update is called once per frame 
@@ -55,8 +56,8 @@ public class CraftingScript : MonoBehaviour
 	}
 	public void OncustomerSpawn()
 	{
-		recipeList.Add("dogbowl");
-		//customerNeedsScript.AddingToList();
-		//customerNeedsScript.itemNeeded=true;
+		customerNeedsScript.AddingToList();
+		customerNeedsScript.RandomList();
+	
 	}
 }
