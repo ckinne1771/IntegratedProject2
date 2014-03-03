@@ -27,6 +27,34 @@ public class TheInventoryScript : MonoBehaviour
 	{
 
 	}
+
+	public bool AddItem (string item)
+	{
+		if(playerInventory.ContainsKey(item))
+		{
+			playerInventory[item] += 1;
+		}
+		else
+		{
+			playerInventory.Add(item, 1);
+		}
+		return true;
+	}
+
+	public bool RemoveItem (string item)
+	{
+		if(playerInventory.ContainsKey(item))
+		{
+			playerInventory[item] -= 1;
+			if(playerInventory[item] < 1)
+			{
+				playerInventory.Remove(item);
+			}
+			return true;
+		}
+		return false;
+	}
+
 	
 }
 

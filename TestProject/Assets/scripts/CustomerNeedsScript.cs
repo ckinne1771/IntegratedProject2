@@ -18,6 +18,10 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string itemRequested;
 
 	public GameObject Player;
+
+	public CustomerSpawnScript customerSpawnScript;
+
+
 	
 	// Use this for initialization
 	void Start () 
@@ -25,6 +29,8 @@ public class CustomerNeedsScript : MonoBehaviour {
 		itemNeeded = true;
 		Player = GameObject.Find("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
+		AddingToList();
+		//customerSpawnScript = 
 
 	}
 	

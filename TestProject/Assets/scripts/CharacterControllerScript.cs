@@ -21,12 +21,14 @@ public class CharacterControllerScript : MonoBehaviour
 	GameObject Till;
 	public TheInventoryScript inventoryScript;
 	public CraftingScript craftingScript;
-	public CustomerNeedsScript customerNeedsScript;
+	public CustomerSpawnScript customerSpawnScript;
+	//public CustomerNeedsScript customerNeedsScript;
 	public List<string> itemsTodelete;
 	public GameObject Customer;
 	public string item1;
 	public string item2;
 	public Texture2D images;
+	public GameObject customerTemplate;
 
 	// Use this for initialization
 	void Start () 
@@ -34,14 +36,14 @@ public class CharacterControllerScript : MonoBehaviour
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
-		Customer = GameObject.Find("Customer");
+		//Customer = GameObject.FindGameObjectsWithTag("Customer");
 		Till = GameObject.Find("Till");
 
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
-		customerNeedsScript = Customer.GetComponent<CustomerNeedsScript>();
-		item1=null;
-		item2=null;
+//		customerNeedsScript = customerTemplate.GetComponent<CustomerNeedsScript>();
+		item1="";
+		item2="";
 
 	}
 	
@@ -100,10 +102,11 @@ public class CharacterControllerScript : MonoBehaviour
 				if(GUILayout.Button(string.Format("{0})",item)))
 				{
 					Debug.Log(string.Format("Got {0}",item));
-					inventoryScript.playerInventory.Add(item,1);
-					images = inventoryScript.componentInventory[item];
-					Debug.Log (images);
-					inventoryScript.playerInventoryImages.Add (item, images);
+					//inventoryScript.playerInventory.Add(item,1);
+					//images = inventoryScript.componentInventory[item];
+					//Debug.Log (images);
+					inventoryScript.AddItem(item);
+
 
 				}
 			GUILayout.EndHorizontal();
@@ -113,22 +116,20 @@ public class CharacterControllerScript : MonoBehaviour
 		//crafting
 		if(currentState == PlayerState.Crafting)
 		{
+			Debug.Log(inventoryScript.playerInventory.Keys.Count);
 			foreach(string item in inventoryScript.playerInventory.Keys)
 			{
 				GUILayout.BeginHorizontal();
-				GUILayout.Box(inventoryScript.playerInventoryImages[item],GUILayout.Width(50.0f), GUILayout.Height(50.0f));
-				if(GUILayout.Button(string.Format("{0}",item))&&item2==null)
+				GUILayout.Box(inventoryScript.componentInventory[item],GUILayout.Width(50.0f), GUILayout.Height(50.0f));
+				if(GUILayout.Button(string.Format("{0}",item)))
 				{
-					if(item1==null)
+					if(item1=="")
 					{
 						item1=item;
-						Debug.Log ("this is item1"+item1);
-						itemsTodelete.Add(item);
 					}
-					else
+					else if(item2 == "")
 					{
 						item2=item;
-						itemsTodelete.Add(item);
 					}
 				}
 				GUILayout.EndHorizontal();
@@ -141,11 +142,26 @@ public class CharacterControllerScript : MonoBehaviour
 
 			if(GUILayout.Button("Craft"))
 			{
-				Debug.Log("This is item1 again"+item1);
-				craftingScript.Craft();
-				craftingScript.craftingItems.Clear();
-				craftingScript.item = "";
+				Debug.Log("This is item1 again "+item1);
+
+				if(craftingScript.Craft(item1, item2))
+				{
+					//craftingScript.craftingItems.Clear();
+					//craftingScript.item = "";
+					inventoryScript.RemoveItem(item1);
+					inventoryScript.RemoveItem(item2);
+				}
+				item1 = "";
+				item2 = "";
+				currentState = PlayerState.Idle;
 			}
+
+			if(GUILayout.Button("Clear"))
+			{
+				item1 = "";
+				item2 = "";
+			}
+
 		}
 
 		//recycling
@@ -168,23 +184,14 @@ public class CharacterControllerScript : MonoBehaviour
 		}
 
 		//serving
-		if(currentState == PlayerState.Serving && customerNeedsScript.itemNeeded)
+		if(!customerSpawnScript.IsQueueEmpty() && currentState == PlayerState.Serving)
 		{
-			foreach(string item in inventoryScript.playerInventory.Keys)
+			if(inventoryScript.playerInventory.ContainsKey(customerSpawnScript.GetFrontOfQueueOrder().itemRequested))
 			{
-				/*if(inventoryScript.playerInventory.Keys.(customerNeedsScript.itemRequested))
-				{
-					customerNeedsScript.itemNeeded = false;
-
-				}*/
-
-					if(item==customerNeedsScript.itemRequested)
-					{
-						customerNeedsScript.itemNeeded = false;
-					}
+				inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().itemRequested);
+				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
+				customerSpawnScript.RemoveCustomer(0);
 			}
-
 		}
 	}
-
 }
