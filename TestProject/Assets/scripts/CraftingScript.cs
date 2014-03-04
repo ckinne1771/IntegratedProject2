@@ -20,8 +20,8 @@ public class CraftingScript : MonoBehaviour
 	{
 		characterControllerScript = GetComponent<CharacterControllerScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
-		recipeList.Add("dogbowl");
-		//customerNeedsScript.AddingToList();
+		recipeList.Add("orangeball");
+		recipeList.Add ("wheelmetal");
 	}
 	
 	// Update is called once per frame
@@ -32,13 +32,8 @@ public class CraftingScript : MonoBehaviour
 
 	public bool Craft(string item1, string item2)
 	{
-		//temporary test code while the inventory and gui interactions arent done yet for component selecting
-		//and inventory
-		//"dog" and "bowl" will later be added by the player selecting the items
-		//item = "dog"+"bowl";
 		bool itemCrafted = false;
-		//Debug.Log ("This is item1 and 2"+item1+ item2);
-
+	
 		if(recipeList.Contains(item1+item2))
 		{
 			itemCrafted = true;
@@ -51,7 +46,6 @@ public class CraftingScript : MonoBehaviour
 			Debug.Log (item2+item1);
 		}
 		return itemCrafted;
-
-		//characterControllerScript.currentState = CharacterControllerScript.PlayerState.Idle;
+		
 	}
 }

@@ -8,8 +8,6 @@ public class TheInventoryScript : MonoBehaviour
 	public List<Texture2D> allComponentImages;
 	public Dictionary<string, Texture2D> componentInventory = new Dictionary<string,Texture2D>();
 	public Dictionary<string, int> playerInventory = new Dictionary<string,int>();
-	public Dictionary<string, Texture2D> playerInventoryImages = new Dictionary<string, Texture2D>();
-
 	
 	// Use this for initialization
 	void Start () 

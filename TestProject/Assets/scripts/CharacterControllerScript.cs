@@ -22,7 +22,6 @@ public class CharacterControllerScript : MonoBehaviour
 	public TheInventoryScript inventoryScript;
 	public CraftingScript craftingScript;
 	public CustomerSpawnScript customerSpawnScript;
-	//public CustomerNeedsScript customerNeedsScript;
 	public List<string> itemsTodelete;
 	public GameObject Customer;
 	public string item1;
@@ -36,12 +35,11 @@ public class CharacterControllerScript : MonoBehaviour
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
-		//Customer = GameObject.FindGameObjectsWithTag("Customer");
 		Till = GameObject.Find("Till");
+		currentState=PlayerState.Idle;
 
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
-//		customerNeedsScript = customerTemplate.GetComponent<CustomerNeedsScript>();
 		item1="";
 		item2="";
 
@@ -51,11 +49,12 @@ public class CharacterControllerScript : MonoBehaviour
 	//moves player
 	void Update()
 	{
+
 		if(Input.GetMouseButtonDown(0))
 		{
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-			if(hit.collider != null)
+			if(hit.collider != null &&currentState==PlayerState.Idle)
 				
 			{
 				if(hit.transform.gameObject.tag=="componentsarea")
@@ -102,21 +101,20 @@ public class CharacterControllerScript : MonoBehaviour
 				if(GUILayout.Button(string.Format("{0})",item)))
 				{
 					Debug.Log(string.Format("Got {0}",item));
-					//inventoryScript.playerInventory.Add(item,1);
-					//images = inventoryScript.componentInventory[item];
-					//Debug.Log (images);
 					inventoryScript.AddItem(item);
-
-
 				}
 			GUILayout.EndHorizontal();
 		}
+			if(GUILayout.Button("Exit"))
+			{
+				currentState=PlayerState.Idle;
+			}
+
 		}
 
 		//crafting
-		if(currentState == PlayerState.Crafting)
+		if(currentState == PlayerState.Crafting )
 		{
-			Debug.Log(inventoryScript.playerInventory.Keys.Count);
 			foreach(string item in inventoryScript.playerInventory.Keys)
 			{
 				GUILayout.BeginHorizontal();
@@ -126,10 +124,12 @@ public class CharacterControllerScript : MonoBehaviour
 					if(item1=="")
 					{
 						item1=item;
+						itemsTodelete.Add(item1);
 					}
 					else if(item2 == "")
 					{
 						item2=item;
+						itemsTodelete.Add(item2);
 					}
 				}
 				GUILayout.EndHorizontal();
@@ -146,8 +146,6 @@ public class CharacterControllerScript : MonoBehaviour
 
 				if(craftingScript.Craft(item1, item2))
 				{
-					//craftingScript.craftingItems.Clear();
-					//craftingScript.item = "";
 					inventoryScript.RemoveItem(item1);
 					inventoryScript.RemoveItem(item2);
 				}
@@ -160,6 +158,7 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				item1 = "";
 				item2 = "";
+				currentState=PlayerState.Idle;
 			}
 
 		}
@@ -192,6 +191,7 @@ public class CharacterControllerScript : MonoBehaviour
 				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 				customerSpawnScript.RemoveCustomer(0);
 			}
+			currentState=PlayerState.Idle;
 		}
 	}
 }

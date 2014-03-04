@@ -16,6 +16,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 		AddCustomerToList();
 		AddCustomerToList();
 		AddCustomerToList();
+		GetFrontOfQueueOrder().itemNeeded = true;
 	}
 	
 	// Update is called once per frame
@@ -40,6 +41,10 @@ public class CustomerSpawnScript : MonoBehaviour {
 					customers[i].transform.position = targets[i].position;
 					added = true;
 					Debug.Log("Customer added");
+					if(customers[0])
+					{
+
+					}
 				}
 			}
 		}
@@ -88,7 +93,10 @@ public class CustomerSpawnScript : MonoBehaviour {
 				customers[i+1] = null;
 			}
 		}
-
+		if(!IsQueueEmpty())
+		{
+		GetFrontOfQueueOrder().itemNeeded = true;
+		}
 		return true;
 	}
 }

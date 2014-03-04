@@ -6,19 +6,12 @@ using System.Collections.Generic;
 public class CustomerNeedsScript : MonoBehaviour {
 	
 	public CraftingScript theCraftingScript;
-	
 	public List<string> choice;
-	
 	public int NeededItem;
-	
 	public int randomNumber;
-	
 	public bool itemNeeded;
-	
 	public string itemRequested;
-
 	public GameObject Player;
-
 	public CustomerSpawnScript customerSpawnScript;
 
 
@@ -26,11 +19,10 @@ public class CustomerNeedsScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		itemNeeded = true;
+		//itemNeeded = true;
 		Player = GameObject.Find("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
 		AddingToList();
-		//customerSpawnScript = 
 
 	}
 	
