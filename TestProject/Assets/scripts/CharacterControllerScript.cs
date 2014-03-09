@@ -29,6 +29,7 @@ public class CharacterControllerScript : MonoBehaviour
 	public Texture2D images;
 	public GameObject customerTemplate;
 
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -37,6 +38,7 @@ public class CharacterControllerScript : MonoBehaviour
 		ComponentsArea = GameObject.Find("ComponentsArea");
 		Till = GameObject.Find("Till");
 		currentState=PlayerState.Idle;
+
 
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
@@ -57,12 +59,40 @@ public class CharacterControllerScript : MonoBehaviour
 			if(hit.collider != null &&currentState==PlayerState.Idle)
 				
 			{
-				if(hit.transform.gameObject.tag=="componentsarea")
+				if(hit.transform.gameObject.tag=="Components")
 				{
 					Debug.Log("component");
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,-2,0));
-					currentState= PlayerState.SelectingComponents;
-				}
+					//currentState= PlayerState.SelectingComponents;
+
+					if(hit.transform.gameObject.name=="Component1")
+					{
+						inventoryScript.AddItem(inventoryScript.allComponents[0]);
+						//currentState= PlayerState.Idle;
+						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+
+					}
+					else if (hit.transform.gameObject.name=="Component2")
+					{
+						inventoryScript.AddItem(inventoryScript.allComponents[1]);
+						//currentState= PlayerState.Idle;
+						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+					}
+					else if(hit.transform.gameObject.name=="Component3")
+					{
+						inventoryScript.AddItem(inventoryScript.allComponents[2]);
+						//currentState=PlayerState.Idle;
+						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+					}
+					else if(hit.transform.gameObject.name=="Component4")
+					{
+						inventoryScript.AddItem(inventoryScript.allComponents[3]);
+						//currentState=PlayerState.Idle;
+						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+					}
+					}
+				
+
 				else if(hit.transform.gameObject.tag=="recyclingbin")
 				{
 					Debug.Log("recycling");
@@ -85,14 +115,19 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 
 		}
-
 	}
+
+
 
 	//handles player states
 	 public void OnGUI()
 	{
+		//foreach(Transform trans in components)
+		//{
+		//	Camera.main.ScreenToWorldPoint (components[trans].position);
+		//}
 		//selecting components
-		if(currentState == PlayerState.SelectingComponents)
+		/*if(currentState == PlayerState.SelectingComponents)
 		{
 		foreach (string item in inventoryScript.allComponents)
 		{
@@ -109,8 +144,23 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				currentState=PlayerState.Idle;
 			}
+*/
+		/*	foreach (string item in inventoryScript.allComponents)
+			{
+			int componentSlot = 0;
+				if(GUI.Button(new Rect(components[componentSlot].position.x, components[componentSlot].position.y, 100,100), inventoryScript.componentInventory[item]))
+				{
+					Debug.Log(string.Format("Got {0}",item));
+					inventoryScript.AddItem(item);
+				}
+			componentSlot++;
 
-		}
+			}
+		/*	if(GUILayout.Button("Exit"))
+			{
+				currentState=PlayerState.Idle;
+			}
+*/
 
 		//crafting
 		if(currentState == PlayerState.Crafting )
