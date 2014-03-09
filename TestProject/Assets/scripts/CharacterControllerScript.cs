@@ -28,11 +28,13 @@ public class CharacterControllerScript : MonoBehaviour
 	public string item2;
 	public Texture2D images;
 	public GameObject customerTemplate;
+	private bool noCompletedItems = true;
 
 
 	// Use this for initialization
 	void Start () 
 	{
+
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
@@ -101,10 +103,18 @@ public class CharacterControllerScript : MonoBehaviour
 				}
 				else if(hit.transform.gameObject.tag=="craftingtable")
 				{
+					if(inventoryScript.playerInventory.ContainsKey("orangeball") || inventoryScript.playerInventory.ContainsKey("wheelmetal"))
+					{
+						noCompletedItems = false;
+						Debug.Log("Status Changed");
+					}
+					else{
+
 					Debug.Log("crafting");
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(2,0,0));
 					this.gameObject.transform.rotation = CraftingTable.transform.rotation;
 					currentState = PlayerState.Crafting;
+					}
 				}
 				else if(hit.transform.gameObject.tag=="Till")
 				{
@@ -122,45 +132,6 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	 public void OnGUI()
 	{
-		//foreach(Transform trans in components)
-		//{
-		//	Camera.main.ScreenToWorldPoint (components[trans].position);
-		//}
-		//selecting components
-		/*if(currentState == PlayerState.SelectingComponents)
-		{
-		foreach (string item in inventoryScript.allComponents)
-		{
-			GUILayout.BeginHorizontal();
-			GUILayout.Box(inventoryScript.componentInventory[item],GUILayout.Width(50.0f), GUILayout.Height(50.0f));
-				if(GUILayout.Button(string.Format("{0})",item)))
-				{
-					Debug.Log(string.Format("Got {0}",item));
-					inventoryScript.AddItem(item);
-				}
-			GUILayout.EndHorizontal();
-		}
-			if(GUILayout.Button("Exit"))
-			{
-				currentState=PlayerState.Idle;
-			}
-*/
-		/*	foreach (string item in inventoryScript.allComponents)
-			{
-			int componentSlot = 0;
-				if(GUI.Button(new Rect(components[componentSlot].position.x, components[componentSlot].position.y, 100,100), inventoryScript.componentInventory[item]))
-				{
-					Debug.Log(string.Format("Got {0}",item));
-					inventoryScript.AddItem(item);
-				}
-			componentSlot++;
-
-			}
-		/*	if(GUILayout.Button("Exit"))
-			{
-				currentState=PlayerState.Idle;
-			}
-*/
 
 		//crafting
 		if(currentState == PlayerState.Crafting )
@@ -222,8 +193,18 @@ public class CharacterControllerScript : MonoBehaviour
 				if(GUILayout.Button(string.Format("{0}",item)))
 				{
 					itemsTodelete.Add(item);
+					currentState=PlayerState.Idle;
+					if(item=="orangeball" || item =="wheelmetal")
+					{
+						noCompletedItems=true;
+					}
 				}
 			}
+			if(GUILayout.Button("Exit"))
+			   {
+				currentState=PlayerState.Idle;
+			}
+
 				GUILayout.EndVertical();
 				foreach(string itemToDelete in itemsTodelete)
 				{
@@ -239,9 +220,17 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().itemRequested);
 				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
+				noCompletedItems=true;
 				customerSpawnScript.RemoveCustomer(0);
 			}
 			currentState=PlayerState.Idle;
+
 		}
+
+		if(noCompletedItems==false){
+			GUI.TextArea(new Rect(240, 10,300,50), "Completed items must be given to the customer or recycled before crafting again!");
+		}
+
 	}
+
 }
