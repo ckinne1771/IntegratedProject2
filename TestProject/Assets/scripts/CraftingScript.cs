@@ -30,22 +30,26 @@ public class CraftingScript : MonoBehaviour
 
 	}
 
-	public bool Craft(string item1, string item2)
+	public bool Craft(string _item1, string _item2)
 	{
 		bool itemCrafted = false;
 	
-		if(recipeList.Contains(item1+item2))
+		if(recipeList.Contains(_item1+_item2))
 		{
 			itemCrafted = true;
-			inventoryScript.AddItem(item1+item2);
-			Debug.Log (item1+item2);
-		}else if(recipeList.Contains(item2+item1))
+			inventoryScript.AddItem(_item1+_item2);
+			characterControllerScript.recipeitem=(_item1+_item2);
+			Debug.Log (_item1+_item2);
+
+		}else if(recipeList.Contains(_item2+_item1))
 		{
 			itemCrafted = true;
-			inventoryScript.AddItem(item2+item1);
-			Debug.Log (item2+item1);
+			inventoryScript.AddItem(_item2+_item1);
+			characterControllerScript.recipeitem=(_item2+_item1);
+			Debug.Log (_item2+_item1);
 		}
 		return itemCrafted;
+
 		
 	}
 }

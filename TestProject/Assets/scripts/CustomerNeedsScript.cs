@@ -13,8 +13,6 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string itemRequested;
 	public GameObject Player;
 	public CustomerSpawnScript customerSpawnScript;
-
-
 	
 	// Use this for initialization
 	void Start () 

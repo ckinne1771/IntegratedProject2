@@ -26,6 +26,7 @@ public class CharacterControllerScript : MonoBehaviour
 	public GameObject Customer;
 	public string item1;
 	public string item2;
+	public string recipeitem;
 	public Texture2D images;
 	public GameObject customerTemplate;
 	private bool noCompletedItems = true;
@@ -61,36 +62,40 @@ public class CharacterControllerScript : MonoBehaviour
 			if(hit.collider != null &&currentState==PlayerState.Idle)
 				
 			{
-				if(hit.transform.gameObject.tag=="Components")
+				if(hit.transform.gameObject.tag=="Components" && item2=="")
 				{
 					Debug.Log("component");
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,-2,0));
 					//currentState= PlayerState.SelectingComponents;
 
-					if(hit.transform.gameObject.name=="Component1")
+					if(hit.transform.gameObject.name=="orange")
 					{
 						inventoryScript.AddItem(inventoryScript.allComponents[0]);
 						//currentState= PlayerState.Idle;
 						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+						collectItems(hit.transform.gameObject.name);
 
 					}
-					else if (hit.transform.gameObject.name=="Component2")
+					else if (hit.transform.gameObject.name=="ball")
 					{
 						inventoryScript.AddItem(inventoryScript.allComponents[1]);
 						//currentState= PlayerState.Idle;
 						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+						collectItems(hit.transform.gameObject.name);
 					}
-					else if(hit.transform.gameObject.name=="Component3")
+					else if(hit.transform.gameObject.name=="wheel")
 					{
 						inventoryScript.AddItem(inventoryScript.allComponents[2]);
 						//currentState=PlayerState.Idle;
 						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+						collectItems(hit.transform.gameObject.name);
 					}
-					else if(hit.transform.gameObject.name=="Component4")
+					else if(hit.transform.gameObject.name=="metal")
 					{
 						inventoryScript.AddItem(inventoryScript.allComponents[3]);
 						//currentState=PlayerState.Idle;
 						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+						collectItems(hit.transform.gameObject.name);
 					}
 					}
 				
@@ -103,18 +108,18 @@ public class CharacterControllerScript : MonoBehaviour
 				}
 				else if(hit.transform.gameObject.tag=="craftingtable")
 				{
-					if(inventoryScript.playerInventory.ContainsKey("orangeball") || inventoryScript.playerInventory.ContainsKey("wheelmetal"))
+					/*if(inventoryScript.playerInventory.ContainsKey("orangeball") || inventoryScript.playerInventory.ContainsKey("wheelmetal"))
 					{
 						noCompletedItems = false;
 						Debug.Log("Status Changed");
-					}
-					else{
+					}*/
+
 
 					Debug.Log("crafting");
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(2,0,0));
 					this.gameObject.transform.rotation = CraftingTable.transform.rotation;
 					currentState = PlayerState.Crafting;
-					}
+
 				}
 				else if(hit.transform.gameObject.tag=="Till")
 				{
@@ -132,55 +137,20 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	 public void OnGUI()
 	{
+		GUI.Label(new Rect(100,100,100,100),"You are holding "+item1+""+item2+recipeitem);
 
 		//crafting
 		if(currentState == PlayerState.Crafting )
 		{
-			foreach(string item in inventoryScript.playerInventory.Keys)
-			{
-				GUILayout.BeginHorizontal();
-				GUILayout.Box(inventoryScript.componentInventory[item],GUILayout.Width(50.0f), GUILayout.Height(50.0f));
-				if(GUILayout.Button(string.Format("{0}",item)))
-				{
-					if(item1=="")
-					{
-						item1=item;
-						itemsTodelete.Add(item1);
-					}
-					else if(item2 == "")
-					{
-						item2=item;
-						itemsTodelete.Add(item2);
-					}
-				}
-				GUILayout.EndHorizontal();
-			}
-			foreach(string itemToDelete in itemsTodelete)
-			{
-				inventoryScript.playerInventory.Remove(itemToDelete);
-			}
-			itemsTodelete.Clear();
 
-			if(GUILayout.Button("Craft"))
+			if(craftingScript.Craft(item1, item2))
 			{
-				Debug.Log("This is item1 again "+item1);
-
-				if(craftingScript.Craft(item1, item2))
-				{
-					inventoryScript.RemoveItem(item1);
-					inventoryScript.RemoveItem(item2);
-				}
-				item1 = "";
-				item2 = "";
-				currentState = PlayerState.Idle;
+				inventoryScript.RemoveItem(item1);
+				inventoryScript.RemoveItem(item2);
 			}
-
-			if(GUILayout.Button("Clear"))
-			{
-				item1 = "";
-				item2 = "";
-				currentState=PlayerState.Idle;
-			}
+			item1 = "";
+			item2 = "";
+			currentState = PlayerState.Idle;
 
 		}
 
@@ -193,12 +163,12 @@ public class CharacterControllerScript : MonoBehaviour
 				if(GUILayout.Button(string.Format("{0}",item)))
 				{
 					itemsTodelete.Add(item);
-					currentState=PlayerState.Idle;
-					if(item=="orangeball" || item =="wheelmetal")
+					/*if(item=="orangeball" || item =="wheelmetal")
 					{
 						noCompletedItems=true;
-					}
+					}*/
 				}
+				currentState=PlayerState.Idle;
 			}
 			if(GUILayout.Button("Exit"))
 			   {
@@ -222,13 +192,27 @@ public class CharacterControllerScript : MonoBehaviour
 				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 				noCompletedItems=true;
 				customerSpawnScript.RemoveCustomer(0);
+				recipeitem="";
 			}
 			currentState=PlayerState.Idle;
 
 		}
 
-		if(noCompletedItems==false){
+		/*if(noCompletedItems==false){
 			GUI.TextArea(new Rect(240, 10,300,50), "Completed items must be given to the customer or recycled before crafting again!");
+		}*/
+
+	}
+
+	void collectItems(string _item)
+	{
+		if(item1=="")
+		{
+			item1=_item;
+		}
+		else
+		{
+			item2=_item;
 		}
 
 	}
