@@ -65,7 +65,7 @@ public class CharacterControllerScript : MonoBehaviour
 				if(hit.transform.gameObject.tag=="Components" && item2=="")
 				{
 					Debug.Log("component");
-					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,-2,0));
+					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
 					//currentState= PlayerState.SelectingComponents;
 
 					if(hit.transform.gameObject.name=="orange")
@@ -100,12 +100,12 @@ public class CharacterControllerScript : MonoBehaviour
 					}
 				
 
-				else if(hit.transform.gameObject.tag=="recyclingbin")
+				/*else if(hit.transform.gameObject.tag=="recyclingbin")
 				{
 					Debug.Log("recycling");
-					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-2,0));
+					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(2,0,0));
 					currentState = PlayerState.Recycling;
-				}
+				}*/
 				else if(hit.transform.gameObject.tag=="craftingtable")
 				{
 					/*if(inventoryScript.playerInventory.ContainsKey("orangeball") || inventoryScript.playerInventory.ContainsKey("wheelmetal"))
@@ -116,7 +116,7 @@ public class CharacterControllerScript : MonoBehaviour
 
 
 					Debug.Log("crafting");
-					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(2,0,0));
+					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
 					this.gameObject.transform.rotation = CraftingTable.transform.rotation;
 					currentState = PlayerState.Crafting;
 
@@ -137,7 +137,8 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	 public void OnGUI()
 	{
-		GUI.Label(new Rect(100,100,100,100),"You are holding "+item1+""+item2+recipeitem);
+		GUI.color=Color.black;
+		GUI.Label(new Rect(Screen.width/2,Screen.height/8,100,100),"You are holding "+item1+""+item2+recipeitem);
 
 		//crafting
 		if(currentState == PlayerState.Crafting )
