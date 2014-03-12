@@ -12,7 +12,9 @@ public class CraftingScript : MonoBehaviour
 	public List<string> recipeList;
 	public List<string> craftingItems;
 	public GameObject[] Customer;
-
+	public List<GameObject> itemsToDelete;
+	public Dictionary<GameObject, string> ItemList = new Dictionary<GameObject,string >();
+	public List<GameObject> recipeItems;
 	public GameObject customerTemplate;
 
 	// Use this for initialization
@@ -50,6 +52,15 @@ public class CraftingScript : MonoBehaviour
 			characterControllerScript.recipeitem=(_item2+_item1);
 			//Debug.Log (_item2+_item1);
 		}
+		foreach(GameObject component in characterControllerScript.components)
+		{
+			itemsToDelete.Add(component);
+		}
+		foreach(GameObject item in itemsToDelete)
+		{
+			Destroy(item);
+		}
+		characterControllerScript.components.Clear();
 		return itemCrafted;
 		
 		

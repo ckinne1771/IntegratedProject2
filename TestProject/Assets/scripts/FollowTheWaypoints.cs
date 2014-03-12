@@ -36,11 +36,6 @@ public class FollowTheWaypoints : MonoBehaviour
 				// Set new waypoint as target
 				targetWaypoint++;
 			}
-			else
-			{
-				customerneedsscript.itemNeeded=true;
-			}
-
 		}
 		else
 		{

@@ -30,7 +30,11 @@ public class CharacterControllerScript : MonoBehaviour
 	public Texture2D images;
 	public GameObject customerTemplate;
 	//private bool noCompletedItems = true;
-	
+	public GameObject orangeTemplate;
+	public GameObject ballTemplate;
+	public GameObject frameTemplate;
+	public GameObject wheelTemplate;
+	public List<GameObject> components;
 	
 	// Use this for initialization
 	void Start () 
@@ -74,6 +78,18 @@ public class CharacterControllerScript : MonoBehaviour
 						//currentState= PlayerState.Idle;
 						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
 						collectItems(hit.transform.gameObject.name);
+						GameObject neworange = Instantiate(orangeTemplate) as GameObject;
+						if(components.Count==0)
+						{
+							neworange.transform.position=this.gameObject.transform.position + new Vector3(0,1,0);
+						}
+						else
+						{
+							neworange.transform.position=this.gameObject.transform.position + new Vector3(0,2,0);
+						}
+						neworange.transform.parent=this.gameObject.transform;
+						components.Add(neworange);
+
 						
 					}
 					else if (hit.transform.gameObject.name=="ball")
@@ -82,6 +98,17 @@ public class CharacterControllerScript : MonoBehaviour
 						//currentState= PlayerState.Idle;
 						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
 						collectItems(hit.transform.gameObject.name);
+						GameObject newball = Instantiate(ballTemplate) as GameObject;
+						if(components.Count==0)
+						{
+							newball.transform.position=this.gameObject.transform.position + new Vector3(0,1,0);
+						}
+						else
+						{
+							newball.transform.position=this.gameObject.transform.position + new Vector3(0,2,0);
+						}
+						newball.transform.parent=this.gameObject.transform;
+						components.Add(newball);
 					}
 					else if(hit.transform.gameObject.name=="wheel")
 					{
@@ -89,6 +116,17 @@ public class CharacterControllerScript : MonoBehaviour
 						//currentState=PlayerState.Idle;
 						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
 						collectItems(hit.transform.gameObject.name);
+						GameObject newwheel = Instantiate(wheelTemplate) as GameObject;
+						if(components.Count==0)
+						{
+							newwheel.transform.position=this.gameObject.transform.position + new Vector3(0,1,0);
+						}
+						else
+						{
+							newwheel.transform.position=this.gameObject.transform.position + new Vector3(0,2,0);
+						}
+						newwheel.transform.parent=this.gameObject.transform;
+						components.Add(newwheel);
 					}
 					else if(hit.transform.gameObject.name=="metal")
 					{
@@ -96,6 +134,17 @@ public class CharacterControllerScript : MonoBehaviour
 						//currentState=PlayerState.Idle;
 						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
 						collectItems(hit.transform.gameObject.name);
+						GameObject newmetal = Instantiate(frameTemplate) as GameObject;
+						if(components.Count==0)
+						{
+							newmetal.transform.position=this.gameObject.transform.position + new Vector3(0,1,0);
+						}
+						else
+						{
+							newmetal.transform.position=this.gameObject.transform.position + new Vector3(0,2,0);
+						}
+						newmetal.transform.parent=this.gameObject.transform;
+						components.Add(newmetal);
 					}
 				}
 				
@@ -150,6 +199,7 @@ public class CharacterControllerScript : MonoBehaviour
 				inventoryScript.RemoveItem(item1);
 				inventoryScript.RemoveItem(item2);
 			}
+
 			item1 = "";
 			item2 = "";
 			currentState = PlayerState.Idle;
