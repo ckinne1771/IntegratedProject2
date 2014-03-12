@@ -1,29 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using System.Collections.Generic;
 
 public class CustomerSpawnScript : MonoBehaviour {
 
-	GameObject[] customers;
-	public Transform[] targets;
 	public int NoOfCustomers = 3;
 	public GameObject customerTemplate;
+	private Transform targets;
+	private int initialTarget = 0;
 
+	GameObject[] customers;
+	
 	// Use this for initialization
 	void Start () 
 	{
+		targets = GameObject.Find("Targets").transform;
 		customers = new GameObject[NoOfCustomers];
 		AddCustomerToList();
 		AddCustomerToList();
 		AddCustomerToList();
 		GetFrontOfQueueOrder().itemNeeded = true;
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		              
-
 	}
 
 	public bool AddCustomerToList()
@@ -32,25 +27,33 @@ public class CustomerSpawnScript : MonoBehaviour {
 		if(customers[NoOfCustomers -1] == null)
 		{
 			GameObject newCustomer = Instantiate(customerTemplate) as GameObject;
-
+			
 			for(int i = 0; i < NoOfCustomers; i++)
 			{
 				if(customers[i] == null && !added)
 				{
 					customers[i] = newCustomer;
-					customers[i].transform.position = targets[i].position;
+					Transform targetWaypoint = targets.GetChild(initialTarget);
+					customers[i].transform.position = targetWaypoint.transform.position;
 					added = true;
 					Debug.Log("Customer added");
+
+					if (initialTarget + 1 < targets.childCount)
+					{
+						// Set next target as spawnpoint
+						initialTarget++;
+					}
+
 					if(customers[0])
 					{
-
+						
 					}
 				}
 			}
 		}
 		return added;
 	}
-
+	
 	public bool IsQueueEmpty()
 	{
 		if(customers[0] == null)
@@ -62,12 +65,12 @@ public class CustomerSpawnScript : MonoBehaviour {
 			return false;
 		}
 	}
-
+	
 	public CustomerNeedsScript GetFrontOfQueueOrder()
 	{
 		return customers[0].GetComponent<CustomerNeedsScript>();
 	}
-
+	
 	public bool RemoveCustomer(int pos)
 	{
 		if(customers[pos] != null)
@@ -80,7 +83,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 		{
 			return false;
 		}
-
+		
 		for(int i = pos; i < NoOfCustomers - pos; i++)
 		{
 			if(i + 1 < NoOfCustomers)
@@ -88,14 +91,14 @@ public class CustomerSpawnScript : MonoBehaviour {
 				customers[i] = customers[i+1];
 				if(customers[i] != null)
 				{
-					customers[i].transform.position = targets[i].position;
+					//customers[i].transform.position = targets[i].position;
 				}
 				customers[i+1] = null;
 			}
 		}
 		if(!IsQueueEmpty())
 		{
-		GetFrontOfQueueOrder().itemNeeded = true;
+			GetFrontOfQueueOrder().itemNeeded = true;
 		}
 		return true;
 	}
