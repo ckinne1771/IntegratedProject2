@@ -12,8 +12,6 @@ public class CraftingScript : MonoBehaviour
 	public List<string> recipeList;
 	public List<string> craftingItems;
 	public GameObject[] Customer;
-	public List<GameObject> itemsToDelete;
-	public Dictionary<GameObject, string> ItemList = new Dictionary<GameObject,string >();
 	public List<GameObject> recipeItems;
 	public GameObject customerTemplate;
 
@@ -39,32 +37,14 @@ public class CraftingScript : MonoBehaviour
 		
 		if(recipeList.Contains(_item1+_item2))
 		{
-			//Debug.Log(TherecipeList[_item1+_item2]);
 			itemCrafted = true;
 			inventoryScript.AddItem(_item1+_item2);
-			characterControllerScript.recipeitem=(_item1+_item2);
-			//Debug.Log (_item1+_item2);
 			
 		}else if(recipeList.Contains(_item2+_item1))
 		{
 			itemCrafted = true;
 			inventoryScript.AddItem(_item2+_item1);
-			characterControllerScript.recipeitem=(_item2+_item1);
-			//Debug.Log (_item2+_item1);
 		}
-		foreach(GameObject component in characterControllerScript.components)
-		{
-			itemsToDelete.Add(component);
-		}
-		foreach(GameObject item in itemsToDelete)
-		{
-			Destroy(item);
-		}
-		characterControllerScript.components.Clear();
-		return itemCrafted;
-		
-		
+		return itemCrafted;	
 	}
-
-
 }

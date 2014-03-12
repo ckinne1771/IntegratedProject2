@@ -23,18 +23,17 @@ public class CharacterControllerScript : MonoBehaviour
 	public CraftingScript craftingScript;
 	public CustomerSpawnScript customerSpawnScript;
 	public List<string> itemsTodelete;
-	public GameObject Customer;
 	public string item1;
 	public string item2;
 	public string recipeitem;
 	public Texture2D images;
 	public GameObject customerTemplate;
-	//private bool noCompletedItems = true;
-	public GameObject orangeTemplate;
-	public GameObject ballTemplate;
-	public GameObject frameTemplate;
-	public GameObject wheelTemplate;
+	public GameObject orange;
+	public GameObject ball;
+	public GameObject metal;
+	public GameObject wheel;
 	public List<GameObject> components;
+	public GameObject component;
 	
 	// Use this for initialization
 	void Start () 
@@ -45,10 +44,9 @@ public class CharacterControllerScript : MonoBehaviour
 		ComponentsArea = GameObject.Find("ComponentsArea");
 		Till = GameObject.Find("Till");
 		currentState=PlayerState.Idle;
-		
-		
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
+		//customerSpawnScript = GetComponent<CustomerSpawnScript>();
 		item1="";
 		item2="";
 		
@@ -68,107 +66,24 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				if(hit.transform.gameObject.tag=="Components" && item2=="")
 				{
-					Debug.Log("component");
-					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
-					//currentState= PlayerState.SelectingComponents;
-					
-					if(hit.transform.gameObject.name=="orange")
-					{
-						inventoryScript.AddItem(inventoryScript.allComponents[0]);
-						//currentState= PlayerState.Idle;
-						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
-						collectItems(hit.transform.gameObject.name);
-						GameObject neworange = Instantiate(orangeTemplate) as GameObject;
-						if(components.Count==0)
-						{
-							neworange.transform.position=this.gameObject.transform.position + new Vector3(0,1,0);
-						}
-						else
-						{
-							neworange.transform.position=this.gameObject.transform.position + new Vector3(0,2,0);
-						}
-						neworange.transform.parent=this.gameObject.transform;
-						components.Add(neworange);
 
-						
-					}
-					else if (hit.transform.gameObject.name=="ball")
+					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
+
+					if(hit.transform.gameObject.tag=="Components")
 					{
-						inventoryScript.AddItem(inventoryScript.allComponents[1]);
-						//currentState= PlayerState.Idle;
-						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
+					
+						inventoryScript.AddItem(hit.transform.gameObject.name);
 						collectItems(hit.transform.gameObject.name);
-						GameObject newball = Instantiate(ballTemplate) as GameObject;
-						if(components.Count==0)
-						{
-							newball.transform.position=this.gameObject.transform.position + new Vector3(0,1,0);
-						}
-						else
-						{
-							newball.transform.position=this.gameObject.transform.position + new Vector3(0,2,0);
-						}
-						newball.transform.parent=this.gameObject.transform;
-						components.Add(newball);
-					}
-					else if(hit.transform.gameObject.name=="wheel")
-					{
-						inventoryScript.AddItem(inventoryScript.allComponents[2]);
-						//currentState=PlayerState.Idle;
-						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
-						collectItems(hit.transform.gameObject.name);
-						GameObject newwheel = Instantiate(wheelTemplate) as GameObject;
-						if(components.Count==0)
-						{
-							newwheel.transform.position=this.gameObject.transform.position + new Vector3(0,1,0);
-						}
-						else
-						{
-							newwheel.transform.position=this.gameObject.transform.position + new Vector3(0,2,0);
-						}
-						newwheel.transform.parent=this.gameObject.transform;
-						components.Add(newwheel);
-					}
-					else if(hit.transform.gameObject.name=="metal")
-					{
-						inventoryScript.AddItem(inventoryScript.allComponents[3]);
-						//currentState=PlayerState.Idle;
-						Debug.Log(inventoryScript.playerInventory.Keys.ToString());
-						collectItems(hit.transform.gameObject.name);
-						GameObject newmetal = Instantiate(frameTemplate) as GameObject;
-						if(components.Count==0)
-						{
-							newmetal.transform.position=this.gameObject.transform.position + new Vector3(0,1,0);
-						}
-						else
-						{
-							newmetal.transform.position=this.gameObject.transform.position + new Vector3(0,2,0);
-						}
-						newmetal.transform.parent=this.gameObject.transform;
-						components.Add(newmetal);
+						InstantiateComponents(hit.transform.gameObject);
+						//components.Add(hit.transform.gameObject);
 					}
 				}
-				
-				
-				/*else if(hit.transform.gameObject.tag=="recyclingbin")
-				{
-					Debug.Log("recycling");
-					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(2,0,0));
-					currentState = PlayerState.Recycling;
-				}*/
+
 				else if(hit.transform.gameObject.tag=="craftingtable")
 				{
-					/*if(inventoryScript.playerInventory.ContainsKey("orangeball") || inventoryScript.playerInventory.ContainsKey("wheelmetal"))
-					{
-						noCompletedItems = false;
-						Debug.Log("Status Changed");
-					}*/
-					
-					
-					Debug.Log("crafting");
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
 					this.gameObject.transform.rotation = CraftingTable.transform.rotation;
 					currentState = PlayerState.Crafting;
-					//recipeitem = craftingScript.TherecipeList[recipeitem];
 					
 				}
 				else if(hit.transform.gameObject.tag=="Till")
@@ -187,10 +102,6 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	public void OnGUI()
 	{
-		GUI.color=Color.black;
-		GUI.Label(new Rect(Screen.width/2,Screen.height/8,100,100),"You are holding "+item1+" "+item2+recipeitem);
-		
-		//crafting
 		if(currentState == PlayerState.Crafting )
 		{
 			
@@ -198,10 +109,22 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				inventoryScript.RemoveItem(item1);
 				inventoryScript.RemoveItem(item2);
+
+			}
+
+			if(components.Count > 0)
+			{
+				while(components.Count > 0)
+				{
+					GameObject delObj = components[0];
+					components.RemoveAt(0);
+					Destroy(delObj);
+				}
 			}
 
 			item1 = "";
 			item2 = "";
+
 			currentState = PlayerState.Idle;
 			
 		}
@@ -215,10 +138,7 @@ public class CharacterControllerScript : MonoBehaviour
 				if(GUILayout.Button(string.Format("{0}",item)))
 				{
 					itemsTodelete.Add(item);
-					/*if(item=="orangeball" || item =="wheelmetal")
-					{
-						noCompletedItems=true;
-					}*/
+
 				}
 				currentState=PlayerState.Idle;
 			}
@@ -249,11 +169,7 @@ public class CharacterControllerScript : MonoBehaviour
 			currentState=PlayerState.Idle;
 			
 		}
-		
-		/*if(noCompletedItems==false){
-			GUI.TextArea(new Rect(240, 10,300,50), "Completed items must be given to the customer or recycled before crafting again!");
-		}*/
-		
+
 	}
 	
 	void collectItems(string _item)
@@ -267,6 +183,15 @@ public class CharacterControllerScript : MonoBehaviour
 			item2=_item;
 		}
 		
+	}
+
+	void InstantiateComponents(GameObject _component)
+	{
+		component = Instantiate(_component) as GameObject;
+		component.name = component.name.Substring(0, _component.name.Length);
+		component.transform.position=this.gameObject.transform.position + new Vector3(0,0 + 2 * components.Count,0);
+		component.transform.parent=this.gameObject.transform;
+		components.Add(component);
 	}
 	
 }
