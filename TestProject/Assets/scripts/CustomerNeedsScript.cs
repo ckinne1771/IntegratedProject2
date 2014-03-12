@@ -14,6 +14,8 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public GameObject Player;
 	public CustomerSpawnScript customerSpawnScript;
 	public string item;
+	public Vector3 customerPos;
+	public Transform target;
 	
 	// Use this for initialization
 	void Start () 
@@ -26,8 +28,11 @@ public class CustomerNeedsScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+	{
+		target= this.gameObject.transform;
+		customerPos = Camera.main.WorldToScreenPoint(target.position);
+
 	}
 	
 	public void AddingToList(){
@@ -43,7 +48,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 	void OnGUI(){
 		if(itemNeeded==true)
 		{
-			GUI.Box(new Rect(110,5,100,30),itemRequested);
+			GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),itemRequested);
 		}
 		
 	}

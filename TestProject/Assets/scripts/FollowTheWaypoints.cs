@@ -5,12 +5,14 @@ public class FollowTheWaypoints : MonoBehaviour
 	public float movementSpeed = 5f;
 	private int targetWaypoint = 0;
 	private Transform waypoints;
+	public CustomerNeedsScript customerneedsscript;
 
 	
 	// Use this for initialization
 	void Start () 
 	{
 		waypoints = GameObject.Find("Waypoints").transform;
+		customerneedsscript = GetComponent<CustomerNeedsScript>();
 	}
 	
 	// Fixed update
@@ -34,6 +36,11 @@ public class FollowTheWaypoints : MonoBehaviour
 				// Set new waypoint as target
 				targetWaypoint++;
 			}
+			else
+			{
+				customerneedsscript.itemNeeded=true;
+			}
+
 		}
 		else
 		{

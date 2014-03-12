@@ -44,10 +44,6 @@ public class CustomerSpawnScript : MonoBehaviour {
 						initialTarget++;
 					}
 
-					if(customers[0])
-					{
-						
-					}
 				}
 			}
 		}
