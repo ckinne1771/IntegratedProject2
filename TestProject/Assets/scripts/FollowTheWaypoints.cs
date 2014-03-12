@@ -2,7 +2,7 @@
 
 public class FollowTheWaypoints : MonoBehaviour 
 {
-	public float movementSpeed = 3f;
+	public float movementSpeed = 5f;
 	private int targetWaypoint = 0;
 	private Transform waypoints;
 
