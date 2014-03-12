@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 
 public class CustomerNeedsScript : MonoBehaviour {
 	
@@ -13,6 +13,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string itemRequested;
 	public GameObject Player;
 	public CustomerSpawnScript customerSpawnScript;
+	public string item;
 	
 	// Use this for initialization
 	void Start () 
@@ -21,7 +22,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 		Player = GameObject.Find("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
 		AddingToList();
-
+		
 	}
 	
 	// Update is called once per frame
@@ -30,11 +31,13 @@ public class CustomerNeedsScript : MonoBehaviour {
 	}
 	
 	public void AddingToList(){
-
-		choice = new List<string>(theCraftingScript.recipeList);
+		
+		choice = new List<string>(theCraftingScript.TherecipeList.Keys);
 		randomNumber = Random.Range(0,choice.Count);
 		NeededItem = randomNumber;
 		itemRequested = choice[NeededItem];
+		item = theCraftingScript.TherecipeList[itemRequested];
+		
 	}
 	
 	void OnGUI(){
