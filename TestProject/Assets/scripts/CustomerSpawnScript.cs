@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class CustomerSpawnScript : MonoBehaviour {
-
+	
 	public int NoOfCustomers = 3;
 	public GameObject customerTemplate;
 	private Transform targets;
 	private int initialTarget = 0;
-
+	
 	GameObject[] customers;
 	
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 		AddCustomerToList();
 		GetFrontOfQueueOrder().itemNeeded = true;
 	}
-
+	
 	public bool AddCustomerToList()
 	{
 		bool added = false;
@@ -37,13 +37,13 @@ public class CustomerSpawnScript : MonoBehaviour {
 					customers[i].transform.position = targetWaypoint.transform.position;
 					added = true;
 					Debug.Log("Customer added");
-
+					
 					if (initialTarget + 1 < targets.childCount)
 					{
 						// Set next target as spawnpoint
 						initialTarget++;
 					}
-
+					
 				}
 			}
 		}

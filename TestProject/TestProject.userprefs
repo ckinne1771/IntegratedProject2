@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CustomerSpawnScript.cs">
     <Files>
-      <File FileName="Assets\scripts\CustomerSpawnScript.cs" Line="94" Column="8" />
-      <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="5" Column="34" />
+      <File FileName="Assets\scripts\CustomerSpawnScript.cs" Line="102" Column="1" />
+      <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="55" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
