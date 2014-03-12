@@ -1,11 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CharacterControllerScript.cs">
     <Files>
       <File FileName="Assets\scripts\CraftingScript.cs" Line="23" Column="5" />
       <File FileName="Assets\scripts\CustomerSpawnScript.cs" Line="39" Column="1" />
       <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="5" Column="34" />
       <File FileName="Assets\scripts\CharacterControllerScript.cs" Line="165" Column="20" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CustomerSpawnScript.cs">
+    <Files>
+      <File FileName="Assets\scripts\CustomerSpawnScript.cs" Line="102" Column="1" />
+      <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="55" Column="2" />
+>>>>>>> 7fc3bc252761b3a540a7a8a902fdef14c1ecce18
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
