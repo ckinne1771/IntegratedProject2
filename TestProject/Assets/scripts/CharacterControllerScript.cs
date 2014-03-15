@@ -34,6 +34,7 @@ public class CharacterControllerScript : MonoBehaviour
 	public GameObject wheel;
 	public List<GameObject> components;
 	public GameObject component;
+	public static int score;
 	
 	// Use this for initialization
 	void Start () 
@@ -165,11 +166,13 @@ public class CharacterControllerScript : MonoBehaviour
 				//noCompletedItems=true;
 				customerSpawnScript.RemoveCustomer(0);
 				recipeitem="";
+				score += 20;
 			}
 			currentState=PlayerState.Idle;
 			
 		}
 
+		GUI.TextField(new Rect(10,10,100,20),"Score; " +score); 
 	}
 	
 	void collectItems(string _item)
