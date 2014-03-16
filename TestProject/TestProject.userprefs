@@ -1,6 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CharacterControllerScript.cs">
+    <Files>
+      <File FileName="Assets\scripts\CharacterControllerScript.cs" Line="104" Column="21" />
+      <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="11" Column="32" />
+      <File FileName="Assets\scripts\CustomerNeedsScript.cs" Line="18" Column="26" />
+      <File FileName="Assets\scripts\CustomerSpawnScript.cs" Line="32" Column="44" />
+      <File FileName="Assets\scripts\CraftingScript.cs" Line="7" Column="2" />
+      <File FileName="Assets\scripts\TheInventoryScript.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

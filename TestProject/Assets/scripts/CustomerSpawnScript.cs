@@ -7,18 +7,30 @@ public class CustomerSpawnScript : MonoBehaviour {
 	public GameObject customerTemplate;
 	private Transform targets;
 	private int initialTarget = 0;
+	string currentScene;
 	
 	GameObject[] customers;
 	
 	// Use this for initialization
 	void Start () 
 	{
+		currentScene = Application.loadedLevelName;
+		if(currentScene == "tutorialScene")
+		{
+			targets = GameObject.Find("Targets").transform;
+			customers = new GameObject[NoOfCustomers];
+			AddCustomerToList();
+			GetFrontOfQueueOrder().itemNeeded = true;
+		}
+		else
+		{
 		targets = GameObject.Find("Targets").transform;
 		customers = new GameObject[NoOfCustomers];
 		AddCustomerToList();
 		AddCustomerToList();
 		AddCustomerToList();
 		GetFrontOfQueueOrder().itemNeeded = true;
+		}
 	}
 	
 	public bool AddCustomerToList()

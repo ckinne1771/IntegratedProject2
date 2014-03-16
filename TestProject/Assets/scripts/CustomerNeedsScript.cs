@@ -16,6 +16,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string item;
 	public Vector3 customerPos;
 	public Transform target;
+	string currentScene;
 	
 	// Use this for initialization
 	void Start () 
