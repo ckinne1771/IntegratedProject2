@@ -31,6 +31,8 @@ public class CharacterControllerScript : MonoBehaviour
 	public List<GameObject> components;
 	public GameObject component;
 	public static int score;
+	private int scoreModifier;
+	public float timer=60;
 	
 	// Use this for initialization
 	void Start () 
@@ -46,6 +48,7 @@ public class CharacterControllerScript : MonoBehaviour
 		//customerSpawnScript = GetComponent<CustomerSpawnScript>();
 		item1="";
 		item2="";
+		InvokeRepeating("Countdown",1f,1f);
 		
 	}
 	
@@ -92,6 +95,27 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 			
 		}
+
+		if (timer>40)
+		{
+			scoreModifier=3;
+		}
+
+		if (timer <40 && timer>20)
+		{
+			scoreModifier=2;
+		}
+		if (timer <20 && timer>0)
+		{
+			scoreModifier=1;
+		}
+
+	}
+
+	void Countdown()
+	{
+		timer--;
+		Debug.Log (timer);
 	}
 	
 	
@@ -162,7 +186,8 @@ public class CharacterControllerScript : MonoBehaviour
 				//noCompletedItems=true;
 				customerSpawnScript.RemoveCustomer(0);
 				recipeitem="";
-				score += 20;
+				score += (20*scoreModifier);
+				timer=60;
 			}
 			currentState=PlayerState.Idle;
 			

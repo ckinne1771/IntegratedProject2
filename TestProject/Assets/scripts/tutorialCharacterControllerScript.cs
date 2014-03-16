@@ -35,6 +35,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	public string currentStage;
 	public bool gotitem1;
 	public bool gotitem2;
+	private int scoreModifier;
+	public float timer = 60;
 	// Use this for initialization
 	void Start () 
 	{
@@ -49,8 +51,9 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		item1="";
 		item2="";
 		currentStage = stage[0];
+		InvokeRepeating ("Countdown", 1f, 1f);
 		
-	}
+	} 
 	
 	// Update is called once per frame
 	//moves player
@@ -104,7 +107,26 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				}
 			}
 		}
+		if (timer >40)
+		{
+			scoreModifier=3;
+		}
+
+		if (timer > 40 && timer <20)
+		{
+			scoreModifier=2;
+		}
+		if (timer <20 && timer >0)
+		{
+			scoreModifier=1;
+		}
 }
+
+	void Countdown()
+	{
+		timer--;
+		Debug.Log(timer);
+	}
 	
 	
 	
@@ -149,7 +171,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				//noCompletedItems=true;
 				customerSpawnScript.RemoveCustomer(0);
 				recipeitem="";
-				score += 20;
+				score += (20*scoreModifier);
+				timer=60;
 				currentStage="done!";
 			}
 			currentState=PlayerState.Idle;
@@ -167,7 +190,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			//unhighlight
 			break;
 		case("customerWant"):
-			GUI.Box(new Rect(Screen.width/2-75,Screen.height/2,150,50),"They want a basketball");
+			GUI.Box(new Rect(Screen.width/2-75,Screen.height/2,250,60),"Looks like they want an basketball! \n The customer will always \n say what item they want");
 			//highlight customerwant
 			StartCoroutine("grabItems");
 			//unhighlight
@@ -186,7 +209,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("craftItems"):
 			playerHasControl = false;
-			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Good!now craft them \n into something nice!");
+			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Good! Now craft them \n into something nice!");
 			playerHasControl=true;
 			//highlight craft bench anim
 			//StartCoroutine("WaitTime");
@@ -194,7 +217,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("serveCustomer"):
 			playerHasControl=false;
-			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Ok!Now you need to take \n the item to the till");
+			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Ok! Now you need to take \n the item to the till");
 			playerHasControl=true;
 			//highlight till anim
 			//StartCoroutine("WaitTime");
