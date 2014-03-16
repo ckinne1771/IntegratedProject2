@@ -16,13 +16,12 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string item;
 	public Vector3 customerPos;
 	public Transform target;
-	string currentScene;
 	
 	// Use this for initialization
 	void Start () 
 	{
 		//itemNeeded = true;
-		Player = GameObject.Find("Player");
+		Player = GameObject.FindGameObjectWithTag("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
 		AddingToList();
 		

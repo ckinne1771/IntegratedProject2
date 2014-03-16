@@ -29,7 +29,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400006}
   m_Layer: 0
-  m_Name: Player
+  m_Name: tutPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aed5cf6691a1404a8f21cea89129ab8, type: 3}
   m_Name: 
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 298fff1a0fe8cda418347ff4dbe228c4, type: 3}
   m_Name: 
