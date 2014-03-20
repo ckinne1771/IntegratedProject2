@@ -36,6 +36,7 @@ public class TheInventoryScript : MonoBehaviour
 		{
 			playerInventory.Add(item, 1);
 		}
+		Debug.Log ("items added");
 		return true;
 	}
 

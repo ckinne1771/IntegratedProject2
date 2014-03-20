@@ -35,12 +35,16 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	public string currentStage;
 	public bool gotitem1;
 	public bool gotitem2;
+	public bool gotItem3=false;
+	public bool gotItem4=false;
 	private int scoreModifier;
 	public float timer = 60;
+	public static bool itemCrafted = false;
+	public static int part;
 	// Use this for initialization
 	void Start () 
 	{
-		
+
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
@@ -88,6 +92,20 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						InstantiateComponents(hit.transform.gameObject);
 						gotitem2=true;
 					}
+					if(hit.transform.gameObject.name=="wheel")
+					{
+						inventoryScript.AddItem (hit.transform.gameObject.name);
+						collectItems (hit.transform.gameObject.name);
+						InstantiateComponents (hit.transform.gameObject);
+						gotItem3=true;
+					}
+					if(hit.transform.gameObject.name=="metal")
+					{
+						inventoryScript.AddItem (hit.transform.gameObject.name);
+						collectItems (hit.transform.gameObject.name);
+						InstantiateComponents (hit.transform.gameObject);
+						gotItem4=true;
+					}
 				}
 				
 				else if(hit.transform.gameObject.tag=="craftingtable")
@@ -96,7 +114,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
 					this.gameObject.transform.rotation = CraftingTable.transform.rotation;
 					currentState = PlayerState.Crafting;
-					currentStage="serveCustomer";
+
+					//currentStage="serveCustomer";
 					
 				}
 				else if(hit.transform.gameObject.tag=="Till")
@@ -126,6 +145,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	{
 		timer--;
 		Debug.Log(timer);
+		Debug.Log (itemCrafted);
+		Debug.Log (currentState);
 	}
 	
 	
@@ -164,18 +185,40 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		//serving
 		if(!customerSpawnScript.IsQueueEmpty() && currentState == PlayerState.Serving)
 		{
-			if(inventoryScript.playerInventory.ContainsKey(customerSpawnScript.GetFrontOfQueueOrder().item))
+			if(part==1)
 			{
-				inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
-				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
-				//noCompletedItems=true;
-				customerSpawnScript.RemoveCustomer(0);
-				recipeitem="";
-				score += (20*scoreModifier);
-				timer=60;
-				currentStage="done!";
+				Debug.Log ("Pass1");
+				if(inventoryScript.playerInventory.ContainsKey(customerSpawnScript.GetFrontOfQueueOrder().first))
+				{
+					Debug.Log ("served"); 
+					inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
+					customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
+					//noCompletedItems=true;
+					customerSpawnScript.RemoveCustomer(0);
+					recipeitem="";
+					score += (20*scoreModifier);
+					timer=60;
+					currentStage="done!";
+				}
+			} 
+
+			if(part==2)
+			{
+				if(inventoryScript.playerInventory.ContainsKey(customerSpawnScript.GetFrontOfQueueOrder().second))
+				{
+					Debug.Log ("served"); 
+					inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
+					customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
+					//noCompletedItems=true;
+					customerSpawnScript.RemoveCustomer(0);
+					recipeitem="";
+					score += (20*scoreModifier);
+					timer=60;
+					currentStage="finallyDone!";
+				}
 			}
-			currentState=PlayerState.Idle;
+
+				currentState=PlayerState.Idle;
 			
 		}
 		
@@ -183,6 +226,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		switch(currentStage)
 		{
 		case("customerIntro"):
+			part=1;
 			GUI.Box(new Rect(Screen.width/2-80,Screen.height/2,160,50),"We have a new customer");
 			//highlight customer anim
 			StartCoroutine("CustomerWant");
@@ -211,6 +255,10 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			playerHasControl = false;
 			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Good! Now craft them \n into something nice!");
 			playerHasControl=true;
+			if(itemCrafted==true)
+			{
+				currentStage="serveCustomer";
+			}
 			//highlight craft bench anim
 			//StartCoroutine("WaitTime");
 			//unhighlight
@@ -227,10 +275,34 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			playerHasControl=false;
 			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Congratulations, you've served \n your first customer");
 			//StartCoroutine("WaitTime");
+			StartCoroutine("secondCustomerWait");
+			break;
+		case("secondCustomer"):
+			itemCrafted=false;
+			part=2;
+			GUI.Box (new Rect(Screen.width/2-100,Screen.height/2,200,50),"We have another customer! \n This one wants a bike!");
+			customerSpawnScript.AddingTutorialCustomer ();
+			StartCoroutine ("secondCustomerTransition");
+			break;
+	
+		case("Crafting2"):
+			playerHasControl=true;
+			GUI.Box (new Rect(Screen.width/2-100,Screen.height/2,250,50),"Now, grab the items needed \n to make a bike and craft it.");
+			if(itemCrafted==true)
+			{
+				currentStage="serve2";
+			}
+			break;
+		case("serve2"):
+			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Ok! Now you need to take \n the item to the till");
+			break;
+		case("finallyDone!"):
+		
+			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Congratulations, you've served \n another customer");
 			break;
 		}
 	}
-	
+	 
 	void collectItems(string _item)
 	{
 		if(item1=="")
@@ -263,5 +335,17 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		yield return new WaitForSeconds(3.0f);
 		currentStage="grabItems";
 	}
+
+	public IEnumerator secondCustomerWait()
+	{
+		yield return new WaitForSeconds(3.0f);
+		currentStage="secondCustomer";
+	}
+	public IEnumerator secondCustomerTransition()
+	{
+		yield return new WaitForSeconds(3.0f);
+		currentStage="Crafting2";
+	}
 	
 }
+

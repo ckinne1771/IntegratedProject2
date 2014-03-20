@@ -8,7 +8,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 	private Transform targets;
 	private int initialTarget = 0;
 	string currentScene;
-	
+	int limiter = 0;
 	GameObject[] customers;
 	
 	// Use this for initialization
@@ -36,7 +36,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 	public bool AddCustomerToList()
 	{
 		bool added = false;
-		if(customers[NoOfCustomers -1] == null)
+		if(customers[NoOfCustomers -1] == null && limiter==0)
 		{
 			GameObject newCustomer = Instantiate(customerTemplate) as GameObject;
 			
@@ -110,4 +110,15 @@ public class CustomerSpawnScript : MonoBehaviour {
 		}
 		return true;
 	}
+
+	public void AddingTutorialCustomer()
+	{
+		
+		AddCustomerToList();
+		GetFrontOfQueueOrder().itemNeeded = true;
+		limiter = 1;
+		
+	}
 }
+
+
