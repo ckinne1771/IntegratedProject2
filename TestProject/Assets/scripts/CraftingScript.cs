@@ -16,6 +16,7 @@ public class CraftingScript : MonoBehaviour
 	public CharacterControllerScript characterControllerScript;
 	string currentScene;
 	public bool itemCrafted;
+	public bool crafted=false;
 
 
 	// Use this for initialization
@@ -57,8 +58,8 @@ public class CraftingScript : MonoBehaviour
 			itemCrafted = true;
 			inventoryScript.AddItem(_item1+_item2);
 			tutorialCharacterControllerScript.itemCrafted=true;
-			//characterControllerScript.Crafted=true;
 			tutCharacterControllerScript.currentStage="serveCustomer";
+			crafted=true;
 			
 		}
 		else if(recipeList.Contains(_item2+_item1))
@@ -66,9 +67,8 @@ public class CraftingScript : MonoBehaviour
 			itemCrafted = true;
 			inventoryScript.AddItem(_item2+_item1);
 			characterControllerScript.Crafted=true;
-			characterControllerScript.Crafted=true;
-			//tutorialCharacterControllerScript.itemCrafted=true;
 			tutCharacterControllerScript.currentStage="serveCustomer";
+			crafted= true;
 		}
 		inventoryScript.RemoveItem (_item1);
 		inventoryScript.RemoveItem (_item2);

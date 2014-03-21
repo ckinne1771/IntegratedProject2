@@ -123,9 +123,9 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	public void OnGUI()
 	{
-		if(craftingScript.itemCrafted&&Crafted)
+		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
-			GUI.Box (new Rect(Screen.width/2,Screen.height/2,60,40),"Crafted!");
+			GUI.Box (new Rect(Screen.width/2,Screen.height/2,60,20),"Crafted!");
 			StartCoroutine("WaitTime");
 		}
 
@@ -200,6 +200,12 @@ public class CharacterControllerScript : MonoBehaviour
 		}
 
 		GUI.TextField(new Rect(10,10,100,20),"Score; " +score); 
+
+		if(customerSpawnScript.IsQueueEmpty()==true)
+		{
+			Debug.Log ("empty");
+			Application.LoadLevel("LevelSelect");
+		}
 	}
 	
 	void collectItems(string _item)
@@ -227,7 +233,7 @@ public class CharacterControllerScript : MonoBehaviour
 	IEnumerator WaitTime()
 	{
 		yield return new WaitForSeconds(1.0f);
-		Crafted=false;
+		craftingScript.crafted=false;
 	}
 	
 }

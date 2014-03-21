@@ -43,6 +43,12 @@ public class LevelSelect : MonoBehaviour {
 			//Application.LoadLevel("4");
 		}
 		GUILayout.EndHorizontal();
+		GUILayout.BeginHorizontal();
+		if(GUILayout.Button("Back",GUILayout.Height(Screen.height/4)))
+		{
+			Application.LoadLevel("Project");
+		}
+		GUILayout.EndHorizontal();
 		GUILayout.EndVertical();
 		//GUILayout.EndVertical();
 		GUILayout.EndArea();
