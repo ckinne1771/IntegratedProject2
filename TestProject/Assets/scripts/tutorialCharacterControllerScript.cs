@@ -281,7 +281,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("movetolevel"):
 			playerHasControl=false;
-			Application.LoadLevel("LevelSelect");
 			StartCoroutine("secondCustomerWait");
 			break;
 		case("secondCustomer"):
@@ -306,6 +305,12 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		case("finallyDone!"):
 		
 			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Congratulations, you've served \n another customer");
+			StartCoroutine("levelWait2");
+			break;
+		
+		case("movetolevel2"):
+			playerHasControl=false;
+			Application.LoadLevel("LevelSelect");
 			break;
 		}
 	}
@@ -347,6 +352,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		yield return new WaitForSeconds(2.0f);
 		currentStage="movetolevel";
 
+	}
 	public IEnumerator secondCustomerWait()
 	{
 		yield return new WaitForSeconds(3.0f);
@@ -356,6 +362,12 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds(3.0f);
 		currentStage="Crafting2";
+	}
+	public IEnumerator levelWait2()
+	{
+		yield return new WaitForSeconds(2.0f);
+		currentStage="movetolevel2";
+		
 	}
 	
 }

@@ -53,8 +53,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.21255589, y: -1.57147932, z: 0}
-  m_LocalScale: {x: .875, y: .783749938, z: 1}
+  m_LocalPosition: {x: -3.84886765, y: -1.13187313, z: 0}
+  m_LocalScale: {x: 4.74754953, y: 4.25244856, z: 5.42577648}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
@@ -76,6 +76,8 @@ MonoBehaviour:
   recipeItems: []
   customerTemplate: {fileID: 100002, guid: bfaba81c2c50eed40941c9e70a0714cc, type: 2}
   tutCharacterControllerScript: {fileID: 0}
+  characterControllerScript: {fileID: 0}
+  itemCrafted: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,6 +122,8 @@ MonoBehaviour:
   customerTemplate: {fileID: 100002, guid: bfaba81c2c50eed40941c9e70a0714cc, type: 2}
   components: []
   component: {fileID: 0}
+  timer: 60
+  Crafted: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,6 +157,9 @@ MonoBehaviour:
   currentStage: 
   gotitem1: 0
   gotitem2: 0
+  gotItem3: 0
+  gotItem4: 0
+  timer: 60
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -174,7 +181,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300014, guid: 8f53f12ef3f589a4dbd9961e3e68f94d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aeaaf6a529c6cd047ab8ba4fca9907d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

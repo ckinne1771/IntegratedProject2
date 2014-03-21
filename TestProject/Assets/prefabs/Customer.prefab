@@ -101,11 +101,15 @@ MonoBehaviour:
   randomNumber: 0
   itemNeeded: 0
   itemRequested: 
-  Player: {fileID: 0}
+  Player: {fileID: 100002, guid: 59429cca69f492041b0bbc591e2286db, type: 2}
   customerSpawnScript: {fileID: 0}
   item: 
   customerPos: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
+  firstItem: 
+  secondItem: 
+  first: 
+  second: 
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
