@@ -17,6 +17,7 @@ public class CraftingScript : MonoBehaviour
 	string currentScene;
 	public bool itemCrafted;
 
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -28,6 +29,8 @@ public class CraftingScript : MonoBehaviour
 			characterControllerScript = GetComponent<CharacterControllerScript>();
 			recipeList.Add("orangeball");
 			TherecipeList.Add("basketball","orangeball");
+			recipeList.Add("wheelmetal");
+			TherecipeList.Add ("bike","wheelmetal");
 		}
 		else
 		{
@@ -54,8 +57,14 @@ public class CraftingScript : MonoBehaviour
 			itemCrafted = true;
 			inventoryScript.AddItem(_item1+_item2);
 			characterControllerScript.Crafted=true;
+
+			inventoryScript.RemoveItem (_item1);
+			inventoryScript.RemoveItem (_item2);
+			tutorialCharacterControllerScript.itemCrafted=true;
+			//tutCharacterControllerScript.currentStage="serveCustomer";
 			
-		}else if(recipeList.Contains(_item2+_item1))
+		}
+		else if(recipeList.Contains(_item2+_item1))
 		{
 			itemCrafted = true;
 			inventoryScript.AddItem(_item2+_item1);
@@ -64,5 +73,11 @@ public class CraftingScript : MonoBehaviour
 		tutCharacterControllerScript.currentStage="serveCustomer";
 		Debug.Log ("served");
 		return itemCrafted;	
+
+		inventoryScript.RemoveItem (_item1);
+		inventoryScript.RemoveItem (_item2);
+		tutorialCharacterControllerScript.itemCrafted=true;
+			//tutCharacterControllerScript.currentStage="serveCustomer";
 	}
+	
 }

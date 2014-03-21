@@ -16,11 +16,17 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string item;
 	public Vector3 customerPos;
 	public Transform target;
+	public string firstItem;
+	public string secondItem;
+	string currentScene;
+	public string first;
+	public string second;
 	
 	// Use this for initialization
 	void Start () 
 	{
 		//itemNeeded = true;
+		currentScene=Application.loadedLevelName;
 		Player = GameObject.FindGameObjectWithTag("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
 		AddingToList();
@@ -42,14 +48,32 @@ public class CustomerNeedsScript : MonoBehaviour {
 		NeededItem = randomNumber;
 		itemRequested = choice[NeededItem];
 		item = theCraftingScript.TherecipeList[itemRequested];
+		firstItem  =choice[0];
+		first = theCraftingScript.TherecipeList[firstItem];
+		secondItem =choice[1];
+		second = theCraftingScript.TherecipeList[secondItem];
 		
 	}
 	
 	void OnGUI(){
 		if(itemNeeded==true)
 		{
-			GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),itemRequested);
-		}
-		
+			if(currentScene=="tutorialScene")
+			{
+				if(tutorialCharacterControllerScript.part==1)
+				{
+					GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),firstItem);
+				}
+				else if(tutorialCharacterControllerScript.part==2)
+				{
+					GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),secondItem);
+				}
+
+		} 
+			else
+			{
+				GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),itemRequested);
+			}
 	}
+}
 }
