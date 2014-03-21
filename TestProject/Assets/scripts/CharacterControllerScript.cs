@@ -33,7 +33,7 @@ public class CharacterControllerScript : MonoBehaviour
 	public static int score;
 	private int scoreModifier;
 	public float timer=60;
-	
+	public bool Crafted;
 	// Use this for initialization
 	void Start () 
 	{
@@ -123,6 +123,12 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	public void OnGUI()
 	{
+		if(craftingScript.itemCrafted&&Crafted)
+		{
+			GUI.Box (new Rect(Screen.width/2,Screen.height/2,60,40),"Crafted!");
+			StartCoroutine("WaitTime");
+		}
+
 		if(currentState == PlayerState.Crafting )
 		{
 			
@@ -216,6 +222,12 @@ public class CharacterControllerScript : MonoBehaviour
 		component.transform.position=this.gameObject.transform.position + new Vector3(0,0 + 2 * components.Count,0);
 		component.transform.parent=this.gameObject.transform;
 		components.Add(component);
+	}
+
+	IEnumerator WaitTime()
+	{
+		yield return new WaitForSeconds(1.0f);
+		Crafted=false;
 	}
 	
 }

@@ -96,6 +96,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
 					this.gameObject.transform.rotation = CraftingTable.transform.rotation;
 					currentState = PlayerState.Crafting;
+					Debug.Log ("serving");
 					currentStage="serveCustomer";
 					
 				}
@@ -190,7 +191,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			//unhighlight
 			break;
 		case("customerWant"):
-			GUI.Box(new Rect(Screen.width/2-75,Screen.height/2,250,60),"Looks like they want an basketball! \n The customer will always \n say what item they want");
+			GUI.Box(new Rect(Screen.width/2-125,Screen.height/2,250,60),"Looks like they want a basketball!\n The customer will always\n say what item they want");
 			//highlight customerwant
 			StartCoroutine("grabItems");
 			//unhighlight
@@ -227,6 +228,11 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			playerHasControl=false;
 			GUI.Box(new Rect(Screen.width/2-100,Screen.height/2,200,50),"Congratulations, you've served \n your first customer");
 			//StartCoroutine("WaitTime");
+			StartCoroutine("levelWait");
+			break;
+		case("movetolevel"):
+			playerHasControl=false;
+			Application.LoadLevel("LevelSelect");
 			break;
 		}
 	}
@@ -260,8 +266,13 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	}
 	public IEnumerator grabItems()
 	{
-		yield return new WaitForSeconds(3.0f);
+		yield return new WaitForSeconds(2.0f);
 		currentStage="grabItems";
+	}
+	public IEnumerator levelWait()
+	{
+		yield return new WaitForSeconds(2.0f);
+		currentStage="movetolevel";
 	}
 	
 }

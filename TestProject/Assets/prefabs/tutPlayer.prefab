@@ -120,6 +120,7 @@ MonoBehaviour:
   customerTemplate: {fileID: 100002, guid: bfaba81c2c50eed40941c9e70a0714cc, type: 2}
   components: []
   component: {fileID: 0}
+  timer: 60
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,6 +154,7 @@ MonoBehaviour:
   currentStage: 
   gotitem1: 0
   gotitem2: 0
+  timer: 60
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -174,7 +176,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300014, guid: 8f53f12ef3f589a4dbd9961e3e68f94d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aeaaf6a529c6cd047ab8ba4fca9907d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
