@@ -30,12 +30,12 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	public List<GameObject> components;
 	public GameObject component;
 	public static int score;
-	public bool playerHasControl = false;
+	public bool playerHasControl = false; 
 	public List<string> stage;
 	public string currentStage;
-	public bool gotitem1;
-	public bool gotitem2;
-	public bool gotItem3=false;
+	public bool gotitem1=false;
+	public bool gotitem2=false;
+	public bool gotItem3=false; 
 	public bool gotItem4=false;
 	private int scoreModifier;
 	public float timer = 60;

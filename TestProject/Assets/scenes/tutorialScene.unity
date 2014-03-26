@@ -911,6 +911,7 @@ MonoBehaviour:
   tutCharacterControllerScript: {fileID: 1722769173}
   characterControllerScript: {fileID: 0}
   itemCrafted: 0
+  crafted: 0
 --- !u!114 &1722769170
 MonoBehaviour:
   m_ObjectHideFlags: 0
