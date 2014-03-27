@@ -57,7 +57,8 @@ public class CraftingScript : MonoBehaviour
 		{
 			itemCrafted = true;
 			inventoryScript.AddItem(_item1+_item2);
-			tutorialCharacterControllerScript.itemCrafted=true;
+			tutCharacterControllerScript.itemCrafted=true;
+			characterControllerScript.Crafted=true;
 			tutCharacterControllerScript.currentStage="serveCustomer";
 			crafted=true;
 			
@@ -66,6 +67,7 @@ public class CraftingScript : MonoBehaviour
 		{
 			itemCrafted = true;
 			inventoryScript.AddItem(_item2+_item1);
+			tutCharacterControllerScript.itemCrafted=true;
 			characterControllerScript.Crafted=true;
 			tutCharacterControllerScript.currentStage="serveCustomer";
 			crafted= true;

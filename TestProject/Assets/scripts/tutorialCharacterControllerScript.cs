@@ -39,7 +39,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	public bool gotItem4=false;
 	private int scoreModifier;
 	public float timer = 60;
-	public static bool itemCrafted = false;
+	public bool itemCrafted = false;
 	public static int part;
 	// Use this for initialization
 	void Start () 
@@ -126,6 +126,12 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					this.gameObject.transform.position = (Till.transform.position + new Vector3(0,-1,0));
 					currentState = PlayerState.Serving;
 				}
+				/*else if(hit.transform.gameObject.tag=="recyclingbin")
+				{
+					Debug.Log ("bin");
+					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-1,0));
+					currentState = PlayerState.Recycling;
+				}*/
 			}
 		}
 		if (timer >40)
@@ -188,6 +194,28 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			currentState = PlayerState.Idle;
 			
 		}
+		//recycling
+		if(currentState == PlayerState.Recycling && inventoryScript.playerInventory.Count>0)
+		{
+			
+			currentState=PlayerState.Idle;
+			
+			inventoryScript.playerInventory.Clear();
+			inventoryScript.RemoveItem(item1);
+			inventoryScript.RemoveItem(item2);
+			
+			if(components.Count > 0)
+			{
+				while(components.Count > 0)
+				{
+					GameObject delObj = components[0];
+					components.RemoveAt(0);
+					Destroy(delObj);
+				}
+			}
+			item1="";
+			item2="";
+		}
 		
 		//serving
 		if(!customerSpawnScript.IsQueueEmpty() && currentState == PlayerState.Serving)
@@ -247,7 +275,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			//unhighlight
 			break;
 		case("grabItems"):
-			        GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Go grab the items \n needed to make the basketball");
+			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Go grab the items \n needed to make the basketball");
 			//highlight orange paint anim
 			//highlight ball anim
 			playerHasControl=true;
@@ -262,10 +290,10 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			playerHasControl = false;
 			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Good! Now craft them \n into something nice!");
 			playerHasControl=true;
-			if(itemCrafted==true)
+			/*if(itemCrafted==true)
 			{
 				currentStage="serveCustomer";
-			}
+			}*/
 			//highlight craft bench anim
 			//StartCoroutine("WaitTime");
 			//unhighlight
@@ -344,7 +372,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 
 	public IEnumerator CustomerWant()
 	{
-		yield return new WaitForSeconds(3.0f);
+		yield return new WaitForSeconds(2.0f);
 		currentStage="customerWant";
 	}
 	public IEnumerator grabItems()
