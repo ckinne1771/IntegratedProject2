@@ -34,10 +34,11 @@ public class CharacterControllerScript : MonoBehaviour
 	private int scoreModifier;
 	public float timer=60;
 	public bool Crafted;
+	public Animator anim;
 	// Use this for initialization
 	void Start () 
 	{
-		
+		anim=GetComponent<Animator>();
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
@@ -75,14 +76,14 @@ public class CharacterControllerScript : MonoBehaviour
 						inventoryScript.AddItem(hit.transform.gameObject.name);
 						collectItems(hit.transform.gameObject.name);
 						InstantiateComponents(hit.transform.gameObject);
-						//components.Add(hit.transform.gameObject);
+						anim.SetBool("issideview",false);
 					}
 				}
 
 				else if(hit.transform.gameObject.tag=="craftingtable")
 				{
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
-					this.gameObject.transform.rotation = CraftingTable.transform.rotation;
+					anim.SetBool("issideview",true);
 					currentState = PlayerState.Crafting;
 					
 				}
@@ -90,11 +91,13 @@ public class CharacterControllerScript : MonoBehaviour
 				{
 					this.gameObject.transform.position = (Till.transform.position + new Vector3(0,-1,0));
 					currentState = PlayerState.Serving;
+					anim.SetBool("issideview",false);
 				}
 				else if(hit.transform.gameObject.tag=="recyclingbin")
 				{
 					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-1,0));
 					currentState = PlayerState.Recycling;
+					anim.SetBool("issideview",false);
 				}
 			}
 			

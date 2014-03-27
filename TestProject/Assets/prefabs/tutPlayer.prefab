@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 212: {fileID: 21200002}
   - 212: {fileID: 21200004}
+  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: tutPlayer
   m_TagString: Player
@@ -32,6 +33,20 @@ Transform:
   m_LocalScale: {x: 1.53461623, y: 1.30159116, z: 3.55607176}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0a491f80a1a72824389a1385db16e199, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +67,7 @@ MonoBehaviour:
   tutCharacterControllerScript: {fileID: 11400006}
   characterControllerScript: {fileID: 0}
   itemCrafted: 0
+  crafted: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,11 +145,8 @@ MonoBehaviour:
   - serveCustomer
   - done!
   currentStage: 
-  gotitem1: 0
-  gotitem2: 0
-  gotItem3: 0
-  gotItem4: 0
   timer: 60
+  itemCrafted: 0
 --- !u!212 &21200002
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -178,7 +191,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: aeaaf6a529c6cd047ab8ba4fca9907d1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

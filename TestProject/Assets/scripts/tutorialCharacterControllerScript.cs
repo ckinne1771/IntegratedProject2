@@ -33,18 +33,19 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	public bool playerHasControl = false; 
 	public List<string> stage;
 	public string currentStage;
-	public bool gotitem1=false;
-	public bool gotitem2=false;
-	public bool gotItem3=false; 
-	public bool gotItem4=false;
-	private int scoreModifier;
+	bool gotitem1=false;
+	bool gotitem2=false;
+	bool gotItem3=false; 
+	bool gotItem4=false;
+	int scoreModifier;
 	public float timer = 60;
 	public bool itemCrafted = false;
 	public static int part;
+	Animator anim;
 	// Use this for initialization
 	void Start () 
 	{
-
+		anim = GetComponent<Animator>();
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
@@ -84,6 +85,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						collectItems(hit.transform.gameObject.name);
 						InstantiateComponents(hit.transform.gameObject);
 						gotitem1=true;
+						anim.SetBool("issideview",false);
 					}
 					if(hit.transform.gameObject.name=="ball")
 					{
@@ -91,6 +93,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						collectItems(hit.transform.gameObject.name);
 						InstantiateComponents(hit.transform.gameObject);
 						gotitem2=true;
+						anim.SetBool("issideview",false);
 					}
 					if(hit.transform.gameObject.name=="wheel")
 					{
@@ -98,6 +101,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						collectItems (hit.transform.gameObject.name);
 						InstantiateComponents (hit.transform.gameObject);
 						gotItem3=true;
+						anim.SetBool("issideview",false);
 					}
 					if(hit.transform.gameObject.name=="metal")
 					{
@@ -105,6 +109,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						collectItems (hit.transform.gameObject.name);
 						InstantiateComponents (hit.transform.gameObject);
 						gotItem4=true;
+						anim.SetBool("issideview",false);
 					}
 				}
 				
@@ -112,7 +117,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				{
 					Debug.Log ("crafting");
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
-					this.gameObject.transform.rotation = CraftingTable.transform.rotation;
+					//this.gameObject.transform.rotation = CraftingTable.transform.rotation;
+					anim.SetBool("issideview",true);
 					currentState = PlayerState.Crafting;
 					Debug.Log ("serving");
 					currentStage="serveCustomer";
@@ -125,6 +131,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						Debug.Log ("till");
 					this.gameObject.transform.position = (Till.transform.position + new Vector3(0,-1,0));
 					currentState = PlayerState.Serving;
+					anim.SetBool("issideview",false);
 				}
 				/*else if(hit.transform.gameObject.tag=="recyclingbin")
 				{
@@ -408,4 +415,3 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		craftingScript.crafted=false;
 	}
 }
-
