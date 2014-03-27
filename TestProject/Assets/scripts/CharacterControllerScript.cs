@@ -91,7 +91,11 @@ public class CharacterControllerScript : MonoBehaviour
 					this.gameObject.transform.position = (Till.transform.position + new Vector3(0,-1,0));
 					currentState = PlayerState.Serving;
 				}
-				
+				else if(hit.transform.gameObject.tag=="recyclingbin")
+				{
+					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-1,0));
+					currentState = PlayerState.Recycling;
+				}
 			}
 			
 		}
@@ -159,27 +163,24 @@ public class CharacterControllerScript : MonoBehaviour
 		//recycling
 		if(currentState == PlayerState.Recycling && inventoryScript.playerInventory.Count>0)
 		{
-			foreach(string item in inventoryScript.playerInventory.Keys)
-			{
-				GUILayout.BeginVertical();
-				if(GUILayout.Button(string.Format("{0}",item)))
-				{
-					itemsTodelete.Add(item);
 
+			currentState=PlayerState.Idle;
+
+			inventoryScript.playerInventory.Clear();
+			inventoryScript.RemoveItem(item1);
+			inventoryScript.RemoveItem(item2);
+
+			if(components.Count > 0)
+			{
+				while(components.Count > 0)
+				{
+					GameObject delObj = components[0];
+					components.RemoveAt(0);
+					Destroy(delObj);
 				}
-				currentState=PlayerState.Idle;
 			}
-			if(GUILayout.Button("Exit"))
-			{
-				currentState=PlayerState.Idle;
-			}
-			
-			GUILayout.EndVertical();
-			foreach(string itemToDelete in itemsTodelete)
-			{
-				inventoryScript.playerInventory.Remove(itemToDelete);
-			}
-			itemsTodelete.Clear();
+			item1="";
+			item2="";
 		}
 		
 		//serving
