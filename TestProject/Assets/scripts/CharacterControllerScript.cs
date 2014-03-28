@@ -35,6 +35,9 @@ public class CharacterControllerScript : MonoBehaviour
 	public float timer=60;
 	public bool Crafted;
 	public Animator anim;
+	public Texture2D slot1Image;
+	public Texture2D slot2Image;
+	public List<Texture2D> ComponentSprites;
 	// Use this for initialization
 	void Start () 
 	{
@@ -57,6 +60,25 @@ public class CharacterControllerScript : MonoBehaviour
 	//moves player
 	void Update()
 	{
+
+		if (inventoryScript.playerInventory.ContainsKey("orange"))
+		{
+			slot1Image = ComponentSprites[0];
+		}
+		
+		if (inventoryScript.playerInventory.ContainsKey("ball"))
+		{
+			slot2Image = ComponentSprites[1];
+		}
+		if (inventoryScript.playerInventory.ContainsKey("wheel"))
+		{
+			slot1Image=ComponentSprites[2];
+		}
+		
+		if (inventoryScript.playerInventory.ContainsKey("metal"))
+		{
+			slot2Image=ComponentSprites[3];
+		}
 		
 		if(Input.GetMouseButtonDown(0))
 		{
@@ -130,6 +152,10 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	public void OnGUI()
 	{
+		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 80, 185,75),"Inventory");
+		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
+		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
+
 		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
 			GUI.Box (new Rect(Screen.width/2,Screen.height/2,60,20),"Crafted!");
@@ -143,6 +169,8 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				inventoryScript.RemoveItem(item1);
 				inventoryScript.RemoveItem(item2);
+				slot1Image=null;
+				slot2Image=null;
 
 			}
 
