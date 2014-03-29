@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class CustomerNeedsScript : MonoBehaviour {
-	
+
+	public GUISkin MyGUISkin;
 	public CraftingScript theCraftingScript;
 	public List<string> choice;
 	public int NeededItem;
@@ -55,7 +56,8 @@ public class CustomerNeedsScript : MonoBehaviour {
 		
 	}
 	
-	void OnGUI(){
+	void OnGUI()
+	{
 		if(itemNeeded==true)
 		{
 			if(currentScene=="tutorialScene")
@@ -72,6 +74,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 		} 
 			else
 			{
+				//GUI.skin=MyGUISkin;
 				GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),itemRequested);
 			}
 	}

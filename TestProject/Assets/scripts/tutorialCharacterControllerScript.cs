@@ -12,7 +12,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		Serving,
 		Recycling
 	};
-	
+
+	public GUISkin myGUISkin;
 	//player state comment
 	public PlayerState currentState;
 	GameObject CraftingTable;
@@ -33,10 +34,11 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	public bool playerHasControl = false; 
 	public List<string> stage;
 	public string currentStage;
-	bool gotitem1=false;
-	bool gotitem2=false;
-	bool gotItem3=false; 
-	bool gotItem4=false;
+	public bool gotitem1=false;
+	public bool gotitem2=false;
+	public bool gotitem3=false; 
+	public bool gotitem4=false;
+	public bool readytocraft=false;
 	int scoreModifier;
 	public float timer = 60;
 	public bool itemCrafted = false;
@@ -110,7 +112,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					{
 						inventoryScript.AddItem(hit.transform.gameObject.name);
 						collectItems(hit.transform.gameObject.name);
-						InstantiateComponents(hit.transform.gameObject);
+						//InstantiateComponents(hit.transform.gameObject);
 						gotitem1=true;
 						anim.SetBool("issideview",false);
 					}
@@ -118,7 +120,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					{
 						inventoryScript.AddItem(hit.transform.gameObject.name);
 						collectItems(hit.transform.gameObject.name);
-						InstantiateComponents(hit.transform.gameObject);
+						//InstantiateComponents(hit.transform.gameObject);
 						gotitem2=true;
 						anim.SetBool("issideview",false);
 					}
@@ -126,21 +128,21 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					{
 						inventoryScript.AddItem (hit.transform.gameObject.name);
 						collectItems (hit.transform.gameObject.name);
-						InstantiateComponents (hit.transform.gameObject);
-						gotItem3=true;
+						//InstantiateComponents (hit.transform.gameObject);
+						gotitem3=true;
 						anim.SetBool("issideview",false);
 					}
 					if(hit.transform.gameObject.name=="metal")
 					{
 						inventoryScript.AddItem (hit.transform.gameObject.name);
 						collectItems (hit.transform.gameObject.name);
-						InstantiateComponents (hit.transform.gameObject);
-						gotItem4=true;
+						//InstantiateComponents (hit.transform.gameObject);
+						gotitem4=true;
 						anim.SetBool("issideview",false);
 					}
 				}
 				
-				else if(hit.transform.gameObject.tag=="craftingtable")
+				else if(hit.transform.gameObject.tag=="craftingtable"&&readytocraft)
 				{
 					Debug.Log ("crafting");
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
@@ -162,12 +164,12 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					currentState = PlayerState.Serving;
 					anim.SetBool("issideview",false);
 				}
-				/*else if(hit.transform.gameObject.tag=="recyclingbin")
+				else if(hit.transform.gameObject.tag=="recyclingbin")
 				{
 					Debug.Log ("bin");
 					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-1,0));
 					currentState = PlayerState.Recycling;
-				}*/
+				}
 			}
 		}
 		if (timer >40)
@@ -198,9 +200,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	//handles player states
 	public void OnGUI()
 	{
-		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 80, 185,75),"Inventory");
-		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
-		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
 
 		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
@@ -235,14 +234,31 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			
 		}
 		//recycling
-		if(currentState == PlayerState.Recycling && inventoryScript.playerInventory.Count>0)
+		if(currentState == PlayerState.Recycling)
 		{
+			if(part==1)
+			{
+				currentStage="grabItems";
+			}
+			else if(part==2)
+			{
+				currentStage="Crafting2";
+			}
+			gotitem1=false;
+			gotitem2=false;
+			gotitem3=false;
+			gotitem4=false;
+			readytocraft=false;
+			itemCrafted=false;
+			if(inventoryScript.playerInventory.Count>0)
+			{
 			
 			currentState=PlayerState.Idle;
-			
 			inventoryScript.playerInventory.Clear();
 			inventoryScript.RemoveItem(item1);
 			inventoryScript.RemoveItem(item2);
+			slot1Image=null;
+			slot2Image=null;
 			
 			if(components.Count > 0)
 			{
@@ -254,7 +270,9 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				} 
 			}
 			item1="";
-			item2=""; 
+			item2="";
+			}
+			currentState=PlayerState.Idle;
 		}
 		
 		//serving
@@ -305,7 +323,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			GUI.Box(new Rect(Screen.width/2-80,Screen.height/16,160,50),"We have a new customer");
 			//highlight customer anim
 			StartCoroutine("CustomerWant");
-			//currentStage ="customerWant";
 			//unhighlight
 			break;
 		case("customerWant"):
@@ -321,7 +338,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			playerHasControl=true;
 			if(gotitem1&&gotitem2)
 			{
-				currentStage="craftItems";
+				readytocraft=true;
+				Debug.Log ("bob");
 			}
 			//unhighlight
 			//unhighlight
@@ -330,20 +348,15 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			playerHasControl = false;
 			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Good! Now craft them \n into something nice!");
 			playerHasControl=true;
-			/*if(itemCrafted==true)
-			{
-				currentStage="serveCustomer";
-			}*/
 			//highlight craft bench anim
-			//StartCoroutine("WaitTime");
 			//unhighlight
 			break;
 		case("serveCustomer"):
+			readytocraft=false;
 			playerHasControl=false;
 			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Ok! Now you need to take \n the item to the till");
 			playerHasControl=true;
 			//highlight till anim
-			//StartCoroutine("WaitTime");
 			//unhighlight
 			break;
 		case("done!"):
@@ -367,12 +380,17 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		case("Crafting2"):
 			playerHasControl=true;
 			GUI.Box (new Rect(Screen.width/2-100,Screen.height/16,250,50),"Now, grab the items needed \n to make a bike and craft it.");
-			if(itemCrafted==true)
+			if(gotitem3&&gotitem4)
+			{
+				readytocraft=true;
+			}
+			if(itemCrafted)
 			{
 				currentStage="serve2";
 			}
 			break;
 		case("serve2"):
+			readytocraft=false;
 			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Ok! Now you need to take \n the item to the till");
 			break;
 		case("finallyDone!"):
@@ -386,6 +404,10 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			Application.LoadLevel("LevelSelect");
 			break;
 		}
+		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 80, 185,75),"Inventory");
+		GUI.skin=myGUISkin;
+		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
+		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
 	}
 	 
 	void collectItems(string _item)

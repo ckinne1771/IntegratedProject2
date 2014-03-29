@@ -19,9 +19,9 @@ public class LevelSelect : MonoBehaviour {
 	{
 		GUI.skin = MyGUISkin;
 		GUILayout.BeginArea(new Rect(0,Screen.height/2-(Screen.height/4),Screen.width,Screen.height));
-		//GUILayout.BeginVertical();
-		//GUILayout.Box("Level Select");
-
+		GUILayout.Box("Level Select");
+		GUILayout.BeginArea(new Rect(0,Screen.height/2-(Screen.height/4),Screen.width,Screen.height));
+		GUILayout.EndArea();
 		GUILayout.BeginVertical();
 		GUILayout.BeginHorizontal();
 		if(GUILayout.Button("Tutorial",GUILayout.Height(Screen.height/4)))

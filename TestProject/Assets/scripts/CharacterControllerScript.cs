@@ -12,6 +12,8 @@ public class CharacterControllerScript : MonoBehaviour
 		Serving,
 		Recycling
 	};
+
+	public GUISkin MyGUISkin;
 	
 	//player state comment
 	public PlayerState currentState;
@@ -97,7 +99,7 @@ public class CharacterControllerScript : MonoBehaviour
 					
 						inventoryScript.AddItem(hit.transform.gameObject.name);
 						collectItems(hit.transform.gameObject.name);
-						InstantiateComponents(hit.transform.gameObject);
+						//InstantiateComponents(hit.transform.gameObject);
 						anim.SetBool("issideview",false);
 					}
 				}
@@ -152,15 +154,16 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	public void OnGUI()
 	{
-		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 80, 185,75),"Inventory");
-		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
-		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
-
 		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
 			GUI.Box (new Rect(Screen.width/2,Screen.height/2,60,20),"Crafted!");
 			StartCoroutine("WaitTime");
 		}
+
+		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 80, 185,75),"Inventory");
+		GUI.skin = MyGUISkin;
+		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
+		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
 
 		if(currentState == PlayerState.Crafting )
 		{
@@ -212,6 +215,8 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 			item1="";
 			item2="";
+			slot1Image=null;
+			slot2Image=null;
 		}
 		
 		//serving

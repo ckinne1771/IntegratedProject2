@@ -305,7 +305,7 @@ MonoBehaviour:
     m_ContentOffset: {x: 0, y: 0}
     m_FixedWidth: 0
     m_FixedHeight: 0
-    m_StretchWidth: 1
+    m_StretchWidth: 0
     m_StretchHeight: 0
   m_textArea:
     m_Name: textarea
@@ -1254,6 +1254,6 @@ MonoBehaviour:
   m_Settings:
     m_DoubleClickSelectsWord: 1
     m_TripleClickSelectsLine: 1
-    m_CursorColor: {r: 1, g: 1, b: 1, a: 1}
+    m_CursorColor: {r: .904411793, g: .212802768, b: .212802768, a: 1}
     m_CursorFlashSpeed: -1
     m_SelectionColor: {r: 1, g: .384039074, b: 0, a: .699999988}

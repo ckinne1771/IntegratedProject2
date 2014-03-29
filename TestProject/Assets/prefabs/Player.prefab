@@ -122,6 +122,9 @@ MonoBehaviour:
   currentStage: 
   timer: 60
   itemCrafted: 0
+  slot1Image: {fileID: 0}
+  slot2Image: {fileID: 0}
+  ComponentSprites: []
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aed5cf6691a1404a8f21cea89129ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyGUISkin: {fileID: 11400000, guid: 53753efe8b90f7844b82fd46515d5ca5, type: 2}
   currentState: 0
   inventoryScript: {fileID: 0}
   craftingScript: {fileID: 0}
@@ -148,6 +152,13 @@ MonoBehaviour:
   timer: 60
   Crafted: 0
   anim: {fileID: 0}
+  slot1Image: {fileID: 0}
+  slot2Image: {fileID: 0}
+  ComponentSprites:
+  - {fileID: 2800000, guid: dc695fe35855afb408f34df160eece06, type: 3}
+  - {fileID: 2800000, guid: 5b42edc7739fb7f43a29c0821646b205, type: 3}
+  - {fileID: 2800000, guid: fcf90196ccb9e914aad088c8dca8ca82, type: 3}
+  - {fileID: 2800000, guid: 8f69bec40001b5341b154e1338e49eb2, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

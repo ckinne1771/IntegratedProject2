@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8134a57bacf5d4f4d8d35fb16ed1b6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyGUISkin: {fileID: 11400000, guid: 53753efe8b90f7844b82fd46515d5ca5, type: 2}
   theCraftingScript: {fileID: 0}
   choice: []
   NeededItem: 0
