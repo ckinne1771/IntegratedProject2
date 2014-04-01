@@ -61,7 +61,8 @@ public class CraftingScript : MonoBehaviour
 			//characterControllerScript.Crafted=true;
 			tutCharacterControllerScript.currentStage="serveCustomer";
 			crafted=true;
-			
+			tutCharacterControllerScript.audio.Play();
+			characterControllerScript.audio.Play();
 		}
 		else if(recipeList.Contains(_item2+_item1))
 		{
@@ -71,6 +72,8 @@ public class CraftingScript : MonoBehaviour
 			//characterControllerScript.Crafted=true;
 			tutCharacterControllerScript.currentStage="serveCustomer";
 			crafted= true;
+			tutCharacterControllerScript.audio.Play();
+			characterControllerScript.audio.Play();
 		}
 		inventoryScript.RemoveItem (_item1);
 		inventoryScript.RemoveItem (_item2);

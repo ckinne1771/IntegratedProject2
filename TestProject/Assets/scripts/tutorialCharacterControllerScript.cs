@@ -14,6 +14,10 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	};
 
 	public GUISkin myGUISkin;
+	public GUISkin guiskin2;
+	public AudioClip tillsound;
+	public AudioClip popsound;
+	public AudioClip hammer;
 	//player state comment
 	public PlayerState currentState;
 	GameObject CraftingTable;
@@ -105,7 +109,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				Debug.Log ("idleraycast");
 				if(hit.transform.gameObject.tag=="Components" && item2=="")
 				{
-					
+					audio.PlayOneShot(popsound);
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
 					
 					if(hit.transform.gameObject.name=="orange")
@@ -200,10 +204,15 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	//handles player states
 	public void OnGUI()
 	{
-
+		GUI.skin=myGUISkin;
+		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 110, 185,75),"Inventory");
+		GUI.skin=guiskin2;
+		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
+		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
+		GUI.skin= myGUISkin;
 		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
-			GUI.Box (new Rect(Screen.width/2,Screen.height/2,60,20),"Crafted!");
+			GUI.Box (new Rect(Screen.width/2,Screen.height/2,100,60),"Crafted!");
 			StartCoroutine("WaitTime");
 		}
 
@@ -292,6 +301,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					score += (20*scoreModifier);
 					timer=60; 
 					currentStage="done!"; 
+					audio.PlayOneShot(tillsound);
 				} 
 			} 
 
@@ -308,6 +318,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					score += (20*scoreModifier);
 					timer=60;
 					currentStage="finallyDone!";
+					audio.PlayOneShot(tillsound);
 				}
 			}
 
@@ -320,19 +331,19 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		{
 		case("customerIntro"):
 			part=1;
-			GUI.Box(new Rect(Screen.width/2-80,Screen.height/16,160,50),"We have a new customer");
+			GUI.Box(new Rect(Screen.width/4-80,Screen.height/12+30,160,50),"We have a new customer");
 			//highlight customer anim
 			StartCoroutine("CustomerWant");
 			//unhighlight
 			break;
 		case("customerWant"):
-			GUI.Box(new Rect(Screen.width/2-125,Screen.height/16,250,60),"Looks like they want a basketball!\n The customer will always\n say what item they want");
+			GUI.Box(new Rect(Screen.width/4-125,Screen.height/16,250,100),"Looks like they want a basketball!\nThe customer will\n always say what \nitem they want");
 			//highlight customerwant
 			StartCoroutine("grabItems");
 			//unhighlight
 			break;
 		case("grabItems"):
-			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Go grab the items \n needed to make the basketball");
+			GUI.Box(new Rect(Screen.width/4-100,Screen.height/16,200,100),"Go grab the items \n needed to make the basketball");
 			//highlight orange paint anim
 			//highlight ball anim
 			playerHasControl=true;
@@ -346,7 +357,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("craftItems"):
 			playerHasControl = false;
-			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Good! Now craft them \n into something nice!");
+			GUI.Box(new Rect(Screen.width/4-100,Screen.height/16,200,50),"Good! Now craft them \n into something nice!");
 			playerHasControl=true;
 			//highlight craft bench anim
 			//unhighlight
@@ -354,14 +365,14 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		case("serveCustomer"):
 			readytocraft=false;
 			playerHasControl=false;
-			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Ok! Now you need to take \n the item to the till");
+			GUI.Box(new Rect(Screen.width/4-100,Screen.height/12+30,200,50),"Ok! Now you need to take \n the item to the till");
 			playerHasControl=true;
 			//highlight till anim
 			//unhighlight
 			break;
 		case("done!"):
 			playerHasControl=false;
-			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Congratulations, you've served \n your first customer");
+			GUI.Box(new Rect(Screen.width/4-100,Screen.height/12+30,200,50),"Congratulations, you've served \n your first customer");
 			//StartCoroutine("WaitTime");
 			StartCoroutine("levelWait");
 			break;
@@ -372,14 +383,14 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		case("secondCustomer"):
 			itemCrafted=false;
 			part=2;
-			GUI.Box (new Rect(Screen.width/2-100,Screen.height/16,200,50),"We have another customer! \n This one wants a bike!");
+			GUI.Box (new Rect(Screen.width/4-100,Screen.height/16,200,100),"We have another customer! \n This one wants a bike!");
 			customerSpawnScript.AddingTutorialCustomer ();
 			StartCoroutine ("secondCustomerTransition");
 			break;
 	
 		case("Crafting2"):
 			playerHasControl=true;
-			GUI.Box (new Rect(Screen.width/2-100,Screen.height/16,250,50),"Now, grab the items needed \n to make a bike and craft it.");
+			GUI.Box (new Rect(Screen.width/4-100,Screen.height/16,250,100),"Now, grab the\n items needed to\n make a bike\n and craft it.");
 			if(gotitem3&&gotitem4)
 			{
 				readytocraft=true;
@@ -391,11 +402,11 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("serve2"):
 			readytocraft=false;
-			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Ok! Now you need to take \n the item to the till");
+			GUI.Box(new Rect(Screen.width/4-100,Screen.height/16,200,70),"Ok! Now you need to take \n the item to the till");
 			break;
 		case("finallyDone!"):
 		
-			GUI.Box(new Rect(Screen.width/2-100,Screen.height/16,200,50),"Congratulations, you've served \n another customer");
+			GUI.Box(new Rect(Screen.width/4-100,Screen.height/12+30,200,70),"Congratulations, you've served \n another customer");
 			StartCoroutine("levelWait2");
 			break;
 		
@@ -404,10 +415,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			Application.LoadLevel("LevelSelect");
 			break;
 		}
-		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 80, 185,75),"Inventory");
-		GUI.skin=myGUISkin;
-		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
-		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
 	}
 	 
 	void collectItems(string _item)
