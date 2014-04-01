@@ -74,8 +74,8 @@ public class CustomerNeedsScript : MonoBehaviour {
 		} 
 			else
 			{
-				//GUI.skin=MyGUISkin;
-				GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),itemRequested);
+				GUI.skin=MyGUISkin;
+				GUI.Box (new Rect(customerPos.x+30,Screen.height-customerPos.y-90,110, 55),itemRequested);
 			}
 	}
 }
