@@ -14,7 +14,10 @@ public class CharacterControllerScript : MonoBehaviour
 	};
 
 	public GUISkin MyGUISkin;
-	
+	public GUISkin guiskin2;
+	public AudioClip tillsound;
+	public AudioClip popsound;
+	public AudioClip hammer;
 	//player state comment
 	public PlayerState currentState;
 	GameObject CraftingTable;
@@ -91,12 +94,11 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				if(hit.transform.gameObject.tag=="Components" && item2=="")
 				{
-
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
 
 					if(hit.transform.gameObject.tag=="Components")
 					{
-					
+						audio.PlayOneShot(popsound);
 						inventoryScript.AddItem(hit.transform.gameObject.name);
 						collectItems(hit.transform.gameObject.name);
 						//InstantiateComponents(hit.transform.gameObject);
@@ -154,14 +156,15 @@ public class CharacterControllerScript : MonoBehaviour
 	//handles player states
 	public void OnGUI()
 	{
+		GUI.skin = MyGUISkin;
 		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
-			GUI.Box (new Rect(Screen.width/2,Screen.height/2,60,20),"Crafted!");
+			GUI.Box (new Rect(Screen.width/2,Screen.height/4,110,50),"Crafted!");
 			StartCoroutine("WaitTime");
 		}
 
-		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 80, 185,75),"Inventory");
-		GUI.skin = MyGUISkin;
+		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 110, 185,75),"Inventory");
+		GUI.skin=guiskin2;
 		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
 		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
 
@@ -231,11 +234,12 @@ public class CharacterControllerScript : MonoBehaviour
 				recipeitem="";
 				score += (20*scoreModifier);
 				timer=60;
+				audio.PlayOneShot(tillsound);
 			}
 			currentState=PlayerState.Idle;
 			
 		}
-
+		GUI.skin=MyGUISkin;
 		GUI.TextField(new Rect(10,10,100,20),"Score; " +score); 
 
 		if(customerSpawnScript.IsQueueEmpty()==true)
