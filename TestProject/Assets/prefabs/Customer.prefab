@@ -80,7 +80,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 570c75fe9112fb843b8f968b786d0224, type: 2}
   m_IsTrigger: 0
   m_Size: {x: 3, y: .5}
   m_Center: {x: 0, y: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e03619e98e1b7a43824c049a49eaca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 7
+  movementSpeed: 5
   customerneedsscript: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:

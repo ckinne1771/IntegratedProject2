@@ -10,7 +10,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 	string currentScene;
 	int limiter = 0;
 	GameObject[] customers;
-	
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -26,6 +26,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 		{
 		targets = GameObject.Find("Targets").transform;
 		customers = new GameObject[NoOfCustomers];
+		AddCustomerToList();
 		AddCustomerToList();
 		AddCustomerToList();
 		AddCustomerToList();
@@ -119,6 +120,5 @@ public class CustomerSpawnScript : MonoBehaviour {
 		limiter = 1;
 		
 	}
+
 }
-
-
