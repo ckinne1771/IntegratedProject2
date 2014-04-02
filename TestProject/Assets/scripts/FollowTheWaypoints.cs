@@ -3,7 +3,6 @@ using System.Collections;
 
 public class FollowTheWaypoints : MonoBehaviour 
 {
-	public float movementSpeed = 5f;
 	private int targetWaypoint = 0;
 	private Transform waypoints;
 	public CustomerNeedsScript customerneedsscript;
@@ -16,34 +15,72 @@ public class FollowTheWaypoints : MonoBehaviour
 	}
 
 	private State state;
+
 	
 	// Use this for initialization
-	void Start () 
+	void Start() 
 	{
+		state = State.Enter;
 		waypoints = GameObject.Find ("Waypoints").transform;
 		customerneedsscript = GetComponent<CustomerNeedsScript> ();
 	}
-	
-	// Fixed update
+
 	void FixedUpdate()
 	{
-		if (targetWaypoint == 0) 
+		states();
+	}
+
+	private void states()
+	{
+		switch(state) 
 		{
-			moveToWaypoints();
-		}
-		if (targetWaypoint == 1) 
-		{
+		case State.Enter:
+			Debug.Log (state);
+			enter();
+			break;
+				
+		case State.Serving:
 			StartCoroutine(WaitFirst());
-		}
-		if (targetWaypoint == 2)
-		{
+			Debug.Log(state);
+			break;
+				
+		case State.Exit:
+			Debug.Log(state);
 			StartCoroutine(WaitSecond());
+			break;
 		}
 	}
 
-	void Update()
+	private void enter()
 	{
+		if (targetWaypoint == 0) 
+		{
+			moveToWaypoints();	
+		} 
+		else 
+		{
+			state = State.Serving;
+		}
+	}
 
+	private void serving()
+	{
+		if (targetWaypoint == 1)
+		{
+			moveToWaypoints();
+		}
+		else 
+		{
+			state = State.Exit;
+		}
+	}
+
+	private void exit()
+	{
+		if (targetWaypoint == 2)
+		{
+			moveToWaypoints();
+		}
 	}
 
 	// Handle walking the waypoints
@@ -77,19 +114,12 @@ public class FollowTheWaypoints : MonoBehaviour
 	IEnumerator WaitFirst() 
 	{
 		yield return new WaitForSeconds(5);
-		moveToWaypoints();
+		serving();
 	}
 
 	IEnumerator WaitSecond() 
 	{
-		yield return new WaitForSeconds(15);
-		moveToWaypoints();
+		yield return new WaitForSeconds(1);
+		exit();
 	}
 }
-
-//state = State.Enter;
-//switch (state) 
-//{
-//case State.Enter:
-//	break;
-//}
