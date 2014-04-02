@@ -3,7 +3,8 @@ using System.Collections;
 
 public class CustomerSpawnScript : MonoBehaviour {
 	
-	public int NoOfCustomers = 3;
+	public int MaxNoOfCustomers = 4;
+	int noOfCustomers=0;
 	public GameObject customerTemplate;
 	private Transform targets;
 	private int initialTarget = 0;
@@ -18,14 +19,14 @@ public class CustomerSpawnScript : MonoBehaviour {
 		if(currentScene == "tutorialScene")
 		{
 			targets = GameObject.Find("Targets").transform;
-			customers = new GameObject[NoOfCustomers];
+			customers = new GameObject[MaxNoOfCustomers];
 			AddCustomerToList();
 			GetFrontOfQueueOrder().itemNeeded = true;
 		}
 		else
 		{
 		targets = GameObject.Find("Targets").transform;
-		customers = new GameObject[NoOfCustomers];
+		customers = new GameObject[MaxNoOfCustomers];
 		AddCustomerToList();
 		AddCustomerToList();
 		AddCustomerToList();
@@ -33,15 +34,19 @@ public class CustomerSpawnScript : MonoBehaviour {
 		GetFrontOfQueueOrder().itemNeeded = true;
 		}
 	}
+	void Update()
+	{
+		StartCoroutine("spawnCustomersRegularly");
+	}
 	
 	public bool AddCustomerToList()
 	{
 		bool added = false;
-		if(customers[NoOfCustomers -1] == null && limiter==0)
+		if(customers[MaxNoOfCustomers -1] == null && limiter==0)
 		{
 			GameObject newCustomer = Instantiate(customerTemplate) as GameObject;
 			
-			for(int i = 0; i < NoOfCustomers; i++)
+			for(int i = 0; i < MaxNoOfCustomers; i++)
 			{
 				if(customers[i] == null && !added)
 				{
@@ -56,6 +61,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 						// Set next target as spawnpoint
 						initialTarget++;
 					}
+					noOfCustomers++;
 					
 				}
 			}
@@ -87,15 +93,16 @@ public class CustomerSpawnScript : MonoBehaviour {
 			GameObject delCustomer = customers[pos];
 			customers[pos] = null;
 			Destroy(delCustomer);
+			noOfCustomers--;
 		}
 		else
 		{
 			return false;
 		}
 		
-		for(int i = pos; i < NoOfCustomers - pos; i++)
+		for(int i = pos; i < MaxNoOfCustomers - pos; i++)
 		{
-			if(i + 1 < NoOfCustomers)
+			if(i + 1 < MaxNoOfCustomers)
 			{
 				customers[i] = customers[i+1];
 				if(customers[i] != null)
@@ -118,6 +125,16 @@ public class CustomerSpawnScript : MonoBehaviour {
 		AddCustomerToList();
 		GetFrontOfQueueOrder().itemNeeded = true;
 		limiter = 1;
+		
+	}
+	IEnumerator spawnCustomersRegularly()
+	{
+		if(noOfCustomers<MaxNoOfCustomers)
+		{
+		AddCustomerToList();
+		GetFrontOfQueueOrder().itemNeeded = true;
+		}
+		yield return new WaitForSeconds(20.0f);
 		
 	}
 

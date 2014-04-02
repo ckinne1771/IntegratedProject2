@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class FollowTheWaypoints : MonoBehaviour 
@@ -25,7 +25,7 @@ public class FollowTheWaypoints : MonoBehaviour
 		customerneedsscript = GetComponent<CustomerNeedsScript> ();
 	}
 
-	void FixedUpdate()
+	void Update()
 	{
 		states();
 	}
@@ -35,17 +35,17 @@ public class FollowTheWaypoints : MonoBehaviour
 		switch(state) 
 		{
 		case State.Enter:
-			Debug.Log (state);
+			//Debug.Log (state);
 			enter();
 			break;
 				
 		case State.Serving:
 			StartCoroutine(WaitFirst());
-			Debug.Log(state);
+			//Debug.Log(state);
 			break;
 				
 		case State.Exit:
-			Debug.Log(state);
+			//Debug.Log(state);
 			StartCoroutine(WaitSecond());
 			break;
 		}
@@ -113,7 +113,7 @@ public class FollowTheWaypoints : MonoBehaviour
 
 	IEnumerator WaitFirst() 
 	{
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(30);
 		serving();
 	}
 

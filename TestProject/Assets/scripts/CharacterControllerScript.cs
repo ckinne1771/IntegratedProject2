@@ -35,9 +35,9 @@ public class CharacterControllerScript : MonoBehaviour
 	public GameObject customerTemplate;
 	public List<GameObject> components;
 	public GameObject component;
-	public static int score;
+	public int score;
 	private int scoreModifier;
-	public float timer=60;
+	public float timer;
 	public bool Crafted;
 	public Animator anim;
 	public Texture2D slot1Image;
@@ -57,7 +57,7 @@ public class CharacterControllerScript : MonoBehaviour
 		//customerSpawnScript = GetComponent<CustomerSpawnScript>();
 		item1="";
 		item2="";
-		InvokeRepeating("Countdown",1f,1f);
+		//InvokeRepeating("Countdown",1f,1f);
 		
 	}
 	
@@ -129,7 +129,7 @@ public class CharacterControllerScript : MonoBehaviour
 			
 		}
 
-		if (timer>40)
+		/*if (timer>40)
 		{
 			scoreModifier=3;
 		}
@@ -141,15 +141,15 @@ public class CharacterControllerScript : MonoBehaviour
 		if (timer <20 && timer>0)
 		{
 			scoreModifier=1;
-		}
+		}*/
 
 	}
 
-	void Countdown()
+	/*void Countdown()
 	{
 		timer--;
 		Debug.Log (timer);
-	}
+	}*/
 	
 	
 	
@@ -232,8 +232,10 @@ public class CharacterControllerScript : MonoBehaviour
 				//noCompletedItems=true;
 				customerSpawnScript.RemoveCustomer(0);
 				recipeitem="";
+				ScoreModifier();
 				score += (20*scoreModifier);
-				timer=60;
+				Debug.Log(customerSpawnScript.GetFrontOfQueueOrder().timer);
+				customerSpawnScript.GetFrontOfQueueOrder().timer=60;
 				audio.PlayOneShot(tillsound);
 			}
 			currentState=PlayerState.Idle;
@@ -275,6 +277,24 @@ public class CharacterControllerScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds(1.0f);
 		craftingScript.crafted=false;
+	}
+
+	public void ScoreModifier()
+	{
+	timer=customerSpawnScript.GetFrontOfQueueOrder().timer;
+	if (timer>49)
+	{
+		scoreModifier=3;
+	}
+	
+	if (timer <50 && timer>29)
+	{
+		scoreModifier=2;
+	}
+	if (timer <30 && timer>0)
+	{
+		scoreModifier=1;
+	}
 	}
 	
 }

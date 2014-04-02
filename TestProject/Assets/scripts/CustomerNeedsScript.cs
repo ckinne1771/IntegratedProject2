@@ -5,6 +5,7 @@ using System.Linq;
 
 public class CustomerNeedsScript : MonoBehaviour {
 
+	public Animator anim;
 	public GUISkin MyGUISkin;
 	public CraftingScript theCraftingScript;
 	public List<string> choice;
@@ -22,6 +23,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 	string currentScene;
 	public string first;
 	public string second;
+	public float timer=60;
 	
 	// Use this for initialization
 	void Start () 
@@ -31,7 +33,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 		Player = GameObject.FindGameObjectWithTag("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
 		AddingToList();
-		
+		InvokeRepeating("Countdown",1f,1f);
 	}
 	
 	// Update is called once per frame
@@ -39,7 +41,6 @@ public class CustomerNeedsScript : MonoBehaviour {
 	{
 		target= this.gameObject.transform;
 		customerPos = Camera.main.WorldToScreenPoint(target.position);
-
 	}
 	
 	public void AddingToList(){
@@ -55,9 +56,15 @@ public class CustomerNeedsScript : MonoBehaviour {
 		second = theCraftingScript.TherecipeList[secondItem];
 		
 	}
+	void Countdown()
+	{
+		timer--;
+		//Debug.Log (timer);
+	}
 	
 	void OnGUI()
 	{
+		GUI.skin=MyGUISkin;
 		if(itemNeeded==true)
 		{
 			if(currentScene=="tutorialScene")
@@ -74,7 +81,6 @@ public class CustomerNeedsScript : MonoBehaviour {
 		} 
 			else
 			{
-				GUI.skin=MyGUISkin;
 				GUI.Box (new Rect(customerPos.x+30,Screen.height-customerPos.y-90,110, 55),itemRequested);
 			}
 	}
