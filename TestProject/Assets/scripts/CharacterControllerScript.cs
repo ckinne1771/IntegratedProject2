@@ -231,6 +231,7 @@ public class CharacterControllerScript : MonoBehaviour
 				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 				//noCompletedItems=true;
 				//customerSpawnScript.RemoveCustomer(0);
+				customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.targetWaypoint=1;
 				customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.customerState=FollowTheWaypoints.State.Exit;
 				recipeitem="";
 				ScoreModifier();

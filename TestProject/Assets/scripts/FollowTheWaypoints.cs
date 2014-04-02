@@ -47,7 +47,7 @@ public class FollowTheWaypoints : MonoBehaviour
 			break;
 				
 		case State.Serving:
-			StartCoroutine(WaitFirst());
+			WaitFirst();
 			//Debug.Log(customerState);
 			break;
 				
@@ -84,13 +84,14 @@ public class FollowTheWaypoints : MonoBehaviour
 
 	public void exit()
 	{
-		if (targetWaypoint==1)
+		if(targetWaypoint==1)
 		{
 			moveToWaypoints();
 			moveToWaypoints();
 			Debug.Log ("move");
 
 		}
+	
 		else
 		{
 			moveToWaypoints();
@@ -128,11 +129,13 @@ public class FollowTheWaypoints : MonoBehaviour
 		}
 	}
 
-	IEnumerator WaitFirst() 
+	void WaitFirst() 
 	{
-		//if(customerneedsscript.timer>30)
-		yield return new WaitForSeconds(10);
+		if(customerneedsscript.timer<50)
+		{
+		//yield return new WaitForSeconds(10);
 		serving();
+		}
 	}
 
 	IEnumerator WaitSecond() 

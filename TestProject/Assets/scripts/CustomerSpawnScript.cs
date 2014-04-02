@@ -126,9 +126,12 @@ public class CustomerSpawnScript : MonoBehaviour {
 		}
 		foreach(GameObject customer in customers)
 		{
+			if(customer!=null)
+			{
 			if(customer.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue>queuePointToDelete)
 			{
 			customer.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue--;
+			}
 			}
 		}
 		return true;
@@ -144,13 +147,13 @@ public class CustomerSpawnScript : MonoBehaviour {
 	}
 	IEnumerator spawnCustomersRegularly()
 	{
+		yield return new WaitForSeconds(5.0f);
 		if(totalNoOfCustomers<=maxTotalNoOfCustomers&& limiter==0)
 		{
 			if(currentNoOfCustomers<MaxNoOfCustomersAtOnce)
 			{
 			AddCustomerToList();
 			GetFrontOfQueueOrder().itemNeeded = true;
-			yield return new WaitForSeconds(20.0f);
 			}
 		}
 	}

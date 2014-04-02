@@ -1288,7 +1288,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1695713707}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.62238407, y: 1.20358801, z: 0}
+  m_LocalPosition: {x: 4.62238407, y: 3.78010178, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2133815407}
@@ -1384,7 +1384,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ce46e966189e94f8bfcec799af63a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxTotalNoOfCustomers: 10
   MaxNoOfCustomersAtOnce: 5
+  currentNoOfCustomers: 0
+  totalNoOfCustomers: 0
   customerTemplate: {fileID: 100002, guid: bfaba81c2c50eed40941c9e70a0714cc, type: 2}
   customers: []
   queuePointToDelete: 0
