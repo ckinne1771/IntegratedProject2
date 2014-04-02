@@ -1,0 +1,121 @@
+fileFormatVersion: 2
+guid: 7a9ee759c0451f54d880100532ea719e
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 30
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: walk cycle 1 spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 606
+        width: 113
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: walk cycle 1 spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 607
+        width: 111
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: walk cycle 1 spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 605
+        width: 110
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: walk cycle 1 spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 607
+        width: 109
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: walk cycle 1 spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 608
+        width: 110
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: walk cycle 1 spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 608
+        width: 107
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: walk cycle 1 spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 608
+        width: 109
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: walk cycle 1 spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 608
+        width: 106
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

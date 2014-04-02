@@ -230,11 +230,12 @@ public class CharacterControllerScript : MonoBehaviour
 				inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
 				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 				//noCompletedItems=true;
-				customerSpawnScript.RemoveCustomer(0);
+				//customerSpawnScript.RemoveCustomer(0);
+				customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.customerState=FollowTheWaypoints.State.Exit;
 				recipeitem="";
 				ScoreModifier();
 				score += (20*scoreModifier);
-				Debug.Log(customerSpawnScript.GetFrontOfQueueOrder().timer);
+				//Debug.Log(customerSpawnScript.GetFrontOfQueueOrder().timer);
 				customerSpawnScript.GetFrontOfQueueOrder().timer=60;
 				audio.PlayOneShot(tillsound);
 			}

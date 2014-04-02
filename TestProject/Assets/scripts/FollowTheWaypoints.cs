@@ -3,26 +3,31 @@ using System.Collections;
 
 public class FollowTheWaypoints : MonoBehaviour 
 {
-	private int targetWaypoint = 0;
+	public int targetWaypoint = 0;
 	private Transform waypoints;
 	public CustomerNeedsScript customerneedsscript;
+	public CustomerSpawnScript customerSpawnScript;
+	public Animator anim;
+	public int pointInQueue=0;
 
 	public enum State
 	{
 		Enter,
 		Serving,
 		Exit
-	}
+	};
 
-	private State state;
+	public State customerState;
 
 	
 	// Use this for initialization
 	void Start() 
 	{
-		state = State.Enter;
+		//anim=GetComponent<Animator>();
+		customerState = State.Enter;
 		waypoints = GameObject.Find ("Waypoints").transform;
-		customerneedsscript = GetComponent<CustomerNeedsScript> ();
+		customerneedsscript = GetComponent<CustomerNeedsScript>();
+		customerSpawnScript = GetComponent<CustomerSpawnScript>();
 	}
 
 	void Update()
@@ -32,20 +37,21 @@ public class FollowTheWaypoints : MonoBehaviour
 
 	private void states()
 	{
-		switch(state) 
+		switch(customerState) 
 		{
 		case State.Enter:
 			//Debug.Log (state);
 			enter();
+
 			break;
 				
 		case State.Serving:
 			StartCoroutine(WaitFirst());
-			//Debug.Log(state);
+			//Debug.Log(customerState);
 			break;
 				
 		case State.Exit:
-			//Debug.Log(state);
+			//Debug.Log(customerState);
 			StartCoroutine(WaitSecond());
 			break;
 		}
@@ -59,7 +65,7 @@ public class FollowTheWaypoints : MonoBehaviour
 		} 
 		else 
 		{
-			state = State.Serving;
+			customerState = State.Serving;
 		}
 	}
 
@@ -71,15 +77,24 @@ public class FollowTheWaypoints : MonoBehaviour
 		}
 		else 
 		{
-			state = State.Exit;
+			customerState = State.Exit;
 		}
 	}
 
-	private void exit()
+	public void exit()
 	{
-		if (targetWaypoint == 2)
+		if (targetWaypoint==1)
 		{
 			moveToWaypoints();
+			moveToWaypoints();
+			Debug.Log ("move");
+
+		}
+		else
+		{
+			moveToWaypoints();
+			customerSpawnScript.RemoveCustomer(pointInQueue);
+			Debug.Log ("kill");
 		}
 	}
 
@@ -113,13 +128,14 @@ public class FollowTheWaypoints : MonoBehaviour
 
 	IEnumerator WaitFirst() 
 	{
-		yield return new WaitForSeconds(30);
+		//if(customerneedsscript.timer>30)
+		yield return new WaitForSeconds(10);
 		serving();
 	}
 
 	IEnumerator WaitSecond() 
 	{
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0);
 		exit();
 	}
 }

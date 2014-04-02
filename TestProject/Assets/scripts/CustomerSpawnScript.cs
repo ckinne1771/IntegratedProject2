@@ -2,15 +2,17 @@
 using System.Collections;
 
 public class CustomerSpawnScript : MonoBehaviour {
-	
-	public int MaxNoOfCustomers = 4;
-	int noOfCustomers=0;
+
+	//public int maxTotalNoOfCustomers=10;
+	public int MaxNoOfCustomersAtOnce = 5;
+	int currentNoOfCustomers=0;
+	int totalNoOfCustomers=0;
 	public GameObject customerTemplate;
 	private Transform targets;
 	private int initialTarget = 0;
 	string currentScene;
 	int limiter = 0;
-	GameObject[] customers;
+	public GameObject[] customers;
 
 	// Use this for initialization
 	void Start () 
@@ -19,14 +21,14 @@ public class CustomerSpawnScript : MonoBehaviour {
 		if(currentScene == "tutorialScene")
 		{
 			targets = GameObject.Find("Targets").transform;
-			customers = new GameObject[MaxNoOfCustomers];
+			customers = new GameObject[MaxNoOfCustomersAtOnce];
 			AddCustomerToList();
 			GetFrontOfQueueOrder().itemNeeded = true;
 		}
 		else
 		{
 		targets = GameObject.Find("Targets").transform;
-		customers = new GameObject[MaxNoOfCustomers];
+		customers = new GameObject[MaxNoOfCustomersAtOnce];
 		AddCustomerToList();
 		AddCustomerToList();
 		AddCustomerToList();
@@ -42,11 +44,12 @@ public class CustomerSpawnScript : MonoBehaviour {
 	public bool AddCustomerToList()
 	{
 		bool added = false;
-		if(customers[MaxNoOfCustomers -1] == null && limiter==0)
+
+		if(customers[MaxNoOfCustomersAtOnce -1] == null && limiter==0)
 		{
 			GameObject newCustomer = Instantiate(customerTemplate) as GameObject;
-			
-			for(int i = 0; i < MaxNoOfCustomers; i++)
+			newCustomer.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue=currentNoOfCustomers;
+			for(int i = 0; i < MaxNoOfCustomersAtOnce; i++)
 			{
 				if(customers[i] == null && !added)
 				{
@@ -54,14 +57,15 @@ public class CustomerSpawnScript : MonoBehaviour {
 					Transform targetWaypoint = targets.GetChild(initialTarget);
 					customers[i].transform.position = targetWaypoint.transform.position;
 					added = true;
-					Debug.Log("Customer added");
+					//Debug.Log("Customer added");
 					
 					if (initialTarget + 1 < targets.childCount)
 					{
 						// Set next target as spawnpoint
 						initialTarget++;
 					}
-					noOfCustomers++;
+					currentNoOfCustomers++;
+					totalNoOfCustomers++;
 					
 				}
 			}
@@ -93,16 +97,18 @@ public class CustomerSpawnScript : MonoBehaviour {
 			GameObject delCustomer = customers[pos];
 			customers[pos] = null;
 			Destroy(delCustomer);
-			noOfCustomers--;
+			//delCustomer.gameObject.GetComponent<FollowTheWaypoints>().targetWaypoint=2;
+			//delCustomer.gameObject.GetComponent<FollowTheWaypoints>().customerState=FollowTheWaypoints.State.Exit;
+			currentNoOfCustomers--;
 		}
 		else
 		{
 			return false;
 		}
 		
-		for(int i = pos; i < MaxNoOfCustomers - pos; i++)
+		for(int i = pos; i < MaxNoOfCustomersAtOnce - pos; i++)
 		{
-			if(i + 1 < MaxNoOfCustomers)
+			if(i + 1 < MaxNoOfCustomersAtOnce)
 			{
 				customers[i] = customers[i+1];
 				if(customers[i] != null)
@@ -129,7 +135,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 	}
 	IEnumerator spawnCustomersRegularly()
 	{
-		if(noOfCustomers<MaxNoOfCustomers)
+		if(currentNoOfCustomers<MaxNoOfCustomersAtOnce)
 		{
 		AddCustomerToList();
 		GetFrontOfQueueOrder().itemNeeded = true;

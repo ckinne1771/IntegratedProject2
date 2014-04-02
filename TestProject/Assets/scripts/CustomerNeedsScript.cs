@@ -15,6 +15,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string itemRequested;
 	public GameObject Player;
 	public CustomerSpawnScript customerSpawnScript;
+	public FollowTheWaypoints followTheWaypoints;
 	public string item;
 	public Vector3 customerPos;
 	public Transform target;
@@ -32,6 +33,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 		currentScene=Application.loadedLevelName;
 		Player = GameObject.FindGameObjectWithTag("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
+		followTheWaypoints=GetComponent<FollowTheWaypoints>();
 		AddingToList();
 		InvokeRepeating("Countdown",1f,1f);
 	}
@@ -78,11 +80,12 @@ public class CustomerNeedsScript : MonoBehaviour {
 					GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),secondItem);
 				}
 
-		} 
+		    } 
 			else
 			{
 				GUI.Box (new Rect(customerPos.x+30,Screen.height-customerPos.y-90,110, 55),itemRequested);
 			}
-	}
+
+		}
 }
 }
