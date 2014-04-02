@@ -3,10 +3,10 @@ using System.Collections;
 
 public class CustomerSpawnScript : MonoBehaviour {
 
-	//public int maxTotalNoOfCustomers=10;
+	public int maxTotalNoOfCustomers=10;
 	public int MaxNoOfCustomersAtOnce = 5;
-	int currentNoOfCustomers=0;
-	int totalNoOfCustomers=0;
+	public int currentNoOfCustomers=0;
+	public int totalNoOfCustomers=0;
 	public GameObject customerTemplate;
 	private Transform targets;
 	private int initialTarget = 0;
@@ -45,7 +45,6 @@ public class CustomerSpawnScript : MonoBehaviour {
 	public bool AddCustomerToList()
 	{
 		bool added = false;
-
 		if(customers[MaxNoOfCustomersAtOnce -1] == null && limiter==0)
 		{
 			GameObject newCustomer = Instantiate(customerTemplate) as GameObject;
@@ -123,11 +122,11 @@ public class CustomerSpawnScript : MonoBehaviour {
 		{
 			GetFrontOfQueueOrder().itemNeeded = true;
 		}
-		foreach(GameObject thing in customers)
+		foreach(GameObject customer in customers)
 		{
-			if(thing.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue>queuePointToDelete)
+			if(customer.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue>queuePointToDelete)
 			{
-			thing.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue--;
+			customer.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue--;
 			}
 		}
 		return true;
@@ -143,13 +142,15 @@ public class CustomerSpawnScript : MonoBehaviour {
 	}
 	IEnumerator spawnCustomersRegularly()
 	{
-		if(currentNoOfCustomers<MaxNoOfCustomersAtOnce)
+		if(totalNoOfCustomers<=maxTotalNoOfCustomers)
 		{
-		AddCustomerToList();
-		GetFrontOfQueueOrder().itemNeeded = true;
+			if(currentNoOfCustomers<MaxNoOfCustomersAtOnce)
+			{
+			AddCustomerToList();
+			GetFrontOfQueueOrder().itemNeeded = true;
+			yield return new WaitForSeconds(20.0f);
+			}
 		}
-		yield return new WaitForSeconds(20.0f);
-		
 	}
 
 }
