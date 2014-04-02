@@ -13,6 +13,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 	string currentScene;
 	int limiter = 0;
 	public GameObject[] customers;
+	public int queuePointToDelete;
 
 	// Use this for initialization
 	void Start () 
@@ -48,12 +49,12 @@ public class CustomerSpawnScript : MonoBehaviour {
 		if(customers[MaxNoOfCustomersAtOnce -1] == null && limiter==0)
 		{
 			GameObject newCustomer = Instantiate(customerTemplate) as GameObject;
-			newCustomer.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue=currentNoOfCustomers;
 			for(int i = 0; i < MaxNoOfCustomersAtOnce; i++)
 			{
 				if(customers[i] == null && !added)
 				{
 					customers[i] = newCustomer;
+					customers[i].gameObject.GetComponent<FollowTheWaypoints>().pointInQueue=currentNoOfCustomers;
 					Transform targetWaypoint = targets.GetChild(initialTarget);
 					customers[i].transform.position = targetWaypoint.transform.position;
 					added = true;
@@ -121,6 +122,13 @@ public class CustomerSpawnScript : MonoBehaviour {
 		if(!IsQueueEmpty())
 		{
 			GetFrontOfQueueOrder().itemNeeded = true;
+		}
+		foreach(GameObject thing in customers)
+		{
+			if(thing.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue>queuePointToDelete)
+			{
+			thing.gameObject.GetComponent<FollowTheWaypoints>().pointInQueue--;
+			}
 		}
 		return true;
 	}

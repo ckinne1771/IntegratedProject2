@@ -27,7 +27,8 @@ public class FollowTheWaypoints : MonoBehaviour
 		customerState = State.Enter;
 		waypoints = GameObject.Find ("Waypoints").transform;
 		customerneedsscript = GetComponent<CustomerNeedsScript>();
-		customerSpawnScript = GetComponent<CustomerSpawnScript>();
+		customerSpawnScript = Camera.main.gameObject.GetComponent<CustomerSpawnScript>();
+		//customerSpawnScript = GetComponent<CustomerSpawnScript>();
 	}
 
 	void Update()
@@ -94,6 +95,7 @@ public class FollowTheWaypoints : MonoBehaviour
 		{
 			moveToWaypoints();
 			customerSpawnScript.RemoveCustomer(pointInQueue);
+			customerSpawnScript.queuePointToDelete=pointInQueue;
 			Debug.Log ("kill");
 		}
 	}
