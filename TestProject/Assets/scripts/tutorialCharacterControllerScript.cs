@@ -296,7 +296,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
 					customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 					//noCompletedItems=true;
-					customerSpawnScript.RemoveCustomer(0);
+					//customerSpawnScript.RemoveCustomer(0);
+					customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.customerState=FollowTheWaypoints.State.Exit;
 					recipeitem="";
 					score += (20*scoreModifier);
 					timer=60; 
@@ -313,7 +314,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
 					customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 					//noCompletedItems=true;
-					customerSpawnScript.RemoveCustomer(0);
+					//customerSpawnScript.RemoveCustomer(0);
+					customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.customerState=FollowTheWaypoints.State.Exit;
 					recipeitem="";
 					score += (20*scoreModifier);
 					timer=60;
@@ -333,13 +335,20 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			part=1;
 			GUI.Box(new Rect(Screen.width/4-80,Screen.height/12+30,160,50),"We have a new customer");
 			//highlight customer anim
-			StartCoroutine("CustomerWant");
+			//StartCoroutine("CustomerWant");
 			//unhighlight
+			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,120,40),"Click here\n to continue"))
+			{
+				currentStage="customerWant";
+			}
 			break;
 		case("customerWant"):
 			GUI.Box(new Rect(Screen.width/4-125,Screen.height/16,250,100),"Looks like they want a basketball!\nThe customer will\n always say what \nitem they want");
 			//highlight customerwant
-			StartCoroutine("grabItems");
+			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,120,40),"Click here\n to continue"))
+			{
+				currentStage="grabItems";
+			}
 			//unhighlight
 			break;
 		case("grabItems"):
@@ -385,7 +394,10 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			part=2;
 			GUI.Box (new Rect(Screen.width/4-100,Screen.height/16,200,100),"We have another customer! \n This one wants a bike!");
 			customerSpawnScript.AddingTutorialCustomer ();
-			StartCoroutine ("secondCustomerTransition");
+			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,120,40),"Click here\n to continue"))
+			{
+				currentStage="Crafting2";
+			}
 			break;
 	
 		case("Crafting2"):
@@ -473,7 +485,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	}
 	IEnumerator WaitTime()
 	{
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(3.0f);
 		craftingScript.crafted=false;
 	}
 }

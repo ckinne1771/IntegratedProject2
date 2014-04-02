@@ -38,8 +38,10 @@ public class CustomerSpawnScript : MonoBehaviour {
 		}
 	}
 	void Update()
-	{
+	{	if(currentScene != "tutorialScene")
+		{
 		StartCoroutine("spawnCustomersRegularly");
+		}
 	}
 	
 	public bool AddCustomerToList()
@@ -142,7 +144,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 	}
 	IEnumerator spawnCustomersRegularly()
 	{
-		if(totalNoOfCustomers<=maxTotalNoOfCustomers)
+		if(totalNoOfCustomers<=maxTotalNoOfCustomers&& limiter==0)
 		{
 			if(currentNoOfCustomers<MaxNoOfCustomersAtOnce)
 			{

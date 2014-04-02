@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Name: button
     m_Normal:
       m_Background: {fileID: 0}
-      m_TextColor: {r: .899999976, g: .899999976, b: .899999976, a: 1}
+      m_TextColor: {r: .860294104, g: .120188162, b: .120188162, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
       m_TextColor: {r: .5, g: .444852948, b: .444852948, a: 1}
