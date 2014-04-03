@@ -1,0 +1,310 @@
+fileFormatVersion: 2
+guid: 4ac136cd9cfa6e84e88191689d6812e6
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 50
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: expression spritesheet 1_0
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 784
+        width: 113
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 784
+        width: 113
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_2
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 784
+        width: 113
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_3
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 784
+        width: 113
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_4
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 784
+        width: 114
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_5
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 784
+        width: 113
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_6
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 611
+        width: 114
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_7
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 611
+        width: 122
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_8
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 611
+        width: 129
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_9
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 611
+        width: 135
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_10
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 611
+        width: 139
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_11
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 611
+        width: 130
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_12
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 438
+        width: 138
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_13
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 438
+        width: 130
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_14
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 438
+        width: 138
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_15
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 438
+        width: 130
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_16
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 438
+        width: 136
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_17
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 438
+        width: 129
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_18
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 269
+        width: 122
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_19
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 269
+        width: 114
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_20
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 269
+        width: 113
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_21
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 269
+        width: 113
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_22
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 271
+        width: 114
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_23
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 271
+        width: 113
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_24
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 94
+        width: 113
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_25
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 94
+        width: 113
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_26
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 94
+        width: 113
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_27
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 94
+        width: 116
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: expression spritesheet 1_28
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 94
+        width: 116
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

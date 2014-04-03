@@ -62,7 +62,7 @@ public class FollowTheWaypoints : MonoBehaviour
 	{
 		if (targetWaypoint == 0) 
 		{
-			moveToWaypoints();	
+			moveToWaypoints();
 		} 
 		else 
 		{
@@ -131,10 +131,10 @@ public class FollowTheWaypoints : MonoBehaviour
 
 	void WaitFirst() 
 	{
-		if(customerneedsscript.timer<50)
+		if(customerneedsscript.timer<21)
 		{
 		//yield return new WaitForSeconds(10);
-		serving();
+		exit();
 		}
 	}
 

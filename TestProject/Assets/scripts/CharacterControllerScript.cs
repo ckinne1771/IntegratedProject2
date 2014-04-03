@@ -36,7 +36,7 @@ public class CharacterControllerScript : MonoBehaviour
 	public List<GameObject> components;
 	public GameObject component;
 	public int score;
-	private int scoreModifier;
+	public int scoreModifier;
 	public float timer;
 	public bool Crafted;
 	public Animator anim;
@@ -57,7 +57,7 @@ public class CharacterControllerScript : MonoBehaviour
 		//customerSpawnScript = GetComponent<CustomerSpawnScript>();
 		item1="";
 		item2="";
-		//InvokeRepeating("Countdown",1f,1f);
+		InvokeRepeating("ScoreModifier",1f,1f);
 		
 	}
 	
@@ -65,6 +65,8 @@ public class CharacterControllerScript : MonoBehaviour
 	//moves player
 	void Update()
 	{
+		timer=customerSpawnScript.GetFrontOfQueueOrder().timer;
+		//ScoreModifier();
 
 		if (inventoryScript.playerInventory.ContainsKey("orange"))
 		{
@@ -128,20 +130,6 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 			
 		}
-
-		/*if (timer>40)
-		{
-			scoreModifier=3;
-		}
-
-		if (timer <40 && timer>20)
-		{
-			scoreModifier=2;
-		}
-		if (timer <20 && timer>0)
-		{
-			scoreModifier=1;
-		}*/
 
 	}
 
@@ -229,15 +217,13 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
 				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
-				//noCompletedItems=true;
-				//customerSpawnScript.RemoveCustomer(0);
 				customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.targetWaypoint=1;
 				customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.customerState=FollowTheWaypoints.State.Exit;
 				recipeitem="";
 				ScoreModifier();
 				score += (20*scoreModifier);
 				//Debug.Log(customerSpawnScript.GetFrontOfQueueOrder().timer);
-				customerSpawnScript.GetFrontOfQueueOrder().timer=60;
+				//customerSpawnScript.GetFrontOfQueueOrder().timer=60;
 				audio.PlayOneShot(tillsound);
 			}
 			currentState=PlayerState.Idle;
@@ -280,23 +266,21 @@ public class CharacterControllerScript : MonoBehaviour
 		yield return new WaitForSeconds(1.0f);
 		craftingScript.crafted=false;
 	}
-
 	public void ScoreModifier()
 	{
-	timer=customerSpawnScript.GetFrontOfQueueOrder().timer;
-	if (timer>49)
+	if(timer>44)
 	{
 		scoreModifier=3;
 	}
 	
-	if (timer <50 && timer>29)
+	if (timer <45 && timer>24)
 	{
 		scoreModifier=2;
 	}
-	if (timer <30 && timer>0)
+	if (timer <26 && timer>=0)
 	{
 		scoreModifier=1;
 	}
 	}
-	
+
 }

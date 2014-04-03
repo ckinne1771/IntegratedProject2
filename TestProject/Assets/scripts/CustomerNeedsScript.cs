@@ -8,6 +8,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public Animator anim;
 	public GUISkin MyGUISkin;
 	public CraftingScript theCraftingScript;
+	public CharacterControllerScript characterControllerScript;
 	public List<string> choice;
 	public int NeededItem;
 	public int randomNumber;
@@ -25,17 +26,21 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string first;
 	public string second;
 	public float timer=60;
+	public bool waiting;
 	
 	// Use this for initialization
 	void Start () 
 	{
 		//itemNeeded = true;
+		anim=gameObject.GetComponent<Animator>();
 		currentScene=Application.loadedLevelName;
 		Player = GameObject.FindGameObjectWithTag("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
+		characterControllerScript=Player.GetComponent<CharacterControllerScript>();
 		followTheWaypoints=GetComponent<FollowTheWaypoints>();
 		AddingToList();
 		InvokeRepeating("Countdown",1f,1f);
+		//InvokeRepeating("ScoreModifier",1f,1f);
 	}
 	
 	// Update is called once per frame
@@ -43,6 +48,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 	{
 		target= this.gameObject.transform;
 		customerPos = Camera.main.WorldToScreenPoint(target.position);
+		ScoreModifier();
 	}
 	
 	public void AddingToList(){
@@ -62,6 +68,25 @@ public class CustomerNeedsScript : MonoBehaviour {
 	{
 		timer--;
 		//Debug.Log (timer);
+	}
+	public void ScoreModifier()
+	{
+		if(timer<=59)
+		{
+			characterControllerScript.scoreModifier=3;
+			anim.SetTrigger("inQueue");
+		}
+		
+		if (timer <40 && timer>29)
+		{
+			characterControllerScript.scoreModifier=2;
+			anim.SetTrigger("wait1");
+		}
+		if (timer <30 && timer>0)
+		{
+			characterControllerScript.scoreModifier=1;
+			anim.SetTrigger("wait2");
+		}
 	}
 	
 	void OnGUI()
