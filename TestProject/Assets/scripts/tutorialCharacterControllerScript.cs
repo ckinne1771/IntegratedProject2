@@ -271,7 +271,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			}
 			if (inventoryScript.playerInventory.ContainsKey("orangeball"))
 			{
-				slot2Image = ComponentSprites[5];
+				slot1Image = ComponentSprites[6];
 			}
 			
 			currentState = PlayerState.Idle;
