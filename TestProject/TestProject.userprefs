@@ -1,19 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CustomerSpawnScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GlowAnimator.cs">
     <Files>
-      <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="98" Column="56" />
-      <File FileName="Assets\scripts\CraftingScript.cs" Line="62" Column="62" />
-      <File FileName="Assets\scripts\CustomerNeedsScript.cs" Line="53" Column="1" />
-      <File FileName="Assets\scripts\CustomerSpawnScript.cs" Line="128" Column="1" />
-      <File FileName="Assets\scripts\CharacterControllerScript.cs" Line="234" Column="110" />
-      <File FileName="Assets\scripts\TheInventoryScript.cs" Line="63" Column="1" />
+      <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\tutorialCharacterControllerScript.cs" Line="63" Column="7" />
+      <File FileName="Assets\scripts\GlowAnimator.cs" Line="20" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\Emma\Documents\GitHub\IntegratedProject2\TestProject\Assets\scripts\CustomerSpawnScript.cs" line="128" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

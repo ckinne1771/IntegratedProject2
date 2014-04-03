@@ -24,9 +24,11 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	GameObject RecyclingBin;
 	GameObject ComponentsArea;
 	GameObject Till;
+	public GameObject frame;
 	public TheInventoryScript inventoryScript;
 	public CraftingScript craftingScript;
 	public CustomerSpawnScript customerSpawnScript;
+	public GlowAnimator glowanimatorScript;
 	public List<string> itemsTodelete;
 	public string item1;
 	public string item2;
@@ -57,6 +59,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	void Start () 
 	{
 		anim = GetComponent<Animator>();
+		glowanimatorScript=frame.gameObject.GetComponent<GlowAnimator>();
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
@@ -70,6 +73,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		slot2Image=ComponentSprites[0];
 		currentStage = stage[0];
 		InvokeRepeating ("Countdown", 1f, 1f);
+
 		
 	} 
 	
@@ -77,7 +81,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	//moves player
 	void Update()
 	{
-		
+		glowanimatorScript.anim=frame.GetComponent<Animator>();
 		if(Input.GetMouseButtonDown(0)&&playerHasControl)
 		{
 			Debug.Log ("raycast");
@@ -448,10 +452,13 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	
 		case("Crafting2"):
 			playerHasControl=true;
+			Debug.Log ("here");
+			frame.gameObject.GetComponent<GlowAnimator>().glow=true;
 			GUI.Box (new Rect(Screen.width/2,Screen.height/16,250,100),"Now, grab the\n items needed to\n make a bike\n and craft it.");
 			if(gotitem3&&gotitem4)
 			{
 				readytocraft=true;
+				frame.gameObject.GetComponent<GlowAnimator>().glow=false;
 			}
 			if(itemCrafted)
 			{
@@ -460,6 +467,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("serve2"):
 			readytocraft=false;
+			frame.gameObject.GetComponent<GlowAnimator>().glow=false;
 			GUI.Box(new Rect(Screen.width/2,Screen.height/16,200,70),"Ok! Now you need to take \n the item to the till");
 			break;
 		case("finallyDone!"):
