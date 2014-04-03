@@ -265,6 +265,14 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			item2 = "";
 			slot1Image=ComponentSprites[0];
 			slot2Image=ComponentSprites[0];
+			if (inventoryScript.playerInventory.ContainsKey("wheelmetal"))
+			{
+				slot1Image = ComponentSprites[5];
+			}
+			if (inventoryScript.playerInventory.ContainsKey("orangeball"))
+			{
+				slot2Image = ComponentSprites[5];
+			}
 			
 			currentState = PlayerState.Idle;
 			
@@ -314,6 +322,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		//serving
 		if(!customerSpawnScript.IsQueueEmpty() && currentState == PlayerState.Serving)
 		{
+			slot1Image=ComponentSprites[0];
+			slot2Image=ComponentSprites[0];
 			if(part==1)
 			{
 				Debug.Log ("Pass1");
@@ -352,6 +362,9 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					audio.PlayOneShot(tillsound);
 				}
 			}
+			craftingScript.inventoryScript.RemoveItem("orangeball");
+			craftingScript.inventoryScript.RemoveItem("wheelmetal");
+
 
 				currentState=PlayerState.Idle;
 			
