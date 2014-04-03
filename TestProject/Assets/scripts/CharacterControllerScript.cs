@@ -209,7 +209,14 @@ public class CharacterControllerScript : MonoBehaviour
 			slot1Image=ComponentSprites[0];
 			slot2Image=ComponentSprites[0];
 
-			currentState=PlayerState.Idle;
+			if (inventoryScript.playerInventory.ContainsKey("wheelmetal"))
+			{
+				slot1Image = ComponentSprites[5];
+			}
+			if (inventoryScript.playerInventory.ContainsKey("orangeball"))
+			{
+				slot1Image = ComponentSprites[6];
+			}
 			
 		}
 		
@@ -253,6 +260,11 @@ public class CharacterControllerScript : MonoBehaviour
 				//customerSpawnScript.GetFrontOfQueueOrder().timer=60;
 				audio.PlayOneShot(tillsound);
 			}
+			craftingScript.inventoryScript.RemoveItem("orangeball");
+			craftingScript.inventoryScript.RemoveItem("wheelmetal");
+			slot1Image=ComponentSprites[0];
+			slot2Image=ComponentSprites[0];
+
 			currentState=PlayerState.Idle;
 			
 		}
