@@ -32,8 +32,8 @@ public class CustomerSpawnScript : MonoBehaviour {
 		customers = new GameObject[MaxNoOfCustomersAtOnce];
 		AddCustomerToList();
 		AddCustomerToList();
-		AddCustomerToList();
-		AddCustomerToList();
+		//AddCustomerToList();
+		//AddCustomerToList();
 		GetFrontOfQueueOrder().itemNeeded = true;
 		}
 	}

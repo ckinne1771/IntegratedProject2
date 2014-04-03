@@ -58,6 +58,8 @@ public class CharacterControllerScript : MonoBehaviour
 		item1="";
 		item2="";
 		InvokeRepeating("ScoreModifier",1f,1f);
+		slot1Image=ComponentSprites[0];
+		slot2Image=ComponentSprites[0];
 		
 	}
 	
@@ -68,24 +70,6 @@ public class CharacterControllerScript : MonoBehaviour
 		timer=customerSpawnScript.GetFrontOfQueueOrder().timer;
 		//ScoreModifier();
 
-		if (inventoryScript.playerInventory.ContainsKey("orange"))
-		{
-			slot1Image = ComponentSprites[0];
-		}
-		
-		if (inventoryScript.playerInventory.ContainsKey("ball"))
-		{
-			slot2Image = ComponentSprites[1];
-		}
-		if (inventoryScript.playerInventory.ContainsKey("wheel"))
-		{
-			slot1Image=ComponentSprites[2];
-		}
-		
-		if (inventoryScript.playerInventory.ContainsKey("metal"))
-		{
-			slot2Image=ComponentSprites[3];
-		}
 		
 		if(Input.GetMouseButtonDown(0))
 		{
@@ -94,7 +78,7 @@ public class CharacterControllerScript : MonoBehaviour
 			if(hit.collider != null &&currentState==PlayerState.Idle)
 				
 			{
-				if(hit.transform.gameObject.tag=="Components" && item2=="")
+				if(hit.transform.gameObject.tag=="Components"&&item2==""&&!inventoryScript.playerInventory.ContainsKey(this.gameObject.name))
 				{
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
 
@@ -105,6 +89,52 @@ public class CharacterControllerScript : MonoBehaviour
 						collectItems(hit.transform.gameObject.name);
 						//InstantiateComponents(hit.transform.gameObject);
 						anim.SetBool("issideview",false);
+						if (inventoryScript.playerInventory.ContainsKey("orange"))
+						{
+							if(slot1Image==ComponentSprites[0])
+							{
+								slot1Image = ComponentSprites[1];
+							}
+							else
+							{
+								slot2Image = ComponentSprites[1];
+							}
+						}
+						
+						if (inventoryScript.playerInventory.ContainsKey("ball"))
+						{
+							if(slot1Image==ComponentSprites[0])
+							{
+								slot1Image = ComponentSprites[2];
+							}
+							else
+							{
+								slot2Image = ComponentSprites[2];
+							}
+						}
+						if (inventoryScript.playerInventory.ContainsKey("wheel"))
+						{
+							if(slot1Image==ComponentSprites[0])
+							{
+								slot1Image = ComponentSprites[3];
+							}
+							else
+							{
+								slot2Image = ComponentSprites[3];
+							}
+						}
+						
+						if (inventoryScript.playerInventory.ContainsKey("metal"))
+						{
+							if(slot1Image==ComponentSprites[0])
+							{
+								slot1Image = ComponentSprites[4];
+							}
+							else
+							{
+								slot2Image = ComponentSprites[4];
+							}
+						}
 					}
 				}
 
@@ -123,7 +153,7 @@ public class CharacterControllerScript : MonoBehaviour
 				}
 				else if(hit.transform.gameObject.tag=="recyclingbin")
 				{
-					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-1,0));
+					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(-1,-1,0));
 					currentState = PlayerState.Recycling;
 					anim.SetBool("issideview",false);
 				}
@@ -163,11 +193,7 @@ public class CharacterControllerScript : MonoBehaviour
 			{
 				inventoryScript.RemoveItem(item1);
 				inventoryScript.RemoveItem(item2);
-				slot1Image=null;
-				slot2Image=null;
-
 			}
-
 			if(components.Count > 0)
 			{
 				while(components.Count > 0)
@@ -177,18 +203,19 @@ public class CharacterControllerScript : MonoBehaviour
 					Destroy(delObj);
 				}
 			}
-
+			currentState = PlayerState.Idle;
 			item1 = "";
 			item2 = "";
+			slot1Image=ComponentSprites[0];
+			slot2Image=ComponentSprites[0];
 
-			currentState = PlayerState.Idle;
+			currentState=PlayerState.Idle;
 			
 		}
 		
 		//recycling
-		if(currentState == PlayerState.Recycling && inventoryScript.playerInventory.Count>0)
+		if(currentState == PlayerState.Recycling)
 		{
-
 			currentState=PlayerState.Idle;
 
 			inventoryScript.playerInventory.Clear();
@@ -206,8 +233,8 @@ public class CharacterControllerScript : MonoBehaviour
 			}
 			item1="";
 			item2="";
-			slot1Image=null;
-			slot2Image=null;
+			slot1Image=ComponentSprites[0];
+			slot2Image=ComponentSprites[0];
 		}
 		
 		//serving
@@ -268,16 +295,16 @@ public class CharacterControllerScript : MonoBehaviour
 	}
 	public void ScoreModifier()
 	{
-	if(timer>44)
+	if(timer>29)
 	{
 		scoreModifier=3;
 	}
 	
-	if (timer <45 && timer>24)
+	if (timer <31 && timer>9)
 	{
 		scoreModifier=2;
 	}
-	if (timer <26 && timer>=0)
+	if (timer <11 && timer>=0)
 	{
 		scoreModifier=1;
 	}

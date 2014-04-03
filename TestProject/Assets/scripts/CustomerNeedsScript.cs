@@ -73,18 +73,18 @@ public class CustomerNeedsScript : MonoBehaviour {
 	{
 		if(timer<=59)
 		{
-			characterControllerScript.scoreModifier=3;
+			//characterControllerScript.scoreModifier=3;
 			anim.SetTrigger("inQueue");
 		}
 		
 		if (timer <40 && timer>29)
 		{
-			characterControllerScript.scoreModifier=2;
+			//characterControllerScript.scoreModifier=2;
 			anim.SetTrigger("wait1");
 		}
 		if (timer <30 && timer>0)
 		{
-			characterControllerScript.scoreModifier=1;
+			//characterControllerScript.scoreModifier=1;
 			anim.SetTrigger("wait2");
 		}
 	}
@@ -108,7 +108,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 		    } 
 			else
 			{
-				GUI.Box (new Rect(customerPos.x+30,Screen.height-customerPos.y-90,110, 55),itemRequested);
+				GUI.Box (new Rect(customerPos.x+30,Screen.height-customerPos.y-90,120, 55),itemRequested);
 			}
 
 		}

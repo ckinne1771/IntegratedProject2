@@ -28,14 +28,11 @@ public class TheInventoryScript : MonoBehaviour
 
 	public bool AddItem (string item)
 	{
-		if(playerInventory.ContainsKey(item))
-		{
-			playerInventory[item] += 1;
-		}
-		else
+		if(!playerInventory.ContainsKey(item))
 		{
 			playerInventory.Add(item, 1);
 		}
+
 		//Debug.Log ("items added");
 		return true;
 	}

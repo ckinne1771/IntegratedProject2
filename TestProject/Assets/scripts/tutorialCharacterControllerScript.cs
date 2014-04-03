@@ -65,6 +65,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		inventoryScript = GetComponent<TheInventoryScript>();
 		item1="";
 		item2="";
+		slot1Image=ComponentSprites[0];
+		slot2Image=ComponentSprites[0];
 		currentStage = stage[0];
 		InvokeRepeating ("Countdown", 1f, 1f);
 		
@@ -74,29 +76,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	//moves player
 	void Update()
 	{
-
-		if (inventoryScript.playerInventory.ContainsKey("orange"))
-		    {
-				slot1Image = ComponentSprites[0];
-			}
-
-		if (inventoryScript.playerInventory.ContainsKey("ball"))
-		    {
-				slot2Image = ComponentSprites[1];
-			}
-		if (inventoryScript.playerInventory.ContainsKey("wheel"))
-		{
-			slot1Image=ComponentSprites[2];
-		}
-
-		if (inventoryScript.playerInventory.ContainsKey("metal"))
-		{
-			slot2Image=ComponentSprites[3];
-		}
-
-
-
-	
 		
 		if(Input.GetMouseButtonDown(0)&&playerHasControl)
 		{
@@ -107,7 +86,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				
 			{
 				Debug.Log ("idleraycast");
-				if(hit.transform.gameObject.tag=="Components" && item2=="")
+				if(hit.transform.gameObject.tag=="Components" && item2==""&&!inventoryScript.playerInventory.ContainsKey(this.gameObject.name))
 				{
 					audio.PlayOneShot(popsound);
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
@@ -143,6 +122,52 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						//InstantiateComponents (hit.transform.gameObject);
 						gotitem4=true;
 						anim.SetBool("issideview",false);
+					}
+					if (inventoryScript.playerInventory.ContainsKey("orange"))
+					{
+						if(slot1Image==ComponentSprites[0])
+						{
+							slot1Image = ComponentSprites[1];
+						}
+						else
+						{
+							slot2Image = ComponentSprites[1];
+						}
+					}
+					
+					if (inventoryScript.playerInventory.ContainsKey("ball"))
+					{
+						if(slot1Image==ComponentSprites[0])
+						{
+							slot1Image = ComponentSprites[2];
+						}
+						else
+						{
+							slot2Image = ComponentSprites[2];
+						}
+					}
+					if (inventoryScript.playerInventory.ContainsKey("wheel"))
+					{
+						if(slot1Image==ComponentSprites[0])
+						{
+							slot1Image = ComponentSprites[3];
+						}
+						else
+						{
+							slot2Image = ComponentSprites[3];
+						}
+					}
+					
+					if (inventoryScript.playerInventory.ContainsKey("metal"))
+					{
+						if(slot1Image==ComponentSprites[0])
+						{
+							slot1Image = ComponentSprites[4];
+						}
+						else
+						{
+							slot2Image = ComponentSprites[4];
+						}
 					}
 				}
 				
@@ -238,6 +263,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			
 			item1 = "";
 			item2 = "";
+			slot1Image=ComponentSprites[0];
+			slot2Image=ComponentSprites[0];
 			
 			currentState = PlayerState.Idle;
 			
@@ -266,8 +293,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			inventoryScript.playerInventory.Clear();
 			inventoryScript.RemoveItem(item1);
 			inventoryScript.RemoveItem(item2);
-			slot1Image=null;
-			slot2Image=null;
 			
 			if(components.Count > 0)
 			{
@@ -280,6 +305,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			}
 			item1="";
 			item2="";
+			slot1Image=ComponentSprites[0];
+			slot2Image=ComponentSprites[0];
 			}
 			currentState=PlayerState.Idle;
 		}
@@ -345,7 +372,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			}
 			break;
 		case("customerWant"):
-			GUI.Box(new Rect(Screen.width/2,Screen.height/16,250,100),"Looks like they want a basketball!\nThe customer will\n always say what \nitem they want");
+			GUI.Box(new Rect(Screen.width/2,Screen.height/16,270,100),"Looks like they want a basketball!\nThe customer will\n always say what \nitem they want");
 			//highlight customerwant
 			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,120,40),"Click here\n to continue"))
 			{

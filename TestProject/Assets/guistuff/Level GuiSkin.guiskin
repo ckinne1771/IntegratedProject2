@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 12001, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Level GuiSkin
   m_EditorClassIdentifier: 
-  m_Font: {fileID: 12800000, guid: b915b55442ba67f44a6613bcf837018a, type: 3}
+  m_Font: {fileID: 12800000, guid: e8d983870916f6945a144848b284b4f8, type: 3}
   m_box:
     m_Name: box
     m_Normal:
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_button:
     m_Name: button
     m_Normal:
-      m_Background: {fileID: 0}
+      m_Background: {fileID: 2800000, guid: c07b4e6d8aa68b543866c15c663b2241, type: 3}
       m_TextColor: {r: .860294104, g: .120188162, b: .120188162, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
