@@ -50,6 +50,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	Animator anim;
 	public Texture2D slot1Image;
 	public Texture2D slot2Image;
+	public bool heldItem = false;
 
 	public List<Texture2D> ComponentSprites;
 	// Use this for initialization
@@ -86,7 +87,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				
 			{
 				Debug.Log ("idleraycast");
-				if(hit.transform.gameObject.tag=="Components" && item2==""&&!inventoryScript.playerInventory.ContainsKey(this.gameObject.name))
+				if(hit.transform.gameObject.tag=="Components" && item2==""&&!inventoryScript.playerInventory.ContainsKey(this.gameObject.name)&&!heldItem)
 				{
 					audio.PlayOneShot(popsound);
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
@@ -123,7 +124,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						gotitem4=true;
 						anim.SetBool("issideview",false);
 					}
-					if (inventoryScript.playerInventory.ContainsKey("orange"))
+					if (hit.transform.gameObject.name=="orange")
 					{
 						if(slot1Image==ComponentSprites[0])
 						{
@@ -135,7 +136,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						}
 					}
 					
-					if (inventoryScript.playerInventory.ContainsKey("ball"))
+					if (hit.transform.gameObject.name=="ball")
 					{
 						if(slot1Image==ComponentSprites[0])
 						{
@@ -146,7 +147,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 							slot2Image = ComponentSprites[2];
 						}
 					}
-					if (inventoryScript.playerInventory.ContainsKey("wheel"))
+					if (hit.transform.gameObject.name=="wheel")
 					{
 						if(slot1Image==ComponentSprites[0])
 						{
@@ -158,7 +159,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 						}
 					}
 					
-					if (inventoryScript.playerInventory.ContainsKey("metal"))
+					if (hit.transform.gameObject.name=="metal")
 					{
 						if(slot1Image==ComponentSprites[0])
 						{
@@ -273,7 +274,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			{
 				slot1Image = ComponentSprites[6];
 			}
-			
+			heldItem=true;
 			currentState = PlayerState.Idle;
 			
 		}
@@ -315,6 +316,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			item2="";
 			slot1Image=ComponentSprites[0];
 			slot2Image=ComponentSprites[0];
+			inventoryScript.playerInventory.Clear();
+			heldItem=false;
 			}
 			currentState=PlayerState.Idle;
 		}
@@ -364,6 +367,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			}
 			craftingScript.inventoryScript.RemoveItem("orangeball");
 			craftingScript.inventoryScript.RemoveItem("wheelmetal");
+			heldItem=false;
 
 
 				currentState=PlayerState.Idle;

@@ -192,6 +192,7 @@ MonoBehaviour:
   itemCrafted: 0
   slot1Image: {fileID: 0}
   slot2Image: {fileID: 0}
+  heldItem: 0
   ComponentSprites: []
 --- !u!114 &11400006
 MonoBehaviour:
@@ -234,6 +235,9 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 5b42edc7739fb7f43a29c0821646b205, type: 3}
   - {fileID: 2800000, guid: fcf90196ccb9e914aad088c8dca8ca82, type: 3}
   - {fileID: 2800000, guid: 8f69bec40001b5341b154e1338e49eb2, type: 3}
+  - {fileID: 2800000, guid: 246fbb3f92056a04199c72ed38fde39c, type: 3}
+  - {fileID: 2800000, guid: e8d15d0540c6bc8499f84c12baeed7e4, type: 3}
+  HeldItem: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

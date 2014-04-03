@@ -18,7 +18,6 @@ public class CharacterControllerScript : MonoBehaviour
 	public AudioClip tillsound;
 	public AudioClip popsound;
 	public AudioClip hammer;
-	//player state comment
 	public PlayerState currentState;
 	GameObject CraftingTable;
 	GameObject RecyclingBin;
@@ -43,6 +42,7 @@ public class CharacterControllerScript : MonoBehaviour
 	public Texture2D slot1Image;
 	public Texture2D slot2Image;
 	public List<Texture2D> ComponentSprites;
+	public bool HeldItem;
 	// Use this for initialization
 	void Start () 
 	{
@@ -68,9 +68,7 @@ public class CharacterControllerScript : MonoBehaviour
 	void Update()
 	{
 		timer=customerSpawnScript.GetFrontOfQueueOrder().timer;
-		//ScoreModifier();
-
-		
+	
 		if(Input.GetMouseButtonDown(0))
 		{
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -78,7 +76,7 @@ public class CharacterControllerScript : MonoBehaviour
 			if(hit.collider != null &&currentState==PlayerState.Idle)
 				
 			{
-				if(hit.transform.gameObject.tag=="Components"&&item2==""&&!inventoryScript.playerInventory.ContainsKey(this.gameObject.name))
+				if(hit.transform.gameObject.tag=="Components"&&item2==""&&!inventoryScript.playerInventory.ContainsKey(this.gameObject.name)&&!HeldItem)
 				{
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
 
@@ -89,7 +87,7 @@ public class CharacterControllerScript : MonoBehaviour
 						collectItems(hit.transform.gameObject.name);
 						//InstantiateComponents(hit.transform.gameObject);
 						anim.SetBool("issideview",false);
-						if (inventoryScript.playerInventory.ContainsKey("orange"))
+						if (hit.transform.gameObject.name=="orange")
 						{
 							if(slot1Image==ComponentSprites[0])
 							{
@@ -101,7 +99,7 @@ public class CharacterControllerScript : MonoBehaviour
 							}
 						}
 						
-						if (inventoryScript.playerInventory.ContainsKey("ball"))
+						if (hit.transform.gameObject.name=="ball")
 						{
 							if(slot1Image==ComponentSprites[0])
 							{
@@ -112,7 +110,7 @@ public class CharacterControllerScript : MonoBehaviour
 								slot2Image = ComponentSprites[2];
 							}
 						}
-						if (inventoryScript.playerInventory.ContainsKey("wheel"))
+						if (hit.transform.gameObject.name=="wheel")
 						{
 							if(slot1Image==ComponentSprites[0])
 							{
@@ -124,7 +122,7 @@ public class CharacterControllerScript : MonoBehaviour
 							}
 						}
 						
-						if (inventoryScript.playerInventory.ContainsKey("metal"))
+						if (hit.transform.gameObject.name=="metal")
 						{
 							if(slot1Image==ComponentSprites[0])
 							{
@@ -163,14 +161,6 @@ public class CharacterControllerScript : MonoBehaviour
 
 	}
 
-	/*void Countdown()
-	{
-		timer--;
-		Debug.Log (timer);
-	}*/
-	
-	
-	
 	//handles player states
 	public void OnGUI()
 	{
@@ -212,9 +202,11 @@ public class CharacterControllerScript : MonoBehaviour
 			if (inventoryScript.playerInventory.ContainsKey("wheelmetal"))
 			{
 				slot1Image = ComponentSprites[5];
+				HeldItem=true;
 			}
 			if (inventoryScript.playerInventory.ContainsKey("orangeball"))
 			{
+				HeldItem=true;
 				slot1Image = ComponentSprites[6];
 			}
 			
@@ -226,8 +218,6 @@ public class CharacterControllerScript : MonoBehaviour
 			currentState=PlayerState.Idle;
 
 			inventoryScript.playerInventory.Clear();
-			inventoryScript.RemoveItem(item1);
-			inventoryScript.RemoveItem(item2);
 
 			if(components.Count > 0)
 			{
@@ -242,6 +232,7 @@ public class CharacterControllerScript : MonoBehaviour
 			item2="";
 			slot1Image=ComponentSprites[0];
 			slot2Image=ComponentSprites[0];
+			HeldItem=false;
 		}
 		
 		//serving
@@ -256,14 +247,12 @@ public class CharacterControllerScript : MonoBehaviour
 				recipeitem="";
 				ScoreModifier();
 				score += (20*scoreModifier);
-				//Debug.Log(customerSpawnScript.GetFrontOfQueueOrder().timer);
-				//customerSpawnScript.GetFrontOfQueueOrder().timer=60;
 				audio.PlayOneShot(tillsound);
 			}
-			craftingScript.inventoryScript.RemoveItem("orangeball");
-			craftingScript.inventoryScript.RemoveItem("wheelmetal");
+			inventoryScript.playerInventory.Clear();
 			slot1Image=ComponentSprites[0];
 			slot2Image=ComponentSprites[0];
+			HeldItem=false;
 
 			currentState=PlayerState.Idle;
 			
