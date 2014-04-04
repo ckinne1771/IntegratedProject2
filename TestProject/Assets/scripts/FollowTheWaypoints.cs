@@ -13,7 +13,6 @@ public class FollowTheWaypoints : MonoBehaviour
 	public enum State
 	{
 		Enter,
-		Serving,
 		Exit
 	};
 
@@ -41,18 +40,10 @@ public class FollowTheWaypoints : MonoBehaviour
 		switch(customerState) 
 		{
 		case State.Enter:
-			//Debug.Log (state);
 			enter();
-
 			break;
-				
-		case State.Serving:
-			WaitFirst();
-			//Debug.Log(customerState);
-			break;
-				
+	
 		case State.Exit:
-			//Debug.Log(customerState);
 			StartCoroutine(WaitSecond());
 			break;
 		}
@@ -64,34 +55,20 @@ public class FollowTheWaypoints : MonoBehaviour
 		{
 			moveToWaypoints();
 		} 
-		else 
-		{
-			customerState = State.Serving;
-		}
-	}
-
-	private void serving()
-	{
-		if (targetWaypoint == 1)
+		else if (targetWaypoint == 1)
 		{
 			moveToWaypoints();
 		}
-		else 
-		{
-			customerState = State.Exit;
-		}
 	}
 
-	public void exit()
+	private void exit()
 	{
-		if(targetWaypoint==1)
+		moveToWaypoints ();
+		if(targetWaypoint == 2)
 		{
-			moveToWaypoints();
 			moveToWaypoints();
 			Debug.Log ("move");
-
 		}
-	
 		else
 		{
 			moveToWaypoints();
@@ -129,12 +106,11 @@ public class FollowTheWaypoints : MonoBehaviour
 		}
 	}
 
-	void WaitFirst() 
+	private void WaitFirst() 
 	{
 		if(customerneedsscript.timer<21)
 		{
-		//yield return new WaitForSeconds(10);
-		exit();
+			exit();
 		}
 	}
 
@@ -144,3 +120,15 @@ public class FollowTheWaypoints : MonoBehaviour
 		exit();
 	}
 }
+
+//private void serving()
+//{
+//	if (targetWaypoint == 2)
+//	{
+//		moveToWaypoints();
+//	}
+//	else 
+//	{
+//		customerState = State.Exit;
+//	}
+//}

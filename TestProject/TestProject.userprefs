@@ -1,10 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GlowAnimator.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\FollowTheWaypoints.cs">
     <Files>
-      <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\tutorialCharacterControllerScript.cs" Line="63" Column="7" />
-      <File FileName="Assets\scripts\GlowAnimator.cs" Line="20" Column="2" />
+      <File FileName="Assets\scripts\CustomerSpawnScript.cs" Line="147" Column="36" />
+      <File FileName="Assets\scripts\FollowTheWaypoints.cs" Line="134" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

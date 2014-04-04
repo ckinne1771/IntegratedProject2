@@ -31,9 +31,6 @@ public class CustomerSpawnScript : MonoBehaviour {
 		targets = GameObject.Find("Targets").transform;
 		customers = new GameObject[MaxNoOfCustomersAtOnce];
 		AddCustomerToList();
-		AddCustomerToList();
-		//AddCustomerToList();
-		//AddCustomerToList();
 		GetFrontOfQueueOrder().itemNeeded = true;
 		}
 	}
@@ -147,7 +144,7 @@ public class CustomerSpawnScript : MonoBehaviour {
 	}
 	IEnumerator spawnCustomersRegularly()
 	{
-		yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(2.0f);
 		if(totalNoOfCustomers<=maxTotalNoOfCustomers&& limiter==0)
 		{
 			if(currentNoOfCustomers<MaxNoOfCustomersAtOnce)
