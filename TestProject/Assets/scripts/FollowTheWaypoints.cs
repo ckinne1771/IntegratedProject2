@@ -69,6 +69,10 @@ public class FollowTheWaypoints : MonoBehaviour
 			moveToWaypoints();
 			Debug.Log ("move");
 		}
+		else if(targetWaypoint ==3)
+		{
+			moveToWaypoints();
+		}
 		else
 		{
 			moveToWaypoints();
