@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.15030336, y: -3.93311143, z: -2}
-  m_LocalScale: {x: .269887924, y: .269887716, z: 1}
+  m_LocalPosition: {x: -3.16206455, y: -3.72783136, z: 0}
+  m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!61 &6100000
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 9500000}
-  glow: 1
+  glow: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

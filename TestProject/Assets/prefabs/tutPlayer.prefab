@@ -202,6 +202,7 @@ MonoBehaviour:
   hammer: {fileID: 8300000, guid: 809fb2b7cc0e11a47acc7cf8acc4a58c, type: 3}
   currentState: 0
   frame: {fileID: 0}
+  glowitems: {fileID: 0}
   inventoryScript: {fileID: 0}
   craftingScript: {fileID: 0}
   customerSpawnScript: {fileID: 0}
@@ -210,7 +211,7 @@ MonoBehaviour:
   item1: 
   item2: 
   recipeitem: 
-  customerTemplate: {fileID: 100002, guid: bfaba81c2c50eed40941c9e70a0714cc, type: 2}
+  customerTemplate: {fileID: 0}
   components: []
   component: {fileID: 0}
   playerHasControl: 0

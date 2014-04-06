@@ -1,0 +1,121 @@
+fileFormatVersion: 2
+guid: 1709330a53275eb47a0b084cc31a4255
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 30
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: ball glow spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 304
+        width: 95
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: ball glow spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 304
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: ball glow spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 307
+        width: 91
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: ball glow spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 313
+        width: 82
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: ball glow spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 326
+        width: 56
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: ball glow spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 313
+        width: 82
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: ball glow spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 307
+        width: 92
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: ball glow spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 306
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

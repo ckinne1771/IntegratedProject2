@@ -9,11 +9,11 @@ public class GlowAnimator : MonoBehaviour
 	void Start () 
 	{
 		anim=GetComponent<Animator>();
-		//anim.SetBool("glowing",false);
-		//glow=false;
 	}
 	void Update()
 	{
+		if(Application.loadedLevelName=="tutorialScene")
+		{
 		if(glow==true)
 		{
 			anim.SetBool("glowing",true);
@@ -21,6 +21,7 @@ public class GlowAnimator : MonoBehaviour
 		if(glow==false)
 		{
 			anim.SetBool("glowing",false);
+		}
 		}
 	}
 	

@@ -25,6 +25,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	GameObject ComponentsArea;
 	GameObject Till;
 	public GameObject frame;
+	public GameObject glowitems;
 	public TheInventoryScript inventoryScript;
 	public CraftingScript craftingScript;
 	public CustomerSpawnScript customerSpawnScript;
@@ -59,7 +60,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	void Start () 
 	{
 		anim = GetComponent<Animator>();
-		glowanimatorScript=frame.gameObject.GetComponent<GlowAnimator>();
+		//glowanimatorScript=frame.gameObject.GetComponent<GlowAnimator>();
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
@@ -385,7 +386,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			part=1;
 			GUI.Box(new Rect(Screen.width/2,Screen.height/12+30,160,50),"We have a new customer");
 			//highlight customer anim
-			//StartCoroutine("CustomerWant");
 			//unhighlight
 			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,120,40),"Click here\n to continue"))
 			{
@@ -403,16 +403,15 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("grabItems"):
 			GUI.Box(new Rect(Screen.width/2,Screen.height/16,200,100),"Go grab the items \n needed to make the basketball");
-			//highlight orange paint anim
-			//highlight ball anim
+			glowitems.gameObject.transform.FindChild("orange").gameObject.GetComponent<GlowAnimator>().glow=true;
+			glowitems.gameObject.transform.FindChild("ball").gameObject.GetComponent<GlowAnimator>().glow=true;
 			playerHasControl=true;
 			if(gotitem1&&gotitem2)
 			{
 				readytocraft=true;
-				Debug.Log ("bob");
+				glowitems.gameObject.transform.FindChild("orange").gameObject.GetComponent<GlowAnimator>().glow=false;
+				glowitems.gameObject.transform.FindChild("ball").gameObject.GetComponent<GlowAnimator>().glow=false;
 			}
-			//unhighlight
-			//unhighlight
 			break;
 		case("craftItems"):
 			playerHasControl = false;
@@ -452,13 +451,17 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	
 		case("Crafting2"):
 			playerHasControl=true;
-			Debug.Log ("here");
-			frame.gameObject.GetComponent<GlowAnimator>().glow=true;
+			//frame.gameObject.GetComponent<GlowAnimator>().glow=true;
+
 			GUI.Box (new Rect(Screen.width/2,Screen.height/16,250,100),"Now, grab the\n items needed to\n make a bike\n and craft it.");
+			glowitems.gameObject.transform.FindChild("metal").gameObject.GetComponent<GlowAnimator>().glow=true;
+			glowitems.gameObject.transform.FindChild("wheel").gameObject.GetComponent<GlowAnimator>().glow=true;
 			if(gotitem3&&gotitem4)
 			{
 				readytocraft=true;
-				frame.gameObject.GetComponent<GlowAnimator>().glow=false;
+				//frame.gameObject.GetComponent<GlowAnimator>().glow=false;
+				glowitems.gameObject.transform.FindChild("metal").gameObject.GetComponent<GlowAnimator>().glow=false;
+				glowitems.gameObject.transform.FindChild("wheel").gameObject.GetComponent<GlowAnimator>().glow=false;
 			}
 			if(itemCrafted)
 			{
