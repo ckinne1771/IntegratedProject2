@@ -24,18 +24,18 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings:
@@ -44,6 +44,60 @@ TextureImporter:
     textureFormat: -2
     compressionQuality: 50
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: side view spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 162
+        width: 77
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: side view spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 161
+        width: 65
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: side view spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 161
+        width: 48
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: side view spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 161
+        width: 65
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: side view spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 161
+        width: 73
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: side view spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 161
+        width: 62
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
   spritePackingTag: 
   userData: 

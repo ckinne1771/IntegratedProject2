@@ -89,18 +89,18 @@ public class CustomerNeedsScript : MonoBehaviour {
 	{
 		if(currentScene=="tutorialScene" || currentScene=="InventoryTest")
 		{
-		if(timer<=59)
+		if(timer<=59&&followTheWaypoints.wait==true)
 		{
 			//characterControllerScript.scoreModifier=3;
 			anim.SetTrigger("inQueue");
 		}
 		
-		if (timer <40 && timer>29)
+		if(timer <40 && timer>29&&followTheWaypoints.wait==true)
 		{
 			//characterControllerScript.scoreModifier=2;
 			anim.SetTrigger("wait1");
 		}
-		if (timer <30 && timer>0)
+		if(timer <30 && timer>0&&followTheWaypoints.wait==true)
 		{
 			//characterControllerScript.scoreModifier=1;
 			anim.SetTrigger("wait2");

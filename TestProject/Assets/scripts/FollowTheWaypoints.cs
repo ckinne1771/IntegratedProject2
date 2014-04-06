@@ -9,6 +9,7 @@ public class FollowTheWaypoints : MonoBehaviour
 	public CustomerSpawnScript customerSpawnScript;
 	public Animator anim;
 	public int pointInQueue=0;
+	public bool wait=false;
 
 	public enum State
 	{
@@ -22,7 +23,7 @@ public class FollowTheWaypoints : MonoBehaviour
 	// Use this for initialization
 	void Start() 
 	{
-		//anim=GetComponent<Animator>();
+		anim=GetComponent<Animator>();
 		customerState = State.Enter;
 		waypoints = GameObject.Find ("Waypoints").transform;
 		customerneedsscript = GetComponent<CustomerNeedsScript>();
@@ -33,6 +34,7 @@ public class FollowTheWaypoints : MonoBehaviour
 	void Update()
 	{
 		states();
+		WaitFirst();
 	}
 
 	private void states()
@@ -55,23 +57,27 @@ public class FollowTheWaypoints : MonoBehaviour
 		{
 			moveToWaypoints();
 		} 
-		else if (targetWaypoint == 1)
+		else if (targetWaypoint == 1&&wait==false)
 		{
 			moveToWaypoints();
+			anim.SetTrigger("sidewalk");
 		}
 	}
 
 	private void exit()
 	{
+		wait=false;
 		moveToWaypoints ();
 		if(targetWaypoint == 2)
 		{
 			moveToWaypoints();
 			Debug.Log ("move");
+			anim.SetTrigger("sidewalk");
 		}
 		else if(targetWaypoint ==3)
 		{
 			moveToWaypoints();
+			anim.SetTrigger("backwalk");
 		}
 		else
 		{
@@ -108,6 +114,11 @@ public class FollowTheWaypoints : MonoBehaviour
 			// Walk towards waypoint
 			rigidbody2D.AddForce(new Vector2(movementNormal.x, movementNormal.y) * (Time.deltaTime + 15));
 		}
+		if(targetWaypoint==2&&customerState==State.Enter)
+		{
+			wait=true;
+		}
+
 	}
 
 	private void WaitFirst() 
