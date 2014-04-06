@@ -36,11 +36,11 @@ public class LevelSelect : MonoBehaviour {
 		GUILayout.BeginHorizontal();
 		if(GUILayout.Button("3",GUILayout.Height(Screen.height/4)))
 		{
-			//Application.LoadLevel("3");
+			Application.LoadLevel("Level2");
 		}
 		if(GUILayout.Button("4",GUILayout.Height(Screen.height/4)))
 		{
-			//Application.LoadLevel("4");
+			Application.LoadLevel("Level3");
 		}
 		GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal();

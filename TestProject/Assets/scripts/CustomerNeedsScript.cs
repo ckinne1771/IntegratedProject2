@@ -27,6 +27,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 	public string second;
 	public float timer=60;
 	public bool waiting;
+
 	
 	// Use this for initialization
 	void Start () 
@@ -34,6 +35,21 @@ public class CustomerNeedsScript : MonoBehaviour {
 		//itemNeeded = true;
 		anim=gameObject.GetComponent<Animator>();
 		currentScene=Application.loadedLevelName;
+
+		if(currentScene=="tutorialScene" || currentScene=="InventoryTest")
+		{
+			timer=60;
+		}
+
+		if(currentScene=="Level2")
+		{
+			timer=40;
+		}
+		if(currentScene=="Level3")
+		{
+			timer=30;
+		}
+
 		Player = GameObject.FindGameObjectWithTag("Player");
 		theCraftingScript= Player.GetComponent<CraftingScript>();
 		characterControllerScript=Player.GetComponent<CharacterControllerScript>();
@@ -71,6 +87,8 @@ public class CustomerNeedsScript : MonoBehaviour {
 	}
 	public void ScoreModifier()
 	{
+		if(currentScene=="tutorialScene" || currentScene=="InventoryTest")
+		{
 		if(timer<=59)
 		{
 			//characterControllerScript.scoreModifier=3;
@@ -86,6 +104,53 @@ public class CustomerNeedsScript : MonoBehaviour {
 		{
 			//characterControllerScript.scoreModifier=1;
 			anim.SetTrigger("wait2");
+		}
+		}
+
+		if(currentScene=="Level2")
+		{
+
+				if(timer<=39)
+				{
+					//characterControllerScript.scoreModifier=3;
+					anim.SetTrigger("inQueue");
+				}
+				
+				if (timer <30 && timer>20)
+				{
+					//characterControllerScript.scoreModifier=2;
+					anim.SetTrigger("wait1");
+				}
+				if (timer <20 && timer>0)
+				{
+					//characterControllerScript.scoreModifier=1;
+					anim.SetTrigger("wait2");
+				}
+
+	
+		}
+
+		if(currentScene=="Level3")
+		{
+
+			if(timer<=29)
+			{
+				//characterControllerScript.scoreModifier=3;
+				anim.SetTrigger("inQueue");
+			}
+			
+			if (timer <25 && timer>15)
+			{
+				//characterControllerScript.scoreModifier=2;
+				anim.SetTrigger("wait1");
+			}
+			if (timer <15 && timer>0)
+			{
+				//characterControllerScript.scoreModifier=1;
+				anim.SetTrigger("wait2");
+			}
+			 
+			
 		}
 	}
 	
