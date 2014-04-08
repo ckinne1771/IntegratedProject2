@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: tillGlow
+  m_Name: tillIdle
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -18,26 +18,12 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
-    - time: .166666672
-      value: {fileID: 21300002, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
-    - time: .333333343
-      value: {fileID: 21300004, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
-    - time: .5
-      value: {fileID: 21300006, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
-    - time: .666666687
       value: {fileID: 21300008, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
-    - time: .833333313
-      value: {fileID: 21300010, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
-    - time: 1
-      value: {fileID: 21300012, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
-    - time: 1.16666663
-      value: {fileID: 21300014, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 6
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -45,7 +31,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 1.33333325
+    m_StopTime: .0166666675
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

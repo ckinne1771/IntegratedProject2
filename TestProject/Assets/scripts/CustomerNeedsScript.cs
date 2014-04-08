@@ -173,7 +173,7 @@ public class CustomerNeedsScript : MonoBehaviour {
 		    } 
 			else
 			{
-				GUI.Box (new Rect(customerPos.x+30,Screen.height-customerPos.y-90,120, 55),itemRequested);
+				GUI.Box (new Rect(customerPos.x+30,Screen.height-customerPos.y-90,120, 60),itemRequested);
 			}
 
 		}
