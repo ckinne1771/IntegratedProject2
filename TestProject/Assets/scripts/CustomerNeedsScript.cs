@@ -110,18 +110,18 @@ public class CustomerNeedsScript : MonoBehaviour {
 		if(currentScene=="Level2")
 		{
 
-				if(timer<=39)
+			if(timer<=39&&followTheWaypoints.wait==true)
 				{
 					//characterControllerScript.scoreModifier=3;
 					anim.SetTrigger("inQueue");
 				}
 				
-				if (timer <30 && timer>20)
+			if (timer <30 && timer>20&&followTheWaypoints.wait==true)
 				{
 					//characterControllerScript.scoreModifier=2;
 					anim.SetTrigger("wait1");
 				}
-				if (timer <20 && timer>0)
+			if (timer <20 && timer>0&&followTheWaypoints.wait==true)
 				{
 					//characterControllerScript.scoreModifier=1;
 					anim.SetTrigger("wait2");
@@ -133,18 +133,18 @@ public class CustomerNeedsScript : MonoBehaviour {
 		if(currentScene=="Level3")
 		{
 
-			if(timer<=29)
+			if(timer<=29&&followTheWaypoints.wait==true)
 			{
 				//characterControllerScript.scoreModifier=3;
 				anim.SetTrigger("inQueue");
 			}
 			
-			if (timer <25 && timer>15)
+			if (timer <25 && timer>15&&followTheWaypoints.wait==true)
 			{
 				//characterControllerScript.scoreModifier=2;
 				anim.SetTrigger("wait1");
 			}
-			if (timer <15 && timer>0)
+			if (timer <15 && timer>0&&followTheWaypoints.wait==true)
 			{
 				//characterControllerScript.scoreModifier=1;
 				anim.SetTrigger("wait2");

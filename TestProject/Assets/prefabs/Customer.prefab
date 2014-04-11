@@ -120,6 +120,7 @@ MonoBehaviour:
   customerSpawnScript: {fileID: 0}
   anim: {fileID: 0}
   pointInQueue: 0
+  wait: 0
   customerState: 0
 --- !u!212 &21200000
 SpriteRenderer:
@@ -142,7 +143,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4ac136cd9cfa6e84e88191689d6812e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

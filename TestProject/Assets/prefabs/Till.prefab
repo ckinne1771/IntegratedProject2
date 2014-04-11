@@ -8,13 +8,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 212: {fileID: 21200000}
   - 61: {fileID: 6100000}
   - 95: {fileID: 9500000}
+  - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: metal
-  m_TagString: Components
+  m_Name: Till
+  m_TagString: Till
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.63328123, y: -3.51999998, z: 0}
-  m_LocalScale: {x: .300000012, y: .300000012, z: 1}
+  m_LocalPosition: {x: -5.67729378, y: .811053634, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!61 &6100000
@@ -39,7 +39,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 6.5999999, y: 3}
+  m_Size: {x: 1, y: 1}
   m_Center: {x: 0, y: 0}
 --- !u!95 &9500000
 Animator:
@@ -50,10 +50,10 @@ Animator:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aff6750220ed9d346b9bcaf407468fef, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0292fb7765cb02342a69792137bf85ed, type: 2}
   m_CullingMode: 0
-  m_ApplyRootMotion: 0
-  m_AnimatePhysics: 1
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -86,10 +86,10 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
+  m_SortingLayer: -1
   m_SortingOrder: 0
-  m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300008, guid: b9464513189e6e24a855775aab17ba50, type: 3}
+  m_SortingLayerID: 1620886711
+  m_Sprite: {fileID: 21300008, guid: ca7fa3c6e622fac4f947680d25375088, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

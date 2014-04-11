@@ -47,6 +47,10 @@ TagManager:
     userID: 1
     uniqueID: 2773696945
     locked: 0
+  - name: tillglow
+    userID: 2
+    uniqueID: 1620886711
+    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0

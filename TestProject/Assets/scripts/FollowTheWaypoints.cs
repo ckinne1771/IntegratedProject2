@@ -123,7 +123,7 @@ public class FollowTheWaypoints : MonoBehaviour
 
 	private void WaitFirst() 
 	{
-		if(customerneedsscript.timer<21)
+		if(customerneedsscript.timer<1)
 		{
 			exit();
 		}

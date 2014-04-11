@@ -243,7 +243,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		GUI.skin= myGUISkin;
 		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
-			GUI.Box (new Rect(Screen.width/2,Screen.height/2,100,60),"Crafted!");
+			GUI.Box (new Rect(Screen.width/2,Screen.height/2,200,100),"Crafted!");
 			StartCoroutine("WaitTime");
 		}
 
@@ -387,14 +387,14 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		case("customerIntro"):
 			part=1;
 			GUI.Box(new Rect(Screen.width/2,Screen.height/12+30,160,50),"We have a new customer");
-			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,120,40),"Click here\n to continue"))
+			if(GUI.Button(new Rect(Screen.width/2,Screen.height/4,200,100),"Click here\n to continue"))
 			{
 				currentStage="customerWant";
 			}
 			break;
 		case("customerWant"):
-			GUI.Box(new Rect(Screen.width/2,Screen.height/16,270,100),"Looks like they want a basketball!\nThe customer will\n always say what \nitem they want");
-			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,120,40),"Click here\n to continue"))
+			GUI.Box(new Rect(Screen.width/2,Screen.height/8,270,100),"Looks like they want a basketball!\nThe customer will\n always say what \nitem they want");
+			if(GUI.Button(new Rect(Screen.width/2,Screen.height/3,200,100),"Click here\n to continue"))
 			{
 				currentStage="grabItems";
 			}
@@ -440,7 +440,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			part=2;
 			GUI.Box (new Rect(Screen.width/2,Screen.height/16,200,100),"We have another customer! \n This one wants a bike!");
 			customerSpawnScript.AddingTutorialCustomer ();
-			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,120,40),"Click here\n to continue"))
+			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,200,100),"Click here\n to continue"))
 			{
 				currentStage="Crafting2";
 			}
