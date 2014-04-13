@@ -159,22 +159,9 @@ public class CustomerNeedsScript : MonoBehaviour {
 		GUI.skin=MyGUISkin;
 		if(itemNeeded==true)
 		{
-			if(currentScene=="tutorialScene")
-			{
-				if(tutorialCharacterControllerScript.part==1)
-				{
-					GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),firstItem);
-				}
-				else if(tutorialCharacterControllerScript.part==2)
-				{
-					GUI.Box(new Rect(customerPos.x,Screen.height-customerPos.y-50,70,30),secondItem);
-				}
 
-		    } 
-			else
-			{
 				GUI.Box (new Rect(customerPos.x+30,Screen.height-customerPos.y-90,120, 60),itemRequested);
-			}
+			
 
 		}
 }

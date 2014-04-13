@@ -14,7 +14,9 @@ public class FollowTheWaypoints : MonoBehaviour
 	public enum State
 	{
 		Enter,
-		Exit
+		Exit,
+		Waiting,
+		Serving
 	};
 
 	public State customerState;
@@ -46,9 +48,53 @@ public class FollowTheWaypoints : MonoBehaviour
 			break;
 	
 		case State.Exit:
-			StartCoroutine(WaitSecond());
+			exit();
+			break;
+
+		case State.Waiting:
+			if(wait==true)
+			{
+				anim.SetTrigger("inQueue");
+			}
+			else
+			{
+				moveToWaypoints();
+				if(targetWaypoint==1)
+				{
+				anim.SetTrigger("sidewalk");
+				}
+			}
+			if(this.gameObject==customerSpawnScript.customers[0])
+			{
+				wait=false;
+				customerState=State.Serving;
+			}
+			break;
+
+		case State.Serving:
+			if(targetWaypoint==0)
+			{
+				moveToWaypoints();
+			}
+			if(targetWaypoint==1)
+			{
+				anim.SetTrigger("sidewalk");
+				moveToWaypoints();
+			}
+			else if(targetWaypoint==2)
+			{
+				moveToWaypoints();
+				anim.SetTrigger("sidewalk");
+			}
+			else if(targetWaypoint==3)
+			{
+				anim.SetTrigger("inQueue");
+				serving ();
+			}
+
 			break;
 		}
+
 	}
 
 	private void enter()
@@ -57,7 +103,7 @@ public class FollowTheWaypoints : MonoBehaviour
 		{
 			moveToWaypoints();
 		} 
-		else if (targetWaypoint == 1&&wait==false)
+		else if (targetWaypoint ==1)
 		{
 			moveToWaypoints();
 			anim.SetTrigger("sidewalk");
@@ -67,19 +113,26 @@ public class FollowTheWaypoints : MonoBehaviour
 	private void exit()
 	{
 		wait=false;
-		moveToWaypoints ();
-		if(targetWaypoint == 2)
+		if(targetWaypoint < 3)
 		{
+			anim.SetTrigger("sidewalk");
+			moveToWaypoints();
+			targetWaypoint=3;
+			Debug.Log ("move");
+		}
+		if(targetWaypoint == 3)
+		{
+			anim.SetTrigger("sidewalk");
 			moveToWaypoints();
 			Debug.Log ("move");
-			anim.SetTrigger("sidewalk");
 		}
-		else if(targetWaypoint ==3)
+		if(targetWaypoint ==4)
 		{
-			moveToWaypoints();
 			anim.SetTrigger("backwalk");
+			moveToWaypoints();
+			Debug.Log ("bob");
 		}
-		else
+		if(targetWaypoint ==5)
 		{
 			moveToWaypoints();
 			customerSpawnScript.RemoveCustomer(pointInQueue);
@@ -114,7 +167,23 @@ public class FollowTheWaypoints : MonoBehaviour
 			// Walk towards waypoint
 			rigidbody2D.AddForce(new Vector2(movementNormal.x, movementNormal.y) * (Time.deltaTime + 15));
 		}
-		if(targetWaypoint==2&&customerState==State.Enter)
+		if(targetWaypoint==1&&customerState==State.Enter)
+		{
+			customerState=State.Waiting;
+		}
+		if(customerState==State.Enter||customerState==State.Waiting)
+		{
+			if(this.gameObject==customerSpawnScript.customers[0])
+			{
+				customerState=State.Serving;
+			}
+		
+			else
+			{
+			customerState=State.Waiting;
+			}
+			}
+		if(targetWaypoint==2&&customerState==State.Waiting)
 		{
 			wait=true;
 		}
@@ -134,16 +203,15 @@ public class FollowTheWaypoints : MonoBehaviour
 		yield return new WaitForSeconds(0);
 		exit();
 	}
-}
 
-//private void serving()
-//{
-//	if (targetWaypoint == 2)
-//	{
-//		moveToWaypoints();
-//	}
-//	else 
-//	{
-//		customerState = State.Exit;
-//	}
-//}
+
+private void serving()
+{
+	
+	if(customerneedsscript.itemNeeded==false)
+		{
+		customerState = State.Exit;
+		}
+	
+}
+}
