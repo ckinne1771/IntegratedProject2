@@ -88,6 +88,7 @@ public class FollowTheWaypoints : MonoBehaviour
 			}
 			else if(targetWaypoint==3)
 			{
+				wait=true;
 				anim.SetTrigger("inQueue");
 				serving ();
 			}
@@ -187,6 +188,10 @@ public class FollowTheWaypoints : MonoBehaviour
 		{
 			wait=true;
 		}
+		if(targetWaypoint==3&&customerState==State.Waiting)
+		{
+			wait=false;
+		}
 
 	}
 
@@ -194,12 +199,13 @@ public class FollowTheWaypoints : MonoBehaviour
 	{
 		if(customerneedsscript.timer<1)
 		{
-			exit();
+			customerState=State.Exit;
 		}
 	}
 
 	IEnumerator WaitSecond() 
 	{
+		wait=false;
 		yield return new WaitForSeconds(0);
 		exit();
 	}
