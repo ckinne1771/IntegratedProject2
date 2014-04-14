@@ -3,6 +3,7 @@ using System.Collections;
 
 public class LevelSelect : MonoBehaviour {
 
+	//this script controls the level select scene
 	public GUISkin MyGUISkin;
 
 	// Use this for initialization
@@ -17,6 +18,7 @@ public class LevelSelect : MonoBehaviour {
 
 	void OnGUI () 
 	{
+		//gui used to display buttons that are used to choose the level
 		GUI.skin = MyGUISkin;
 		GUILayout.BeginArea(new Rect(Screen.width/2-(Screen.width/10),Screen.height/4-50,Screen.width/6,Screen.height));
 		GUILayout.BeginVertical();
@@ -42,7 +44,6 @@ public class LevelSelect : MonoBehaviour {
 			Application.LoadLevel("Project");
 		}
 		GUILayout.EndVertical();
-		//GUILayout.EndVertical();
 		GUILayout.EndArea();
 	}
 }

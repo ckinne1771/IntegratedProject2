@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class CharacterControllerScript : MonoBehaviour 
 {
+	//player states
 	public enum PlayerState 
 	{
 		Idle,
@@ -13,36 +14,43 @@ public class CharacterControllerScript : MonoBehaviour
 		Recycling
 	};
 
-	public GUISkin MyGUISkin;
-	public GUISkin guiskin2;
-	public AudioClip tillsound;
-	public AudioClip popsound;
-	public AudioClip hammer;
-	public PlayerState currentState;
+	//game objects used to get players move to point
 	GameObject CraftingTable;
 	GameObject RecyclingBin;
 	GameObject ComponentsArea;
 	GameObject Till;
+	//inventory images
+	Texture2D slot1Image;
+	Texture2D slot2Image;
+	//determines whether player can pick up components, if they dont have an item in inventory
+	bool HeldItem;
+	//player state
+	public PlayerState currentState;
+	//gui skins for the game
+	public GUISkin MyGUISkin;
+	public GUISkin guiskin2;
+	//sound effects
+	public AudioClip tillsound;
+	public AudioClip popsound;
+	public AudioClip hammer;
+	//scripts to reference
 	public TheInventoryScript inventoryScript;
 	public CraftingScript craftingScript;
 	public CustomerSpawnScript customerSpawnScript;
-	public List<string> itemsTodelete;
+	//items to craft
 	public string item1;
 	public string item2;
-	public string recipeitem;
-	public Texture2D images;
+	//public string recipeitem;
+	//customer prefab
 	public GameObject customerTemplate;
-	public List<GameObject> components;
-	public GameObject component;
 	public int score;
 	public int scoreModifier;
 	public float timer;
 	public bool Crafted;
 	public Animator anim;
-	public Texture2D slot1Image;
-	public Texture2D slot2Image;
 	public List<Texture2D> ComponentSprites;
-	public bool HeldItem;
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -54,7 +62,6 @@ public class CharacterControllerScript : MonoBehaviour
 		currentState=PlayerState.Idle;
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
-		//customerSpawnScript = GetComponent<CustomerSpawnScript>();
 		item1="";
 		item2="";
 		InvokeRepeating("ScoreModifier",1f,1f);
@@ -68,7 +75,7 @@ public class CharacterControllerScript : MonoBehaviour
 	void Update()
 	{
 		timer=customerSpawnScript.GetFrontOfQueueOrder().timer;
-	
+		//code for determinining where is clicked and where the player goes or an item is picked up accordingly
 		if(Input.GetMouseButtonDown(0))
 		{
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -165,17 +172,21 @@ public class CharacterControllerScript : MonoBehaviour
 	public void OnGUI()
 	{
 		GUI.skin = MyGUISkin;
+		//displays crafted! text after crafting an item for so many seconds
 		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
 			GUI.Box (new Rect(Screen.width/2,Screen.height/4,110,50),"Crafted!");
 			StartCoroutine("WaitTime");
 		}
 
+		//inventory box
 		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 110, 185,75),"Inventory");
 		GUI.skin=guiskin2;
 		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
 		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
 
+		//crafting state, checks to see if item is crafted, if so makes item
+		//empties inventory and adds an item if crafted
 		if(currentState == PlayerState.Crafting )
 		{
 			
@@ -184,15 +195,7 @@ public class CharacterControllerScript : MonoBehaviour
 				inventoryScript.RemoveItem(item1);
 				inventoryScript.RemoveItem(item2);
 			}
-			if(components.Count > 0)
-			{
-				while(components.Count > 0)
-				{
-					GameObject delObj = components[0];
-					components.RemoveAt(0);
-					Destroy(delObj);
-				}
-			}
+
 			currentState = PlayerState.Idle;
 			item1 = "";
 			item2 = "";
@@ -217,17 +220,9 @@ public class CharacterControllerScript : MonoBehaviour
 		{
 			currentState=PlayerState.Idle;
 
+			//clears inventory
 			inventoryScript.playerInventory.Clear();
 
-			if(components.Count > 0)
-			{
-				while(components.Count > 0)
-				{
-					GameObject delObj = components[0];
-					components.RemoveAt(0);
-					Destroy(delObj);
-				}
-			}
 			item1="";
 			item2="";
 			slot1Image=ComponentSprites[0];
@@ -236,6 +231,8 @@ public class CharacterControllerScript : MonoBehaviour
 		}
 		
 		//serving
+		//clears inventory
+		//customer is served if they have the right item
 		if(!customerSpawnScript.IsQueueEmpty() && currentState == PlayerState.Serving)
 		{
 			if(inventoryScript.playerInventory.ContainsKey(customerSpawnScript.GetFrontOfQueueOrder().item))
@@ -244,7 +241,7 @@ public class CharacterControllerScript : MonoBehaviour
 				customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 				customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.targetWaypoint=1;
 				customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.customerState=FollowTheWaypoints.State.Exit;
-				recipeitem="";
+				//recipeitem="";
 				ScoreModifier();
 				score += (20*scoreModifier);
 				audio.PlayOneShot(tillsound);
@@ -258,15 +255,17 @@ public class CharacterControllerScript : MonoBehaviour
 			
 		}
 		GUI.skin=MyGUISkin;
+		//displays score
 		GUI.TextField(new Rect(10,10,100,20),"Score; " +score); 
 
+		//if no customers, level is complete
 		if(customerSpawnScript.IsQueueEmpty()==true)
 		{
-			Debug.Log ("empty");
 			Application.LoadLevel("LevelSelect");
 		}
 	}
-	
+
+	//fills items to be crafted
 	void collectItems(string _item)
 	{
 		if(item1=="")
@@ -280,20 +279,13 @@ public class CharacterControllerScript : MonoBehaviour
 		
 	}
 
-	void InstantiateComponents(GameObject _component)
-	{
-		component = Instantiate(_component) as GameObject;
-		component.name = component.name.Substring(0, _component.name.Length);
-		component.transform.position=this.gameObject.transform.position + new Vector3(0,0 + 2 * components.Count,0);
-		component.transform.parent=this.gameObject.transform;
-		components.Add(component);
-	}
-
 	IEnumerator WaitTime()
 	{
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(3.0f);
 		craftingScript.crafted=false;
 	}
+
+	////adjusts score modifier
 	public void ScoreModifier()
 	{
 	if(timer>29)

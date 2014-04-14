@@ -5,15 +5,14 @@ using System.Linq;
 
 public class CraftingScript : MonoBehaviour 
 {
-	public TheInventoryScript inventoryScript;
+	//dictionary of items that can be crafted
 	public Dictionary<string, string> TherecipeList = new Dictionary<string,string >();
 	public List<string> recipeList;
-	public List<string> craftingItems;
-	public GameObject[] Customer;
-	public List<GameObject> recipeItems;
-	public GameObject customerTemplate;
+	//referenced scripts
+	public TheInventoryScript inventoryScript;
 	public tutorialCharacterControllerScript tutCharacterControllerScript;
 	public CharacterControllerScript characterControllerScript;
+	//current scene
 	string currentScene;
 	public bool itemCrafted;
 	public bool crafted=false;
@@ -43,12 +42,9 @@ public class CraftingScript : MonoBehaviour
 		TherecipeList.Add("bike","wheelmetal");
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
 
-	}
+	//checks to see if the items to be crafted make an item, and if so, crafts the item
+	//the inventory is then cleared
 	public bool Craft(string _item1, string _item2)
 	{
 		itemCrafted = false;
@@ -58,7 +54,6 @@ public class CraftingScript : MonoBehaviour
 			itemCrafted = true;
 			inventoryScript.AddItem(_item1+_item2);
 			tutCharacterControllerScript.itemCrafted=true;
-			//characterControllerScript.Crafted=true;
 			tutCharacterControllerScript.currentStage="serveCustomer";
 			crafted=true;
 			tutCharacterControllerScript.audio.Play();
@@ -69,7 +64,6 @@ public class CraftingScript : MonoBehaviour
 			itemCrafted = true;
 			inventoryScript.AddItem(_item2+_item1);
 			tutCharacterControllerScript.itemCrafted=true;
-			//characterControllerScript.Crafted=true;
 			tutCharacterControllerScript.currentStage="serveCustomer";
 			crafted= true;
 			tutCharacterControllerScript.audio.Play();

@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 404689816}
   m_GameObject: {fileID: 163008144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.60479021, y: 1.85200453, z: 0}
+  m_LocalPosition: {x: -3.84914875, y: 3.86123657, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 531646580}
@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 404689816}
   m_GameObject: {fileID: 182685251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.09547281, y: 1.92815685, z: 0}
+  m_LocalPosition: {x: .406588078, y: 1.92815685, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 531646580}
@@ -373,11 +373,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 163008145}
+  - {fileID: 1893357888}
   - {fileID: 182685252}
   - {fileID: 1647107065}
   - {fileID: 1404398231}
   - {fileID: 968509765}
+  - {fileID: 163008145}
   m_Father: {fileID: 0}
 --- !u!1 &556033957
 GameObject:
@@ -745,7 +746,7 @@ Transform:
   m_GameObject: {fileID: 691329702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.63328123, y: -3.51999998, z: 0}
-  m_LocalScale: {x: .300000012, y: .300000012, z: 1}
+  m_LocalScale: {x: .349999994, y: .349999994, z: 1}
   m_Children: []
   m_Father: {fileID: 1602538431}
 --- !u!61 &691329705
@@ -900,7 +901,7 @@ Transform:
   m_GameObject: {fileID: 742839352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.93276262, y: -2.61305046, z: 0}
-  m_LocalScale: {x: .400000006, y: .400000006, z: 0}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .90486753}
   m_Children: []
   m_Father: {fileID: 1602538431}
 --- !u!61 &742839355
@@ -1061,7 +1062,7 @@ Transform:
   m_PrefabInternal: {fileID: 404689816}
   m_GameObject: {fileID: 968509764}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9842968, y: 4.17696095, z: 0}
+  m_LocalPosition: {x: -3.9842968, y: 3.57040024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 531646580}
@@ -1142,7 +1143,7 @@ Transform:
   m_PrefabInternal: {fileID: 404689816}
   m_GameObject: {fileID: 1404398230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.06195402, y: 4.17696095, z: 0}
+  m_LocalPosition: {x: -3.87240386, y: 2.09190845, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 531646580}
@@ -1200,7 +1201,7 @@ Transform:
   m_PrefabInternal: {fileID: 404689816}
   m_GameObject: {fileID: 1647107064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.92543745, y: 1.91999996, z: 0}
+  m_LocalPosition: {x: -1.95411801, y: 1.91999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 531646580}
@@ -1238,12 +1239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a586eec2d7e0d944bb78d16fed8b4426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryScript: {fileID: 0}
   recipeList: []
-  craftingItems: []
-  Customer: []
-  recipeItems: []
-  customerTemplate: {fileID: 100002, guid: bfaba81c2c50eed40941c9e70a0714cc, type: 2}
+  inventoryScript: {fileID: 0}
   tutCharacterControllerScript: {fileID: 1722769173}
   characterControllerScript: {fileID: 0}
   itemCrafted: 0
@@ -1260,16 +1257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bf3487871d89c4c91decc73d02379e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allComponents:
-  - orange
-  - ball
-  - wheel
-  - metal
-  allComponentImages:
-  - {fileID: 2800000, guid: de15fe8afa909a846b97c1a5dc1b3b17, type: 3}
-  - {fileID: 2800000, guid: 5b42edc7739fb7f43a29c0821646b205, type: 3}
-  - {fileID: 2800000, guid: 558a2041378d1db48b93f6f3dbc39984, type: 3}
-  - {fileID: 2800000, guid: 625f5986c4bb0194d88209c58c8de6bd, type: 3}
 --- !u!114 &1722769171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,32 +1269,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aed5cf6691a1404a8f21cea89129ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   MyGUISkin: {fileID: 11400000, guid: 53753efe8b90f7844b82fd46515d5ca5, type: 2}
   guiskin2: {fileID: 0}
   tillsound: {fileID: 0}
   popsound: {fileID: 0}
   hammer: {fileID: 0}
-  currentState: 0
   inventoryScript: {fileID: 0}
   craftingScript: {fileID: 0}
   customerSpawnScript: {fileID: 1798096122}
-  itemsTodelete: []
   item1: 
   item2: 
-  recipeitem: 
-  images: {fileID: 0}
   customerTemplate: {fileID: 100002, guid: bfaba81c2c50eed40941c9e70a0714cc, type: 2}
-  components: []
-  component: {fileID: 0}
   score: 0
   scoreModifier: 0
   timer: 60
   Crafted: 0
   anim: {fileID: 0}
-  slot1Image: {fileID: 0}
-  slot2Image: {fileID: 0}
   ComponentSprites: []
-  HeldItem: 0
 --- !u!4 &1722769172
 Transform:
   m_ObjectHideFlags: 0
@@ -1337,20 +1316,16 @@ MonoBehaviour:
   popsound: {fileID: 8300000, guid: 56706f7609acfaa468967e1b2dd353b0, type: 3}
   hammer: {fileID: 8300000, guid: 809fb2b7cc0e11a47acc7cf8acc4a58c, type: 3}
   currentState: 0
-  frame: {fileID: 691329702}
   glowitems: {fileID: 1602538430}
+  component: {fileID: 0}
+  customerTemplate: {fileID: 0}
   inventoryScript: {fileID: 0}
   craftingScript: {fileID: 0}
   customerSpawnScript: {fileID: 1798096122}
-  glowanimatorScript: {fileID: 691329707}
-  itemsTodelete: []
   item1: 
   item2: 
   recipeitem: 
-  customerTemplate: {fileID: 0}
-  components: []
-  component: {fileID: 0}
-  playerHasControl: 0
+  currentStage: 
   stage:
   - customerIntro
   - customerWant
@@ -1358,17 +1333,12 @@ MonoBehaviour:
   - craftItems
   - serveCustomer
   - done!
-  currentStage: 
   gotitem1: 0
   gotitem2: 0
   gotitem3: 0
   gotitem4: 0
-  readytocraft: 0
-  timer: 60
   itemCrafted: 0
-  slot1Image: {fileID: 0}
-  slot2Image: {fileID: 0}
-  heldItem: 0
+  timer: 60
   ComponentSprites:
   - {fileID: 0}
   - {fileID: 2800000, guid: dc695fe35855afb408f34df160eece06, type: 3}
@@ -1633,6 +1603,32 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!1 &1893357887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100012, guid: 13371de153c7c9045af204cc527cd1eb, type: 2}
+  m_PrefabInternal: {fileID: 404689816}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1893357888}
+  m_Layer: 0
+  m_Name: Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1893357888
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400012, guid: 13371de153c7c9045af204cc527cd1eb, type: 2}
+  m_PrefabInternal: {fileID: 404689816}
+  m_GameObject: {fileID: 1893357887}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.60479021, y: 1.85200453, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 531646580}
 --- !u!1 &1897439468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,44 +1724,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1897439472}
   glow: 0
---- !u!1 &2003542152
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2003542154}
-  - 114: {fileID: 2003542153}
-  m_Layer: 0
-  m_Name: GameData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2003542153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2003542152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e7d5a3f46d9c24b870fa37810a1f42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2003542154
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2003542152}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.2432747, y: 5.60718822, z: -1.45970154}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
 --- !u!1 &2007934160
 GameObject:
   m_ObjectHideFlags: 0

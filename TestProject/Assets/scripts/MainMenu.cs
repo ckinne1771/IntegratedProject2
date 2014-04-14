@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//this script controls the menu scene
 public class MainMenu : MonoBehaviour {
 
 	public GUISkin MyGUISkin;
@@ -8,7 +9,7 @@ public class MainMenu : MonoBehaviour {
 
 	void OnGUI () {
  		
-	
+		//gui used to go to the level select scene or quit the game
 		GUI.skin = MyGUISkin;
 		GUILayout.BeginArea(new Rect((Screen.width/4-150),Screen.height/2-40,200,200));
 		GUILayout.BeginVertical();

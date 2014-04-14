@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GlowAnimator : MonoBehaviour 
 {
+	//this script is used to turn on and off the glow animation in the tutorial
+
 	public Animator anim;
 	public bool glow=false;
 	// Use this for initialization

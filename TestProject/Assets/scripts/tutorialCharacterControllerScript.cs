@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class tutorialCharacterControllerScript : MonoBehaviour 
 {
+	//controls the player's state so certain events can be managed
 	public enum PlayerState 
 	{
 		Idle,
@@ -13,52 +14,67 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		Recycling
 	};
 
-	public GUISkin myGUISkin;
-	public GUISkin guiskin2;
-	public AudioClip tillsound;
-	public AudioClip popsound;
-	public AudioClip hammer;
-	//player state comment
-	public PlayerState currentState;
+	Animator anim;
+	//textures for inventory
+	Texture2D slot1Image;
+	Texture2D slot2Image;
+	//bool used to decide whether the player can pick up more components
+	bool heldItem = false;
+	//places that the player will move to when they click on the right area
 	GameObject CraftingTable;
 	GameObject RecyclingBin;
 	GameObject ComponentsArea;
 	GameObject Till;
-	public GameObject frame;
+	//score modifier
+	int scoreModifier;
+	//whether the player can click stuff or not
+	bool playerHasControl = false; 
+	//whether the player has the correct items in the inventory and can craft
+	bool readytocraft=false;
+	//guiskins for the game
+	public GUISkin myGUISkin;
+	public GUISkin guiskin2;
+	//sound effects
+	public AudioClip tillsound;
+	public AudioClip popsound;
+	public AudioClip hammer;
+	//players state
+	public PlayerState currentState;
+	//items for the tutorial that glow at certain points
 	public GameObject glowitems;
+	public GameObject component;
+	//customer prefab
+	public GameObject customerTemplate;
+	//scripts that are referenced to
 	public TheInventoryScript inventoryScript;
 	public CraftingScript craftingScript;
 	public CustomerSpawnScript customerSpawnScript;
-	public GlowAnimator glowanimatorScript;
-	public List<string> itemsTodelete;
+	//items to be crafted
 	public string item1;
 	public string item2;
+	//item customer wants
 	public string recipeitem;
-	public GameObject customerTemplate;
-	public List<GameObject> components;
-	public GameObject component;
-	public static int score;
-	public bool playerHasControl = false; 
-	public List<string> stage;
+	//the part of the tutorial the player is on
 	public string currentStage;
+	public List<string> stage;
+	public static int part;
+	//the players score
+	public static int score;
+	//keeps track if the player has the correct tutorial items
 	public bool gotitem1=false;
 	public bool gotitem2=false;
 	public bool gotitem3=false; 
 	public bool gotitem4=false;
-	public bool readytocraft=false;
-	int scoreModifier;
-	public float timer = 60;
+	//if true, can serve second customer
 	public bool itemCrafted = false;
-	public static int part;
-	Animator anim;
-	public Texture2D slot1Image;
-	public Texture2D slot2Image;
-	public bool heldItem = false;
+	//timer
+	public float timer = 60;
 
 	public List<Texture2D> ComponentSprites;
 	// Use this for initialization
 	void Start () 
 	{
+		//animator for player
 		anim = GetComponent<Animator>();
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
@@ -67,11 +83,13 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		currentState=PlayerState.Idle;
 		craftingScript = GetComponent<CraftingScript>();
 		inventoryScript = GetComponent<TheInventoryScript>();
+		//initialising components
 		item1="";
 		item2="";
 		slot1Image=ComponentSprites[0];
 		slot2Image=ComponentSprites[0];
 		currentStage = stage[0];
+		//starts timer
 		InvokeRepeating ("Countdown", 1f, 1f);
 
 		
@@ -81,18 +99,17 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	//moves player
 	void Update()
 	{
-		glowanimatorScript.anim=frame.GetComponent<Animator>();
+		//code for determinining where is clicked and where the player goes or an item is picked up accordingly
 		if(Input.GetMouseButtonDown(0)&&playerHasControl)
 		{
-			Debug.Log ("raycast");
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 			
 			if(hit.collider != null &&currentState==PlayerState.Idle)
 				
 			{
-				Debug.Log ("idleraycast");
 				if(hit.transform.gameObject.tag=="Components" && item2==""&&!inventoryScript.playerInventory.ContainsKey(this.gameObject.name)&&!heldItem)
 				{
+					//play sound effect
 					audio.PlayOneShot(popsound);
 					this.gameObject.transform.position = (ComponentsArea.transform.position + new Vector3(0,2,0));
 					
@@ -174,11 +191,11 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				
 				else if(hit.transform.gameObject.tag=="craftingtable"&&readytocraft)
 				{
-					Debug.Log ("crafting");
+					//positions the player to face crafting table
+					//resets inventory
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
 					anim.SetBool("issideview",true);
 					currentState = PlayerState.Crafting;
-					Debug.Log ("serving");
 					currentStage="serveCustomer";
 					slot1Image=ComponentSprites[0];
 					slot2Image=ComponentSprites[0];
@@ -186,19 +203,20 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				}
 				else if(hit.transform.gameObject.tag=="Till")
 				{
-					Debug.Log ("till");
+					//positions the player to face till
 					this.gameObject.transform.position = (Till.transform.position + new Vector3(0,-1,0));
 					currentState = PlayerState.Serving;
 					anim.SetBool("issideview",false);
 				}
 				else if(hit.transform.gameObject.tag=="recyclingbin")
 				{
-					Debug.Log ("bin");
+					//positions the player to face recycling bin
 					this.gameObject.transform.position = (RecyclingBin.transform.position + new Vector3(0,-1,0));
 					currentState = PlayerState.Recycling;
 				}
 			}
 		}
+		//adjusts score modifier
 		if (timer >40)
 		{
 			scoreModifier=3;
@@ -214,12 +232,10 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		}
 }
 
+	//starts timer for score modifiers
 	void Countdown()
 	{
 		timer--;
-		Debug.Log(timer);
-		Debug.Log (itemCrafted);
-		Debug.Log (currentState);
 	}
 	
 	
@@ -228,17 +244,22 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	public void OnGUI()
 	{
 		GUI.skin=myGUISkin;
+		//inventory box
 		GUI.Box (new Rect ((Screen.width/2) -47, Screen.height - 110, 185,75),"Inventory");
 		GUI.skin=guiskin2;
 		GUI.Box (new Rect((Screen.width/2) - 40, Screen.height - 60, 80,50),slot1Image);
 		GUI.Box (new Rect((Screen.width/2) + 50, Screen.height - 60, 80,50),slot2Image);
 		GUI.skin= myGUISkin;
+
+		//displays crafted! text after crafting an item for so many seconds
 		if(craftingScript.itemCrafted&&craftingScript.crafted)
 		{
 			GUI.Box (new Rect(Screen.width/2,Screen.height/2,200,100),"Crafted!");
 			StartCoroutine("WaitTime");
 		}
 
+		//crafting state, checks to see if item is crafted, if so makes item
+		//empties inventory and adds an item if crafted
 		if(currentState == PlayerState.Crafting )
 		{
 			
@@ -247,16 +268,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				inventoryScript.RemoveItem(item1);
 				inventoryScript.RemoveItem(item2);
 				
-			}
-			
-			if(components.Count > 0)
-			{
-				while(components.Count > 0)
-				{
-					GameObject delObj = components[0];
-					components.RemoveAt(0);
-					Destroy(delObj);
-				}
 			}
 			
 			item1 = "";
@@ -278,6 +289,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		//recycling
 		if(currentState == PlayerState.Recycling)
 		{
+			//resets part in tutorial to before picking up components
 			if(part==1)
 			{
 				currentStage="grabItems";
@@ -286,12 +298,14 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			{
 				currentStage="Crafting2";
 			}
+			//sets any item bools to false again
 			gotitem1=false;
 			gotitem2=false;
 			gotitem3=false;
 			gotitem4=false;
 			readytocraft=false;
 			itemCrafted=false;
+			//clears inventory
 			if(inventoryScript.playerInventory.Count>0)
 			{
 			
@@ -300,15 +314,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			inventoryScript.RemoveItem(item1);
 			inventoryScript.RemoveItem(item2);
 			
-			if(components.Count > 0)
-			{
-				while(components.Count > 0)
-				{
-					GameObject delObj = components[0];
-					components.RemoveAt(0);
-					Destroy(delObj);
-				} 
-			}
 			item1="";
 			item2="";
 			slot1Image=ComponentSprites[0];
@@ -320,16 +325,17 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		}
 		
 		//serving
+		//clears inventory
+		//customer is served if they have the right item
+		//moves on tutorial
 		if(!customerSpawnScript.IsQueueEmpty() && currentState == PlayerState.Serving)
 		{
 			slot1Image=ComponentSprites[0];
 			slot2Image=ComponentSprites[0];
 			if(part==1)
 			{
-				Debug.Log ("Pass1");
 				if(inventoryScript.playerInventory.ContainsKey(customerSpawnScript.GetFrontOfQueueOrder().first))
-				{
-					Debug.Log ("served"); 
+				{ 
 					inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
 					customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 					customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.targetWaypoint=1;
@@ -347,7 +353,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			{
 				if(inventoryScript.playerInventory.ContainsKey(customerSpawnScript.GetFrontOfQueueOrder().second))
 				{
-					Debug.Log ("served"); 
 					inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
 					customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
 					customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.targetWaypoint=1;
@@ -368,8 +373,11 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				currentState=PlayerState.Idle;
 			
 		}
-		
+
+		//this displays the players score
 		GUI.TextField(new Rect(10,10,100,20),"Score; " +score);
+
+		//this controls the events of the tutorial.
 		switch(currentStage)
 		{
 		case("customerIntro"):
@@ -426,8 +434,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		case("secondCustomer"):
 			itemCrafted=false;
 			part=2;
+			customerSpawnScript.AddingTutorialCustomer();
 			GUI.Box (new Rect(Screen.width/2,Screen.height/4,200,100),"We have another customer! \n This one wants a bike!");
-			customerSpawnScript.AddingTutorialCustomer ();
 			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,200,100),"Click here\n to continue"))
 			{
 				currentStage="Crafting2";
@@ -468,6 +476,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		}
 	}
 	 
+	//this method is used to add items to be crafted
 	void collectItems(string _item)
 	{
 		if(item1=="")
@@ -480,17 +489,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		}
 		
 	}
-
-	public IEnumerator CustomerWant()
-	{
-		yield return new WaitForSeconds(2.0f);
-		currentStage="customerWant";
-	}
-	public IEnumerator grabItems()
-	{
-		yield return new WaitForSeconds(2.0f);
-		currentStage="grabItems";
-	}
+	//these give delays at parts of the tutorial
 	public IEnumerator levelWait()
 	{
 		yield return new WaitForSeconds(2.0f);
@@ -499,13 +498,8 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	}
 	public IEnumerator secondCustomerWait()
 	{
-		yield return new WaitForSeconds(3.0f);
+		yield return new WaitForSeconds(2.0f);
 		currentStage="secondCustomer";
-	}
-	public IEnumerator secondCustomerTransition()
-	{
-		yield return new WaitForSeconds(3.0f);
-		currentStage="Crafting2";
 	}
 	public IEnumerator levelWait2()
 	{

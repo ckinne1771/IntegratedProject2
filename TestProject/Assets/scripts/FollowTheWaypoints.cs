@@ -3,14 +3,23 @@ using System.Collections;
 
 public class FollowTheWaypoints : MonoBehaviour 
 {
+	//this script is used to move the customers in the shop
+
+	//waypoint customer is travelling to
 	public int targetWaypoint = 0;
 	private Transform waypoints;
+	//scripts referenced
 	public CustomerNeedsScript customerneedsscript;
 	public CustomerSpawnScript customerSpawnScript;
+	//animator for customers
 	public Animator anim;
+	//where the customer is in queue
 	public int pointInQueue=0;
+	//if they are in motion or not
 	public bool wait=false;
 
+
+	//states used to find what the customer is doing for animation
 	public enum State
 	{
 		Enter,
@@ -30,15 +39,19 @@ public class FollowTheWaypoints : MonoBehaviour
 		waypoints = GameObject.Find ("Waypoints").transform;
 		customerneedsscript = GetComponent<CustomerNeedsScript>();
 		customerSpawnScript = Camera.main.gameObject.GetComponent<CustomerSpawnScript>();
-		//customerSpawnScript = GetComponent<CustomerSpawnScript>();
 	}
 
 	void Update()
 	{
 		states();
+		if(Application.loadedLevelName!="tutorialScene")
+		{
 		WaitFirst();
+		}
 	}
 
+	//used to switch between states and control when the customer moves, where to and when they change states
+	//also sets movement animations
 	private void states()
 	{
 		switch(customerState) 
@@ -98,6 +111,7 @@ public class FollowTheWaypoints : MonoBehaviour
 
 	}
 
+	//method called when customer is in enter state
 	private void enter()
 	{
 		if (targetWaypoint == 0) 
@@ -110,7 +124,18 @@ public class FollowTheWaypoints : MonoBehaviour
 			anim.SetTrigger("sidewalk");
 		}
 	}
+	//method called when customer is in serving state
+	private void serving()
+	{
+		
+		if(customerneedsscript.itemNeeded==false)
+		{
+			customerState = State.Exit;
+		}
+		
+	}
 
+	//method called when customer is in exit state
 	private void exit()
 	{
 		wait=false;
@@ -119,26 +144,22 @@ public class FollowTheWaypoints : MonoBehaviour
 			anim.SetTrigger("sidewalk");
 			moveToWaypoints();
 			targetWaypoint=3;
-			Debug.Log ("move");
 		}
 		if(targetWaypoint == 3)
 		{
 			anim.SetTrigger("sidewalk");
 			moveToWaypoints();
-			Debug.Log ("move");
 		}
 		if(targetWaypoint ==4)
 		{
 			anim.SetTrigger("backwalk");
 			moveToWaypoints();
-			Debug.Log ("bob");
 		}
 		if(targetWaypoint ==5)
 		{
 			moveToWaypoints();
 			customerSpawnScript.RemoveCustomer(pointInQueue);
 			customerSpawnScript.queuePointToDelete=pointInQueue;
-			Debug.Log ("kill");
 		}
 	}
 
@@ -168,6 +189,7 @@ public class FollowTheWaypoints : MonoBehaviour
 			// Walk towards waypoint
 			rigidbody2D.AddForce(new Vector2(movementNormal.x, movementNormal.y) * (Time.deltaTime + 15));
 		}
+		//handles some movement between states
 		if(targetWaypoint==1&&customerState==State.Enter)
 		{
 			customerState=State.Waiting;
@@ -184,6 +206,7 @@ public class FollowTheWaypoints : MonoBehaviour
 			customerState=State.Waiting;
 			}
 			}
+		//sets whether the customer is using a moving animation or an emotion one
 		if(targetWaypoint==2&&customerState==State.Waiting)
 		{
 			wait=true;
@@ -195,6 +218,7 @@ public class FollowTheWaypoints : MonoBehaviour
 
 	}
 
+	//sets customer to leave if times out
 	private void WaitFirst() 
 	{
 		if(customerneedsscript.timer<1)
@@ -209,15 +233,5 @@ public class FollowTheWaypoints : MonoBehaviour
 		yield return new WaitForSeconds(0);
 		exit();
 	}
-
-
-private void serving()
-{
 	
-	if(customerneedsscript.itemNeeded==false)
-		{
-		customerState = State.Exit;
-		}
-	
-}
 }

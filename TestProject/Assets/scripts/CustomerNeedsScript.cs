@@ -32,10 +32,10 @@ public class CustomerNeedsScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		//itemNeeded = true;
 		anim=gameObject.GetComponent<Animator>();
 		currentScene=Application.loadedLevelName;
 
+		//sets timer for customer to get impatient and leave
 		if(currentScene=="tutorialScene" || currentScene=="InventoryTest")
 		{
 			timer=60;
@@ -56,7 +56,6 @@ public class CustomerNeedsScript : MonoBehaviour {
 		followTheWaypoints=GetComponent<FollowTheWaypoints>();
 		AddingToList();
 		InvokeRepeating("Countdown",1f,1f);
-		//InvokeRepeating("ScoreModifier",1f,1f);
 	}
 	
 	// Update is called once per frame
@@ -64,9 +63,10 @@ public class CustomerNeedsScript : MonoBehaviour {
 	{
 		target= this.gameObject.transform;
 		customerPos = Camera.main.WorldToScreenPoint(target.position);
-		ScoreModifier();
+		EmotionControl();
 	}
-	
+
+	//sets the customers' wanted item
 	public void AddingToList(){
 		
 		choice = new List<string>(theCraftingScript.TherecipeList.Keys);
@@ -80,29 +80,29 @@ public class CustomerNeedsScript : MonoBehaviour {
 		second = theCraftingScript.TherecipeList[secondItem];
 		
 	}
+	//acts as a timer
 	void Countdown()
 	{
 		timer--;
-		//Debug.Log (timer);
 	}
-	public void ScoreModifier()
+	/*
+	 * This code sets the customers emotion animation
+	 */ 
+	public void EmotionControl()
 	{
 		if(currentScene=="tutorialScene" || currentScene=="InventoryTest")
 		{
 		if(timer<=59&&followTheWaypoints.wait==true)
 		{
-			//characterControllerScript.scoreModifier=3;
 			anim.SetTrigger("inQueue");
 		}
 		
 		if(timer <40 && timer>29&&followTheWaypoints.wait==true)
 		{
-			//characterControllerScript.scoreModifier=2;
 			anim.SetTrigger("wait1");
 		}
 		if(timer <30 && timer>0&&followTheWaypoints.wait==true)
 		{
-			//characterControllerScript.scoreModifier=1;
 			anim.SetTrigger("wait2");
 		}
 		}
@@ -112,21 +112,17 @@ public class CustomerNeedsScript : MonoBehaviour {
 
 			if(timer<=39&&followTheWaypoints.wait==true)
 				{
-					//characterControllerScript.scoreModifier=3;
 					anim.SetTrigger("inQueue");
 				}
 				
 			if (timer <30 && timer>20&&followTheWaypoints.wait==true)
 				{
-					//characterControllerScript.scoreModifier=2;
 					anim.SetTrigger("wait1");
 				}
 			if (timer <20 && timer>0&&followTheWaypoints.wait==true)
 				{
-					//characterControllerScript.scoreModifier=1;
 					anim.SetTrigger("wait2");
 				}
-
 	
 		}
 
@@ -135,25 +131,24 @@ public class CustomerNeedsScript : MonoBehaviour {
 
 			if(timer<=29&&followTheWaypoints.wait==true)
 			{
-				//characterControllerScript.scoreModifier=3;
 				anim.SetTrigger("inQueue");
 			}
 			
 			if (timer <25 && timer>15&&followTheWaypoints.wait==true)
 			{
-				//characterControllerScript.scoreModifier=2;
 				anim.SetTrigger("wait1");
 			}
 			if (timer <15 && timer>0&&followTheWaypoints.wait==true)
 			{
-				//characterControllerScript.scoreModifier=1;
 				anim.SetTrigger("wait2");
 			}
 			 
 			
 		}
 	}
-	
+	/*
+	 * This code displays the customer's wanted item
+	 */
 	void OnGUI()
 	{
 		GUI.skin=MyGUISkin;

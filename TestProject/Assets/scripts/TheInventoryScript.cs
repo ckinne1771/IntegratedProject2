@@ -4,39 +4,21 @@ using System.Collections.Generic;
 
 public class TheInventoryScript : MonoBehaviour 
 {
-	public List<string> allComponents;
-	public List<Texture2D> allComponentImages;
-	public Dictionary<string, Texture2D> componentInventory = new Dictionary<string,Texture2D>();
+	//this class is used to keep track of the players inventory and add and remove items from it
+
 	public Dictionary<string, int> playerInventory = new Dictionary<string,int>();
-	
-	// Use this for initialization
-	void Start () 
-	{
 
-		for(int i = 0; i <allComponents.Count; i++)
-		{
-			componentInventory.Add(allComponents[i], allComponentImages[i]);
-		}
-	}
-
-	
-	// Update is called once per frame
-	void Update () 
-	{
-
-	}
-
+	//adds an item to the inventory
 	public bool AddItem (string item)
 	{
 		if(!playerInventory.ContainsKey(item))
 		{
 			playerInventory.Add(item, 1);
 		}
-
-		//Debug.Log ("items added");
 		return true;
 	}
 
+	//removes an item from the inventory
 	public bool RemoveItem (string item)
 	{
 		if(playerInventory.ContainsKey(item))
