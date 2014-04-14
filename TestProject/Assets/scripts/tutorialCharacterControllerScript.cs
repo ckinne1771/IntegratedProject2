@@ -60,7 +60,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	void Start () 
 	{
 		anim = GetComponent<Animator>();
-		//glowanimatorScript=frame.gameObject.GetComponent<GlowAnimator>();
 		CraftingTable = GameObject.Find("CraftingTable");
 		RecyclingBin = GameObject.Find("RecyclingBin");
 		ComponentsArea = GameObject.Find("ComponentsArea");
@@ -101,7 +100,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					{
 						inventoryScript.AddItem(hit.transform.gameObject.name);
 						collectItems(hit.transform.gameObject.name);
-						//InstantiateComponents(hit.transform.gameObject);
 						gotitem1=true;
 						anim.SetBool("issideview",false);
 					}
@@ -109,7 +107,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					{
 						inventoryScript.AddItem(hit.transform.gameObject.name);
 						collectItems(hit.transform.gameObject.name);
-						//InstantiateComponents(hit.transform.gameObject);
 						gotitem2=true;
 						anim.SetBool("issideview",false);
 					}
@@ -117,7 +114,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					{
 						inventoryScript.AddItem (hit.transform.gameObject.name);
 						collectItems (hit.transform.gameObject.name);
-						//InstantiateComponents (hit.transform.gameObject);
 						gotitem3=true;
 						anim.SetBool("issideview",false);
 					}
@@ -125,7 +121,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					{
 						inventoryScript.AddItem (hit.transform.gameObject.name);
 						collectItems (hit.transform.gameObject.name);
-						//InstantiateComponents (hit.transform.gameObject);
 						gotitem4=true;
 						anim.SetBool("issideview",false);
 					}
@@ -181,15 +176,12 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 				{
 					Debug.Log ("crafting");
 					this.gameObject.transform.position = (CraftingTable.transform.position + new Vector3(-2,0,0));
-					//this.gameObject.transform.rotation = CraftingTable.transform.rotation;
 					anim.SetBool("issideview",true);
 					currentState = PlayerState.Crafting;
 					Debug.Log ("serving");
 					currentStage="serveCustomer";
-					slot1Image=null;
-					slot2Image=null;
-
-					//currentStage="serveCustomer";
+					slot1Image=ComponentSprites[0];
+					slot2Image=ComponentSprites[0];
 					
 				}
 				else if(hit.transform.gameObject.tag=="Till")
@@ -340,8 +332,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					Debug.Log ("served"); 
 					inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
 					customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
-					//noCompletedItems=true;
-					//customerSpawnScript.RemoveCustomer(0);
 					customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.targetWaypoint=1;
 					customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.customerState=FollowTheWaypoints.State.Exit;
 					recipeitem="";
@@ -360,8 +350,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 					Debug.Log ("served"); 
 					inventoryScript.RemoveItem(customerSpawnScript.GetFrontOfQueueOrder().item);
 					customerSpawnScript.GetFrontOfQueueOrder().itemNeeded = false;
-					//noCompletedItems=true;
-					//customerSpawnScript.RemoveCustomer(0);
 					customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.targetWaypoint=1;
 					customerSpawnScript.GetFrontOfQueueOrder().followTheWaypoints.customerState=FollowTheWaypoints.State.Exit;
 					recipeitem="";
@@ -400,7 +388,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			}
 			break;
 		case("grabItems"):
-			GUI.Box(new Rect(Screen.width/2,Screen.height/16,200,100),"Go grab the items \n needed to make the basketball");
+			GUI.Box(new Rect(Screen.width/2,Screen.height/8,200,100),"Go grab the items \n needed to make the basketball");
 			glowitems.gameObject.transform.FindChild("orange").gameObject.GetComponent<GlowAnimator>().glow=true;
 			glowitems.gameObject.transform.FindChild("ball").gameObject.GetComponent<GlowAnimator>().glow=true;
 			playerHasControl=true;
@@ -414,7 +402,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("craftItems"):
 			playerHasControl = false;
-			GUI.Box(new Rect(Screen.width/2,Screen.height/16,200,50),"Good! Now craft them \n into something nice!");
+			GUI.Box(new Rect(Screen.width/2,Screen.height/4,200,50),"Good! Now craft them \n into something nice!");
 			glowitems.gameObject.transform.FindChild("CraftingTable").gameObject.GetComponent<GlowAnimator>().glow=true;
 			playerHasControl=true;
 			break;
@@ -422,13 +410,13 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			glowitems.gameObject.transform.FindChild("CraftingTable").gameObject.GetComponent<GlowAnimator>().glow=false;
 			readytocraft=false;
 			playerHasControl=false;
-			GUI.Box(new Rect(Screen.width/2,Screen.height/12+30,200,50),"Ok! Now you need to take \n the item to the till");
+			GUI.Box(new Rect(Screen.width/2,Screen.height/4,200,50),"Ok! Now you need to take \n the item to the till");
 			glowitems.gameObject.transform.FindChild("Till").gameObject.GetComponent<GlowAnimator>().glow=true;
 			playerHasControl=true;
 			break;
 		case("done!"):
 			playerHasControl=false;
-			GUI.Box(new Rect(Screen.width/2,Screen.height/12+30,200,50),"Congratulations, you've served \n your first customer");
+			GUI.Box(new Rect(Screen.width/2,Screen.height/4,200,50),"Congratulations, you've served \n your first customer");
 			StartCoroutine("levelWait");
 			break;
 		case("movetolevel"):
@@ -438,7 +426,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 		case("secondCustomer"):
 			itemCrafted=false;
 			part=2;
-			GUI.Box (new Rect(Screen.width/2,Screen.height/16,200,100),"We have another customer! \n This one wants a bike!");
+			GUI.Box (new Rect(Screen.width/2,Screen.height/4,200,100),"We have another customer! \n This one wants a bike!");
 			customerSpawnScript.AddingTutorialCustomer ();
 			if(GUI.Button(new Rect(Screen.width/2,Screen.height/2,200,100),"Click here\n to continue"))
 			{
@@ -448,7 +436,7 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 	
 		case("Crafting2"):
 			playerHasControl=true;
-			GUI.Box (new Rect(Screen.width/2,Screen.height/16,250,100),"Now, grab the\n items needed to\n make a bike\n and craft it.");
+			GUI.Box (new Rect(Screen.width/2,Screen.height/4,250,100),"Now, grab the\n items needed to\n make a bike\n and craft it.");
 			glowitems.gameObject.transform.FindChild("metal").gameObject.GetComponent<GlowAnimator>().glow=true;
 			glowitems.gameObject.transform.FindChild("wheel").gameObject.GetComponent<GlowAnimator>().glow=true;
 			if(gotitem3&&gotitem4)
@@ -464,12 +452,12 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			break;
 		case("serve2"):
 			readytocraft=false;
-			GUI.Box(new Rect(Screen.width/2,Screen.height/16,200,70),"Ok! Now you need to take \n the item to the till");
+			GUI.Box(new Rect(Screen.width/2,Screen.height/4,200,70),"Ok! Now you need to take \n the item to the till");
 			glowitems.gameObject.transform.FindChild("Till").gameObject.GetComponent<GlowAnimator>().glow=true;
 			break;
 		case("finallyDone!"):
 		
-			GUI.Box(new Rect(Screen.width/2,Screen.height/12+30,200,70),"Congratulations, you've served \n another customer");
+			GUI.Box(new Rect(Screen.width/2,Screen.height/4,200,70),"Congratulations, you've served \n another customer");
 			StartCoroutine("levelWait2");
 			break;
 		
@@ -491,15 +479,6 @@ public class tutorialCharacterControllerScript : MonoBehaviour
 			item2=_item;
 		}
 		
-	}
-	
-	void InstantiateComponents(GameObject _component)
-	{
-		component = Instantiate(_component) as GameObject;
-		component.name = component.name.Substring(0, _component.name.Length);
-		component.transform.position=this.gameObject.transform.position + new Vector3(0,0 + 2 * components.Count,0);
-		component.transform.parent=this.gameObject.transform;
-		components.Add(component);
 	}
 
 	public IEnumerator CustomerWant()
